@@ -39,7 +39,6 @@
     "react-slick": "^0.30.3",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "resend": "^6.9.2",
     "slick-carousel": "^1.8.1",
     "uuid": "^13.0.0"
   },

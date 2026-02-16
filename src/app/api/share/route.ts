@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generatePdfAccessToken } from '@/lib/token';
-import { sendAccessEmail } from '@/lib/email';
 
 export async function POST(request: NextRequest) {
   try {
@@ -40,17 +39,7 @@ export async function POST(request: NextRequest) {
     
     const accessLink = `${baseUrl}/api/book-auth?token=${token}&locale=${lang}`;
 
-    const emailResult = await sendAccessEmail({ email, accessLink });
-
-    if (!emailResult.success) {
-      console.error('Email sending failed:', emailResult.error);
-      return NextResponse.json(
-        { error: 'Failed to send email' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ success: true, message: 'Access link sent' });
+    return NextResponse.json({ success: true, message: 'Access link generated', accessLink });
   } catch (error) {
     console.error('Share API error:', error);
     return NextResponse.json(
