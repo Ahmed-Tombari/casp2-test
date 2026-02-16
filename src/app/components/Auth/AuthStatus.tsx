@@ -1,0 +1,121 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { LoginModal } from './LoginModal'
+import { RegisterModal } from './RegisterModal'
+import { logout } from '@/actions/auth'
+import Link from 'next/link'
+import PremiumButton from '@/app/components/UI/PremiumButton'
+import { Icon } from '@iconify/react'
+import { useRouter, usePathname } from '@/i18n/routing'
+
+interface User {
+  name: string
+  email: string
+  role: string
+}
+
+export function AuthStatus({ user }: { user: User | null }) {
+  const [showLogin, setShowLogin] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (user) {
+      const isAdminPath = pathname.includes('/admin')
+      if (user.role === 'ADMIN' && !isAdminPath) {
+        router.push('/admin')
+      } else if (user.role !== 'ADMIN' && isAdminPath) {
+        router.push('/')
+      }
+    }
+  }, [user, pathname, router])
+
+  if (user) {
+    return (
+      <div className="relative">
+        <button 
+          onClick={() => setShowMenu(!showMenu)}
+          className="flex items-center gap-3 p-1.5 pe-4 rounded-full bg-brand-sky/10 dark:bg-white/5 hover:bg-brand-sky/20 transition-all border border-brand-sky/20 dark:border-white/10"
+        >
+          <div className="w-9 h-9 bg-linear-to-br from-brand-sky to-brand-navy dark:from-brand-gold dark:to-brand-orange text-white rounded-full flex items-center justify-center font-bold shadow-soft-sm">
+            {user.name.charAt(0).toUpperCase()}
+          </div>
+          <span className="text-sm font-semibold text-brand-navy dark:text-white hidden sm:inline-block">
+            {user.name}
+          </span>
+          <Icon 
+            icon="lucide:chevron-down" 
+            className={`text-brand-navy dark:text-white transition-transform ${showMenu ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {showMenu && (
+          <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-brand-navy-dark rounded-2xl shadow-soft-lg py-2 border border-brand-sky/20 dark:border-white/10 z-50 backdrop-blur-xl">
+            <div className="px-4 py-3 border-b border-brand-sky/10 dark:border-white/5 mb-2">
+              <p className="text-xs text-gray-400 font-medium">Signed in as</p>
+              <p className="text-sm font-bold text-brand-navy dark:text-white truncate">{user.email}</p>
+            </div>
+            
+            {user.role === 'ADMIN' && (
+              <Link 
+                href="/admin" 
+                className="flex items-center gap-3 px-4 py-2.5 text-sm text-brand-navy dark:text-white hover:bg-brand-sky/10 dark:hover:bg-white/5 transition-colors"
+                onClick={() => setShowMenu(false)}
+              >
+                <Icon icon="lucide:layout-dashboard" />
+                Admin Dashboard
+              </Link>
+            )}
+            
+            <button 
+              onClick={() => logout()}
+              className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
+            >
+              <Icon icon="lucide:log-out" />
+              Sign Out
+            </button>
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <div className="flex items-center gap-3">
+        <PremiumButton
+          variant="secondary"
+          size="sm"
+          onClick={() => setShowLogin(true)}
+        >
+          Sign In
+        </PremiumButton>
+
+        <PremiumButton
+          variant="primary"
+          size="sm"
+          onClick={() => setShowRegister(true)}
+        >
+          Sign Up
+        </PremiumButton>
+      </div>
+
+      {showLogin && (
+        <LoginModal 
+          onClose={() => setShowLogin(false)} 
+          onSwitchToRegister={() => { setShowLogin(false); setShowRegister(true); }}
+        />
+      )}
+
+      {showRegister && (
+        <RegisterModal 
+          onClose={() => setShowRegister(false)} 
+          onSwitchToLogin={() => { setShowRegister(false); setShowLogin(true); }}
+        />
+      )}
+    </>
+  )
+}

@@ -1,0 +1,217 @@
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/routing';
+import { Icon } from '@iconify/react';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale, namespace: 'store' });
+  return { title: t('title'), description: t('description') };
+}
+
+export default async function StorePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale, namespace: 'store' });
+  const isRTL = locale === 'ar';
+
+  const categories = [
+    {
+      title: t('alShamil.title'),
+      desc: t('alShamil.description'),
+      href: '/store/al-shamil',
+      icon: 'solar:book-2-bold-duotone',
+      color: 'bg-brand-gold',
+      textColor: 'text-brand-gold',
+    },
+    {
+      id: 'al-mufid',
+      title: t('alMufid.title'),
+      desc: t('alMufid.description'),
+      href: '/store/al-mufid',
+      icon: 'solar:notebook-bold-duotone',
+      color: 'bg-brand-orange',
+      textColor: 'text-brand-orange',
+    },
+    {
+      id: 'al-wafi',
+      title: t('alWafi.title'),
+      desc: t('alWafi.description'),
+      href: '/store/al-wafi',
+      icon: 'solar:library-bold-duotone',
+      color: 'bg-brand-navy',
+      textColor: 'text-brand-navy',
+    },
+    {
+      id: 'garden',
+      title: t('gardenOfArabic.title'),
+      desc: t('gardenOfArabic.description'),
+      href: '/store/garden-of-arabic',
+      icon: 'solar:leaf-bold-duotone',
+      color: 'bg-emerald-500',
+      textColor: 'text-emerald-600',
+    },
+    {
+      title: t('hidayah.title'),
+      desc: t('hidayah.description'),
+      href: '/store/hidayah',
+      icon: 'solar:book-2-bold-duotone',
+      color: 'bg-brand-gold',
+      textColor: 'text-brand-gold',
+    },
+    {
+      title: t('hidayahFr.title'),
+      desc: t('hidayahFr.description'),
+      href: '/store/hidayah-fr',
+      icon: 'solar:book-2-bold-duotone',
+      color: 'bg-brand-gold',
+      textColor: 'text-brand-gold',
+    },
+    {
+      title: t('hidayahEn.title'),
+      desc: t('hidayahEn.description'),
+      href: '/store/hidayah-en',
+      icon: 'solar:book-2-bold-duotone',
+      color: 'bg-brand-gold',
+      textColor: 'text-brand-gold',
+    },
+    {
+      title: t('qawaedMobasta.title'),
+      desc: t('qawaedMobasta.description'),
+      href: '/store/qawaed-mobasta',
+      icon: 'solar:book-2-bold-duotone',
+      color: 'bg-brand-gold',
+      textColor: 'text-brand-gold',
+    },
+    {
+      title: t('tareeqAlMuneerAr.title'),
+      desc: t('tareeqAlMuneerAr.description'),
+      href: '/store/tareeq-al-muneer',
+      icon: 'solar:cup-star-bold',
+      color: 'bg-brand-navy',
+      textColor: 'text-brand-navy',
+    },
+    {
+      title: t('tareeqAlMuneerFr.title'),
+      desc: t('tareeqAlMuneerFr.description'),
+      href: '/store/tareeq-al-muneer-fr',
+      icon: 'solar:hand-stars-bold',
+      color: 'bg-brand-orange',
+      textColor: 'text-brand-orange',
+    },
+    {
+      title: t('tareeqAlMuneerEn.title'),
+      desc: t('tareeqAlMuneerEn.description'),
+      href: '/store/tareeq-al-muneer-en',
+      icon: 'solar:hand-stars-bold',
+      color: 'bg-brand-orange',
+      textColor: 'text-brand-orange',
+    },
+    {
+      id: 'happy-muslim',
+      title: t('theHappyMuslim.title'),
+      desc: t('theHappyMuslim.description'),
+      href: '/store/the-happy-muslim',
+      icon: 'solar:heart-bold-duotone',
+      color: 'bg-pink-500',
+      textColor: 'text-pink-600',
+    },
+  ];
+
+  return (
+    <main className="min-h-screen bg-gray-50 dark:bg-[#09121E] text-foreground transition-colors duration-300">
+      
+      {/* Hero Section */}
+      <section className="bg-brand-navy pt-32 pb-1 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+          {/* Abstract Background */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
+          <Icon
+            icon="solar:shop-bold"
+            className="absolute top-10 left-10 text-9xl text-emerald-400 animate-pulse-slow"
+          />
+          <Icon
+            icon="solar:shop-bold"
+            className="absolute bottom-20 right-10 text-8xl text-brand-sky animate-pulse-slow"
+            style={{ animationDelay: "2s" }}
+          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/20 blur-[100px] rounded-full"></div>
+        </div>
+
+        <div className="container mx-auto max-w-7xl px-4 relative z-10">
+          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-gold text-sm font-bold mb-8 backdrop-blur-md">
+             <Icon icon="solar:shop-bold" />
+             <span>{t('officialStore')}</span>
+          </div>
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+            {t('title')}
+          </h1>
+          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed font-light">
+            {t('description')}
+          </p>
+        </div>
+      </section>
+
+      {/* Categories Grid */}
+      <section className="py-20 -mt-12 relative z-20 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {categories.map((cat, idx) => (
+              <Link
+                key={idx}
+                href={cat.href}
+                locale={locale}
+                className="group relative flex items-center p-8 bg-white dark:bg-[#112240] rounded-[2.5rem] shadow-soft hover:-translate-y-2 hover:shadow-soft-lg transition-all duration-300 overflow-hidden border border-transparent hover:border-brand-sky/20"
+              >
+                {/* 
+                   DECORATIVE BLOB LOGIC:
+                   - isRTL (Arabic): Icon is Right -> Blob is '-right-10'
+                   - !isRTL (English/French): Icon is Left -> Blob is '-left-10'
+                */}
+                <div 
+                  className={`
+                    absolute w-40 h-40 rounded-full opacity-10 ${cat.color} 
+                    group-hover:scale-150 transition-transform duration-500
+                    -bottom-10 
+                    ${isRTL ? '-right-10' : '-left-10'}
+                  `}
+                ></div>
+
+                <div className={`w-20 h-20 rounded-[1.5rem] ${cat.color} flex items-center justify-center shrink-0 shadow-lg relative z-10`}>
+                   <Icon icon={cat.icon} className="text-4xl text-white" />
+                </div>
+
+                <div className="px-6 relative z-10">
+                   <h3 className="text-2xl font-bold text-brand-navy dark:text-white mb-2">{cat.title}</h3>
+                   <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-4">{cat.desc}</p>
+                   
+                   <div className={`flex items-center gap-2 font-bold text-sm uppercase tracking-wider ${cat.textColor} group-hover:gap-3 transition-all`}>
+                      <span>{t('shopNow')}</span>
+                      <Icon icon="solar:arrow-right-linear" className={isRTL ? "rotate-180" : ""} />
+                   </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured / Sale Banner */}
+      <section className="pb-32 px-4">
+         <div className="container mx-auto max-w-6xl">
+            <div className="bg-brand-gold rounded-[3rem] p-12 relative overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-soft-lg">
+               <div className="absolute inset-0 bg-black/5 pattern-dots"></div>
+               <div className="relative z-10 text-brand-navy-dark text-center md:text-start rtl:md:text-right">
+                  <h2 className="text-3xl md:text-5xl font-black mb-4">{t('bundleOffer')}</h2>
+                  <p className="text-lg font-medium opacity-80 max-w-md">{t('bundleDesc')}</p>
+               </div>
+               <button className="relative z-10 mt-8 md:mt-0 px-8 py-4 bg-white text-brand-navy font-bold rounded-2xl shadow-lg hover:scale-105 transition-transform flex items-center gap-2">
+                  <Icon icon="solar:bag-check-bold" className="text-xl" />
+                  {t('viewBundles')}
+               </button>
+            </div>
+         </div>
+      </section>
+
+    </main>
+  );
+}
