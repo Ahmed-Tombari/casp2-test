@@ -1,8 +1,14 @@
 import { getAccessCodes, deleteAccessCode } from '@/actions/admin'
 import { CodeGenerator } from '@/app/components/admin/CodeGenerator'
+import { CodeDisplay } from '@/app/components/admin/CodeDisplay'
+import AdminCard from '@/app/components/admin/AdminCard'
+import { Icon } from '@iconify/react'
+import { getTranslations } from 'next-intl/server'
+
 
 interface AccessCodeWithUser {
   id: string
+  code: string | null
   codeHash: string
   userId: string | null
   email: string | null
@@ -19,65 +25,90 @@ interface AccessCodeWithUser {
 
 export default async function AdminCodesPage() {
   const codes = await getAccessCodes() as AccessCodeWithUser[]
+  const t = await getTranslations('admin')
 
   function getStatus(code: AccessCodeWithUser) {
-    if (code.used) return { label: 'Used', class: 'bg-gray-100 text-gray-700' }
-    if (new Date(code.expiresAt) < new Date()) return { label: 'Expired', class: 'bg-red-100 text-red-700' }
-    return { label: 'Active', class: 'bg-green-100 text-green-700' }
+    if (code.used) return { label: t('used'), class: 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400', icon: 'solar:check-circle-bold' }
+    if (new Date(code.expiresAt) < new Date()) return { label: t('expired'), class: 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400', icon: 'solar:close-circle-bold' }
+    return { label: t('active'), class: 'bg-green-50 text-green-600 dark:bg-green-900/20 dark:text-green-400', icon: 'solar:shield-check-bold' }
   }
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-gray-900">Access Codes</h2>
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold font-display text-brand-navy dark:text-white mb-1">{t('accessCodes')}</h2>
+        <p className="text-brand-navy/60 dark:text-white/60 text-sm">{t('accessCodesDesc')}</p>
+      </div>
+
       
       <CodeGenerator />
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <table className="w-full text-left">
-          <thead className="bg-gray-50 border-b border-gray-200">
-            <tr>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Assigned To</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Validity</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Expires</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600">Status</th>
-              <th className="px-6 py-4 text-sm font-semibold text-gray-600 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {codes.map((code) => {
-              const status = getStatus(code)
-              return (
-                <tr key={code.id} className="hover:bg-gray-50 transition">
-                  <td className="px-6 py-4 text-sm text-gray-900">
-                    {code.user ? `${code.user.firstName} ${code.user.lastName}` : (code.email || 'Unassigned')}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
-                    {code.validityDays} days
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">
-                    {new Date(code.expiresAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${status.class}`}>
-                      {status.label}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-right">
-                    <form action={async () => {
-                      'use server'
-                      await deleteAccessCode(code.id)
-                    }} className="inline">
-                      <button className="text-red-600 hover:text-red-800 font-medium text-xs">
-                        Delete
-                      </button>
-                    </form>
-                  </td>
+      <AdminCard className="overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
+        <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+            <thead>
+                <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('accessCode')}</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('assignedTo')}</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('validity')}</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('expires')}</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('status')}</th>
+                <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-end">{t('actions')}</th>
                 </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-700 bg-white dark:bg-slate-800">
+                {codes.map((code) => {
+                const status = getStatus(code)
+                return (
+                    <tr key={code.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
+                    <td className="px-6 py-4 text-sm font-medium">
+                        <CodeDisplay codes={code.code} />
+                    </td>
+                    <td className="px-6 py-4 text-sm">
+                        {code.user ? (
+                            <div className="flex flex-col">
+                                <span className="font-bold text-slate-800 dark:text-white">{code.user.firstName} {code.user.lastName}</span>
+                                <span className="text-xs text-slate-500 dark:text-slate-400">{code.user.email}</span>
+                            </div>
+                        ) : (
+                            <span className={`text-xs px-2 py-0.5 rounded-lg ${code.email ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 border border-orange-100 dark:border-orange-800' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}>
+                                {code.email || t('unassigned')}
+                            </span>
+                        )}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300 font-medium">
+                        {code.validityDays} {t('days')}
+                    </td>
+
+                    <td className="px-6 py-4 text-slate-400 dark:text-slate-500 font-mono text-xs">
+                        {new Date(code.expiresAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 text-sm">
+                        <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg w-fit text-xs font-bold ${status.class}`}>
+                            <Icon icon={status.icon} width={14} />
+                            {status.label}
+                        </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-end">
+
+                        <form action={async () => {
+                        'use server'
+                        await deleteAccessCode(code.id)
+                        }} className="inline opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 transition-colors" title={t('deleteCode')}>
+                            <Icon icon="solar:trash-bin-trash-bold-duotone" width={18} />
+                        </button>
+
+                        </form>
+                    </td>
+                    </tr>
+                )
+                })}
+            </tbody>
+            </table>
+        </div>
+      </AdminCard>
     </div>
   )
 }

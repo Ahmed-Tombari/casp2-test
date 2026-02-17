@@ -3,17 +3,9 @@
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import AccessModal from '@/app/components/PrivateBook/AccessModal';
-import { useParams } from 'next/navigation';
-
 export default function BookAccessPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const params = useParams();
   
-  // Handle locale from params, ensuring it's a string
-  const locale = Array.isArray(params?.locale) 
-    ? params.locale[0] 
-    : (params?.locale as string) || 'ar' || 'en' || 'fr' || 'es' || 'de' || 'it' || 'pt' || 'ru' || 'ja' || 'zh' || 'ko';
-
   function closeModal() {
     setIsModalOpen(false);
   }
@@ -91,7 +83,7 @@ export default function BookAccessPage() {
            </div>
        </section>
       
-      <AccessModal isOpen={isModalOpen} closeModal={closeModal} locale={locale} />
+      <AccessModal isOpen={isModalOpen} closeModal={closeModal} />
     </main>
   );
 }

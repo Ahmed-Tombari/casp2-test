@@ -88,6 +88,9 @@ const Banner = () => {
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.3 }}
             >
+               <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-[120px] text-[#2c75a4] dark:text-white text-center font-cairo">
+                ( Version de Test )
+              </h1>
               <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-[120px] text-[#2c75a4] dark:text-white text-center font-cairo">
                 {t('heroTitle')}
               </h1>

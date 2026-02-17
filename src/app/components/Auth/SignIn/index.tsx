@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import SocialSignIn from '../SocialSignIn'
-import Logo from '@/app/components/Layout/Header/Logo'
-import { Button, Input } from '@/app/components/UI'
+import { Input } from '@/app/components/UI'
+import PremiumButton from '@/app/components/UI/PremiumButton'
 import { useTranslations } from 'next-intl'
 
 const Signin = () => {
@@ -80,7 +80,7 @@ const Signin = () => {
         <div className="flex-1 border-t border-brand-sky/20"></div>
       </div>
 
-      <form onSubmit={loginUser} className="space-y-5">
+      <form onSubmit={loginUser} className="space-y-6">
         <Input
           type='email'
           label={tAuth('emailLabel')}
@@ -95,9 +95,10 @@ const Signin = () => {
           fullWidth
           required
           autoComplete="email"
+          className="bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm"
         />
         
-        <div className="space-y-1">
+        <div className="space-y-2">
           <Input
             type='password'
             label={tAuth('passwordLabel')}
@@ -112,6 +113,7 @@ const Signin = () => {
             fullWidth
             required
             autoComplete="current-password"
+            className="bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm"
           />
           <div className='flex justify-end'>
             <Link
@@ -124,27 +126,40 @@ const Signin = () => {
         </div>
         
         <div className='flex items-center text-sm'>
-          <label className="flex items-center gap-2 cursor-pointer group">
-            <input
-              type="checkbox"
-              className="w-4 h-4 rounded border-brand-sky/30 text-brand-orange focus:ring-brand-orange focus:ring-offset-0 cursor-pointer"
-            />
+          <label className="flex items-center gap-3 cursor-pointer group select-none">
+            <div className="relative flex items-center">
+              <input
+                type="checkbox"
+                className="peer sr-only"
+                onChange={() => {}} // Handle change if needed
+              />
+              <div className="w-5 h-5 border-2 border-brand-sky/40 rounded-md peer-checked:bg-brand-orange peer-checked:border-brand-orange transition-all duration-200"></div>
+              <div className="absolute inset-0 flex items-center justify-center text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+            </div>
             <span className="text-brand-navy/70 dark:text-white/70 group-hover:text-brand-navy dark:group-hover:text-white transition-colors font-medium">
               {tAuth('rememberMe')}
             </span>
           </label>
         </div>
 
-        <Button
+        <PremiumButton
           type='submit'
           variant='primary'
           size='lg'
-          fullWidth
-          isLoading={loading}
-          className="mt-6 font-bold text-lg h-14"
+          className="w-full text-lg h-14 shadow-soft-hover"
+          disabled={loading}
         >
-          {tAuth('signInButton')}
-        </Button>
+          {loading ? (
+             <span className="flex items-center gap-2">
+               <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+               Processing...
+             </span>
+          ) : tAuth('signInButton')}
+        </PremiumButton>
       </form>
 
       <div className="mt-8 text-center">

@@ -16,9 +16,10 @@ interface Level {
 
 interface PdfBookGridProps {
   levels: Level[];
+  watermark?: boolean;
 }
 
-export default function PdfBookGrid({ levels }: PdfBookGridProps) {
+export default function PdfBookGrid({ levels, watermark = false }: PdfBookGridProps) {
   const tNav = useTranslations('nav');
   const tGuide = useTranslations('store');
   const locale = useLocale();
@@ -41,6 +42,7 @@ export default function PdfBookGrid({ levels }: PdfBookGridProps) {
               icon="solar:book-bookmark-bold-duotone"
               isRTL={isRTL}
               coverImage={level.bookCover}
+              watermark={watermark}
             />
           ))}
         </div>

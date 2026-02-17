@@ -150,7 +150,7 @@ export default async function PrivateBookPage({ params }: Props) {
         <div className="h-1 w-24 bg-brand-orange mx-auto rounded-full"></div>
       </div>
 
-      <PdfBookGrid levels={levels} />
+      <PdfBookGrid levels={levels} watermark={true} />
     </main>
   );
 }

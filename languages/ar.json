@@ -1,16 +1,23 @@
 {
   "PrivateBook": {
     "title": "مجموعة الكتب الخاصة",
-    "description": "الوصول إلى مجموعتنا الحصرية من الموارد التعليمية. اطلب رابط وصول مؤقت يُرسل مباشرة إلى بريدك الإلكتروني.",
+    "description": "الوصول إلى مجموعتنا الحصرية من الموارد التعليمية بأمان.",
+    "tabRequest": "طلب رابط",
+    "tabCode": "لدي رمز",
     "emailLabel": "البريد الإلكتروني",
     "emailPlaceholder": "you@example.com",
-    "getLink": "احصل على رابط الوصول",
-    "sending": "جاري الإرسال...",
-    "expiryNote": "انتهاء الصلاحية خلال 24 ساعة",
+    "codeLabel": "رمز الوصول",
+    "codePlaceholder": "أدخل الرمز هنا",
+    "getLink": "طلب رابط الوصول",
+    "verify": "التحقق من الرمز",
+    "sending": "جاري المعالجة...",
+    "expiryNote": "صلاحية 24 ساعة",
     "noDownloads": "لا يمكن التنزيل",
     "emailSent": "تم إرسال الرابط إلى بريدك الإلكتروني!",
     "errorGeneric": "حدث خطأ ما.",
-    "errorNetwork": "خطأ في الشبكة. حاول مرة أخرى."
+    "errorNetwork": "خطأ في الشبكة. حاول مرة أخرى.",
+    "expired": "لقد انتهت صلاحية هذا الرمز.",
+    "invalid": "البريد الإلكتروني أو الرمز غير صالح."
   },
   "nav": {
     "home": "الرئيسية",
@@ -577,7 +584,18 @@
     "passwordLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
     "passwordRegEx": "يجب أن تحتوي كلمة المرور على أحرف كبيرة وصغيرة وأرقام",
     "nameRequired": "الاسم مطلوب",
-    "nameLength": "يجب أن يكون الاسم حرفين على الأقل"
+    "nameLength": "يجب أن يكون الاسم حرفين على الأقل",
+    "firstNameLabel": "الاسم الأول",
+    "firstNamePlaceholder": "أدخل اسمك الأول",
+    "lastNameLabel": "اسم العائلة",
+    "lastNamePlaceholder": "أدخل اسم العائلة",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "countryLabel": "الدولة",
+    "countryPlaceholder": "اختر دولتك",
+    "signedInAs": "تم تسجيل الدخول باسم",
+    "adminDashboard": "لوحة تحكم المسؤول",
+    "signOut": "تسجيل الخروج"
   },
 
   "store": {
@@ -620,8 +638,9 @@
       "8": "الثامن",
       "9": "التاسع",
       "10": "العاشر"
-    },
-
+    }
+  },
+  
   "alMufid":{
     "title": "سلسلة المفيد",
     "description": "رفيقك العملي لإتقان العربية. سلسلة تركز على الاستخدام الوظيفي للغة في الحياة اليومية والدراسة.",
@@ -962,6 +981,64 @@
     "book5Title": "قلبي النقي",
     "book5Desc": "أعمال القلوب كالصدق والمحبة والتوكل.",
     "exploreBook": "استكشف الكتاب"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "overview": "نظرة عامة",
+    "welcome": "مرحباً بك مجدداً في لوحة تحكم المسؤول.",
+    "users": "المستخدمين",
+    "accessCodes": "رموز الوصول",
+    "exitAdmin": "الخروج من الإدارة",
+    "totalUsers": "إجمالي المستخدمين",
+    "totalCodes": "إجمالي رموز الوصول",
+    "activeCodes": "الرموز النشطة",
+    "quickActions": "إجراءات سريعة",
+    "addUser": "إضافة مستخدم",
+    "generateCode": "توليد رمز",
+    "systemStatus": "حالة النظام",
+    "dbOptimized": "قاعدة البيانات محسنة",
+    "backupsActive": "النسخ الاحتياطية نشطة",
+    "every24h": "كل 24 ساعة",
+    "vsLastMonth": "مقارنة بالشهر الماضي",
+    "newThisWeek": "جديد هذا الأسبوع",
+    "activeRate": "نسبة النشاط",
+    "search": "بحث...",
+    "userManagement": "إدارة المستخدمين",
+    "manageUsersDesc": "إدارة المستخدمين وأدوار الوصول الخاصة بهم.",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "role": "الدور",
+    "accessCode": "رمز الوصول",
+    "assignNew": "تعيين جديد",
+    "created": "تم الإنشاء",
+    "actions": "الإجراءات",
+    "promote": "ترقية",
+    "demote": "خفض الرتبة",
+    "deleteUser": "حذف المستخدم",
+    "accessCodesDesc": "توليد وإدارة مفاتيح الوصول للمنصة.",
+    "assignedTo": "مخصص لـ",
+    "validity": "الصلاحية",
+    "expires": "ينتهي في",
+    "status": "الحالة",
+    "deleteCode": "حذف الرمز",
+    "used": "مستخدم",
+    "expired": "منتهي",
+    "active": "نشط",
+    "generateAccessCode": "توليد رمز وصول",
+    "createTokensDesc": "إنشاء رموز وصول جديدة للمستخدمين.",
+    "validityPeriod": "فترة الصلاحية",
+    "assignToEmail": "تعيين لبريد إلكتروني (اختياري)",
+    "generating": "جاري التوليد...",
+    "newCodeGenerated": "تم توليد رمز وصول جديد",
+    "saveCodeWarning": "احفظ هذا الرمز الآن، لن يتم عرضه مرة أخرى.",
+    "loading": "جاري التحميل...",
+    "noAvailableCodes": "لا توجد رموز متاحة",
+    "assignCode": "تعيين الرمز",
+    "noRawCode": "لا يوجد رمز خام",
+    "hideCode": "إخفاء الرمز",
+    "showCode": "إظهار الرمز",
+    "days": "أيام",
+    "unassigned": "غير مخصص"
   }
- }
 }
+

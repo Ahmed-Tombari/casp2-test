@@ -23,6 +23,7 @@ interface BookViewerProps {
   icon: string;
   isRTL: boolean;
   coverImage?: string;
+  watermark?: boolean;
 }
 
 export default function BookViewer({
@@ -36,6 +37,7 @@ export default function BookViewer({
   icon,
   isRTL,
   coverImage,
+  watermark = false,
 }: BookViewerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -58,9 +60,26 @@ export default function BookViewer({
       try {
         let fetchUrl = url;
         
-        if (url.toLowerCase().endsWith('.pdf')) {
-          // Use the secure watermarking endpoint
-          fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
+        if (url.toLowerCase().endsWith('.pdf') || url.includes('/api/pdf')) {
+          // Use or update the secure PDF endpoint
+          let baseUrl = url;
+          const params = new URLSearchParams();
+
+          if (!url.includes('/api/pdf')) {
+            baseUrl = '/api/pdf';
+            params.set('url', url);
+          } else {
+            // Extract existing params if any
+            const [path, query] = url.split('?');
+            baseUrl = path;
+            if (query) {
+              new URLSearchParams(query).forEach((val, key) => params.set(key, val));
+            }
+          }
+          
+          if (watermark) {
+            params.set('watermark', 'true');
+          }
           
           // Try to get access code from URL or local storage
           const searchParams = new URLSearchParams(window.location.search);
@@ -69,8 +88,10 @@ export default function BookViewer({
           const code = urlCode || storedCode;
           
           if (code) {
-            fetchUrl += `&code=${code}`;
+            params.set('code', code);
           }
+
+          fetchUrl = `${baseUrl}?${params.toString()}`;
         } else if (!url.startsWith('/') && !url.includes(window.location.origin)) {
           // Proxy images
           const encoded = encodeAssetUrl(url);
@@ -101,7 +122,7 @@ export default function BookViewer({
       pdfBlobRef.current = null;
       coverBlobRef.current = null;
     };
-  }, [pdfUrl, coverImage]);
+  }, [pdfUrl, coverImage, watermark]);
 
   // soft protection: handle context menu and key shortcuts
   const handleContextMenu = (e: React.MouseEvent) => {

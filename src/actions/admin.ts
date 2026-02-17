@@ -3,13 +3,31 @@
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import crypto from 'crypto'
+import { encrypt, decrypt } from '@/lib/encryption'
 
 // --- User Management ---
 
 export async function getUsers() {
-  return await prisma.user.findMany({
+  const users = await prisma.user.findMany({
+    include: {
+      accessCodes: {
+        select: {
+          code: true,
+          used: true,
+          expiresAt: true,
+        },
+      },
+    },
     orderBy: { createdAt: 'desc' },
   })
+
+  return users.map(user => ({
+    ...user,
+    accessCodes: user.accessCodes.map(ac => ({
+      ...ac,
+      code: ac.code ? decrypt(ac.code) : null
+    }))
+  }))
 }
 
 export async function deleteUser(id: string) {
@@ -28,7 +46,7 @@ export async function updateUserRole(id: string, role: 'USER' | 'ADMIN') {
 // --- Access Code Management ---
 
 export async function getAccessCodes() {
-  return await prisma.accessCode.findMany({
+  const codes = await prisma.accessCode.findMany({
     include: {
       user: {
         select: {
@@ -40,6 +58,11 @@ export async function getAccessCodes() {
     },
     orderBy: { createdAt: 'desc' },
   })
+
+  return codes.map(code => ({
+    ...code,
+    code: code.code ? decrypt(code.code) : null
+  }))
 }
 
 export async function generateAccessCode(data: {
@@ -55,6 +78,7 @@ export async function generateAccessCode(data: {
 
   await prisma.accessCode.create({
     data: {
+      code: encrypt(rawCode),
       codeHash,
       validityDays: data.validityDays,
       expiresAt: expiresAt,
@@ -70,4 +94,45 @@ export async function generateAccessCode(data: {
 export async function deleteAccessCode(id: string) {
   await prisma.accessCode.delete({ where: { id } })
   revalidatePath('/admin/codes')
+}
+
+export async function getUnassignedCodes() {
+  const codes = await prisma.accessCode.findMany({
+    where: {
+      userId: null,
+      used: false,
+      expiresAt: { gt: new Date() },
+    },
+    orderBy: { createdAt: 'desc' },
+  })
+
+  return codes.map(code => ({
+    ...code,
+    code: code.code ? decrypt(code.code) : null
+  }))
+}
+
+export async function assignCode(codeId: string, userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { email: true },
+  })
+
+  if (!user) throw new Error('User not found')
+
+  const updatedCode = await prisma.accessCode.update({
+    where: { id: codeId },
+    data: {
+      userId,
+      email: user.email,
+    },
+  })
+
+  revalidatePath('/admin/users')
+  revalidatePath('/admin/codes')
+
+  return {
+    ...updatedCode,
+    code: updatedCode.code ? decrypt(updatedCode.code) : null
+  }
 }

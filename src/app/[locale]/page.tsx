@@ -1,17 +1,20 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
 import Hero from '@/app/components/Home/Hero';
 import Companies from '@/app/components/Home/Companies';
 import Partners from '@/app/components/Home/Partners';
-import Courses from '@/app/components/Home/Courses';
-import Mentor from '@/app/components/Home/Mentor';
-import Testimonial from '@/app/components/Home/Testimonial';
-import Newsletter from '@/app/components/Home/Newsletter';
-import ContactForm from '@/app/components/Contact/Form';
-import About from '@/app/components/Home/About';
-import Publications from '@/app/components/Home/Publications';
-import VideoSection from '@/app/components/Home/VideoSection';
+
+
+const Mentor = dynamic(() => import('@/app/components/Home/Mentor'));
+const Testimonial = dynamic(() => import('@/app/components/Home/Testimonial'));
+const Newsletter = dynamic(() => import('@/app/components/Home/Newsletter'));
+const ContactForm = dynamic(() => import('@/app/components/Contact/Form'));
+const About = dynamic(() => import('@/app/components/Home/About'));
+const Publications = dynamic(() => import('@/app/components/Home/Publications'));
+const VideoSection = dynamic(() => import('@/app/components/Home/VideoSection'));
 
 export async function generateMetadata({
   params,

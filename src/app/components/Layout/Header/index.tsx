@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import AccessModal from "@/app/components/PrivateBook/AccessModal";
 import { AuthStatus } from "@/app/components/Auth/AuthStatus";
 import { ThemeSwitcher } from "../../Theme/ThemeSwitcher";
+import GlassCard from "@/app/components/UI/GlassCard";
 
 interface HeaderProps {
   user?: {
@@ -153,58 +154,81 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
               <AuthStatus user={user || null} />
             </div>
 
-            {isSignInOpen && (
-              <div 
-                className="fixed inset-0 bg-brand-navy-dark/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-                onClick={() => setIsSignInOpen(false)}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="signin-title"
-              >
-                <div
-                  ref={signInRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-center bg-white dark:bg-brand-navy-dark backdrop-blur-xl border border-white/20 shadow-soft-lg"
-                  onClick={(e) => e.stopPropagation()}
+            <AnimatePresence>
+              {isSignInOpen && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-brand-navy-dark/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                  onClick={() => setIsSignInOpen(false)}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="signin-title"
                 >
-                  <button
-                    onClick={() => setIsSignInOpen(false)}
-                    className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-xl bg-brand-sky/10 text-brand-navy dark:text-white hover:bg-brand-orange hover:text-white transition-colors"
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                    transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full max-w-md"
                   >
-                    <Icon icon="material-symbols:close-rounded" width={24} height={24} />
-                  </button>
-                  <Signin />
-                </div>
-              </div>
-            )}
+                    <GlassCard className="px-8 pt-14 pb-8 text-center relative">
+                      <button
+                        onClick={() => setIsSignInOpen(false)}
+                        className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-xl bg-brand-sky/10 text-brand-navy dark:text-white hover:bg-brand-orange hover:text-white transition-colors z-20"
+                      >
+                        <Icon icon="material-symbols:close-rounded" width={24} height={24} />
+                      </button>
+                      <div ref={signInRef}>
+                        <Signin />
+                      </div>
+                    </GlassCard>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            {isSignUpOpen && (
-              <div 
-                className="fixed inset-0 bg-brand-navy-dark/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-                onClick={() => setIsSignUpOpen(false)}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="signup-title"
-              >
-                <div
-                  ref={signUpRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-center bg-white dark:bg-brand-navy-dark backdrop-blur-xl border border-white/20 shadow-soft-lg"
-                  onClick={(e) => e.stopPropagation()}
+            <AnimatePresence>
+              {isSignUpOpen && (
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-brand-navy-dark/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                  onClick={() => setIsSignUpOpen(false)}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="signup-title"
                 >
-                  <button
-                    onClick={() => setIsSignUpOpen(false)}
-                    className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-xl bg-brand-sky/10 text-brand-navy dark:text-white hover:bg-brand-orange hover:text-white transition-colors"
+                  <motion.div
+                    initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                    transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full max-w-md"
                   >
-                    <Icon icon="material-symbols:close-rounded" width={24} height={24} />
-                  </button>
-                  <SignUp />
-                </div>
-              </div>
-            )}
+                    <GlassCard className="px-8 pt-14 pb-8 text-center relative">
+                      <button
+                        onClick={() => setIsSignUpOpen(false)}
+                        className="absolute top-4 end-4 w-10 h-10 flex items-center justify-center rounded-xl bg-brand-sky/10 text-brand-navy dark:text-white hover:bg-brand-orange hover:text-white transition-colors z-20"
+                      >
+                        <Icon icon="material-symbols:close-rounded" width={24} height={24} />
+                      </button>
+                      <div ref={signUpRef}>
+                        <SignUp />
+                      </div>
+                    </GlassCard>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <AccessModal 
                 isOpen={isBookAccessOpen} 
                 closeModal={() => setIsBookAccessOpen(false)} 
-                locale={locale}
             />
             
             <button

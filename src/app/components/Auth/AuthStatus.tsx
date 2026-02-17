@@ -8,6 +8,7 @@ import Link from 'next/link'
 import PremiumButton from '@/app/components/UI/PremiumButton'
 import { Icon } from '@iconify/react'
 import { useRouter, usePathname } from '@/i18n/routing'
+import { useTranslations } from 'next-intl'
 
 interface User {
   name: string
@@ -21,13 +22,12 @@ export function AuthStatus({ user }: { user: User | null }) {
   const [showMenu, setShowMenu] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
+  const tAuth = useTranslations('auth')
 
   useEffect(() => {
     if (user) {
       const isAdminPath = pathname.includes('/admin')
-      if (user.role === 'ADMIN' && !isAdminPath) {
-        router.push('/admin')
-      } else if (user.role !== 'ADMIN' && isAdminPath) {
+      if (user.role !== 'ADMIN' && isAdminPath) {
         router.push('/')
       }
     }
@@ -55,7 +55,7 @@ export function AuthStatus({ user }: { user: User | null }) {
         {showMenu && (
           <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-brand-navy-dark rounded-2xl shadow-soft-lg py-2 border border-brand-sky/20 dark:border-white/10 z-50 backdrop-blur-xl">
             <div className="px-4 py-3 border-b border-brand-sky/10 dark:border-white/5 mb-2">
-              <p className="text-xs text-gray-400 font-medium">Signed in as</p>
+              <p className="text-xs text-gray-400 font-medium">{tAuth('signedInAs')}</p>
               <p className="text-sm font-bold text-brand-navy dark:text-white truncate">{user.email}</p>
             </div>
             
@@ -66,7 +66,7 @@ export function AuthStatus({ user }: { user: User | null }) {
                 onClick={() => setShowMenu(false)}
               >
                 <Icon icon="lucide:layout-dashboard" />
-                Admin Dashboard
+                {tAuth('adminDashboard')}
               </Link>
             )}
             
@@ -75,7 +75,7 @@ export function AuthStatus({ user }: { user: User | null }) {
               className="flex items-center gap-3 w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
             >
               <Icon icon="lucide:log-out" />
-              Sign Out
+              {tAuth('signOut')}
             </button>
           </div>
         )}
@@ -91,7 +91,7 @@ export function AuthStatus({ user }: { user: User | null }) {
           size="sm"
           onClick={() => setShowLogin(true)}
         >
-          Sign In
+          {tAuth('signInButton')}
         </PremiumButton>
 
         <PremiumButton
@@ -99,7 +99,7 @@ export function AuthStatus({ user }: { user: User | null }) {
           size="sm"
           onClick={() => setShowRegister(true)}
         >
-          Sign Up
+          {tAuth('signUpButton')}
         </PremiumButton>
       </div>
 
