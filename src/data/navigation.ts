@@ -226,9 +226,9 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
       label: t.platforms,
       href: '/platform',
       submenu: [
-        { label: t.qalamNetPlatform, href: '/platform/qalamnet-platform' },
-        { label: t.wafiPlatform, href: '/platform/wafi-platform' },
-        { label: t.myBookPlatform, href: '/platform/mybook-platform' },
+        { label: t.qalamNetPlatform, href: 'https://qalamnet.com/' },
+        { label: t.wafiPlatform, href: 'https://alwafi.academy/' },
+        { label: t.myBookPlatform, href: 'https://www.keetaby.com/' },
       ],
     },
     {
