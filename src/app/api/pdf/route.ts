@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
         const payload = verifyPdfAccessToken(bookSessionToken);
         user = {
           name: "Guest User",
-          email: payload.email,
+          email: payload.email || "guest@example.com",
         };
       } catch (err) {
         console.error("Book session verification failed:", err);
@@ -68,8 +68,8 @@ export async function GET(request: NextRequest) {
               email: code.user.email,
             }
           : {
-              name: "",
-              email: code.email,
+              name: "Access Code User",
+              email: code.email || "guest@example.com",
             };
       }
     }
@@ -98,7 +98,7 @@ export async function GET(request: NextRequest) {
       },
     });
 
-    return new NextResponse(Buffer.from(finalBuffer as any), {
+    return new NextResponse(Buffer.from(finalBuffer as Uint8Array), {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": "inline",

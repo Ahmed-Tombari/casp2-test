@@ -9,6 +9,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   
   if (!session || session.user.role !== 'ADMIN') {
     redirect({ href: '/', locale: 'ar' })
+    return null
   }
 
   return (

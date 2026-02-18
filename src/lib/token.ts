@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from './env';
 
 /**
  * Payload structure for the PDF access token
@@ -16,11 +17,11 @@ export interface PdfAccessPayload {
  * @returns The signed JWT string
  */
 export function generatePdfAccessToken(payload: PdfAccessPayload): string {
-  if (!process.env.JWT_SECRET) {
+  if (!JWT_SECRET) {
     throw new Error('JWT_SECRET environment variable is not defined');
   }
 
-  return jwt.sign(payload, process.env.JWT_SECRET, {
+  return jwt.sign(payload, JWT_SECRET, {
     expiresIn: '10m',
   });
 }
@@ -33,12 +34,12 @@ export function generatePdfAccessToken(payload: PdfAccessPayload): string {
  * @throws Error if token is invalid or expired
  */
 export function verifyPdfAccessToken(token: string): PdfAccessPayload {
-  if (!process.env.JWT_SECRET) {
+  if (!JWT_SECRET) {
     throw new Error('JWT_SECRET environment variable is not defined');
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET) as PdfAccessPayload;
+    const decoded = jwt.verify(token, JWT_SECRET) as PdfAccessPayload;
     return decoded;
   } catch {
     throw new Error('Invalid or expired token');
