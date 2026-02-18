@@ -944,8 +944,10 @@
     "book5Title": "Mon Cœur Pur",
     "book5Desc": "Les actions du cœur comme la sincérité, l'amour et la confiance en Allah.",
     "exploreBook": "Explorer le livre"
-  },
-  "admin": {
+  }
+ },
+
+   "admin": {
     "dashboard": "Tableau de Bord",
     "overview": "Aperçu",
     "welcome": "Bienvenue sur le tableau de bord d'administration.",
@@ -1003,5 +1005,4 @@
     "days": "jours",
     "unassigned": "Non assigné"
   }
- }
 }

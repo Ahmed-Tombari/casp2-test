@@ -944,8 +944,10 @@
     "book5Title": "My Pure Heart",
     "book5Desc": "Actions of the heart like honesty, love, and trust in Allah.",
     "exploreBook": "Explore Book"
+  }
   },
-    "admin": {
+  
+   "admin": {
     "dashboard": "Dashboard",
     "overview": "Overview",
     "welcome": "Welcome back to the admin dashboard.",
@@ -1002,7 +1004,5 @@
     "showCode": "Show Code",
     "days": "days",
     "unassigned": "Unassigned"
-  }
-
   }
 }
