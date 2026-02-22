@@ -61,7 +61,7 @@ export default async function HappyMuslimGuidePage({ params }: { params: Promise
               <BookViewer
                 key={idx}
                 title={t(`happy.books.${item.key}`)}
-                pdfUrl={`https://3nvnebfanoina0ww.public.blob.vercel-storage.com/dalil-book/happyMuslim-guide/${item.file}`}
+                pdfUrl={`${process.env.NEXT_PUBLIC_R2_BASE_URL}/dalil-book/happyMuslim-guide/${item.file}`}
                 readLabel={t('readBtn')}
                 downloadLabel={t('downloadBtn')}
                 closeLabel={t('close')}

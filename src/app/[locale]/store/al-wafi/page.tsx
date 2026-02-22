@@ -60,8 +60,8 @@ export default async function AlWafiPage({
       return {
         id,
         title: tLevels(titleKey),
-        bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/wafi-book/wafi-${key}/${section}/cover/${key}-1.png`,
-        pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/wafi-book/wafi-${key}/${section}/${key}-1.pdf`
+        bookCover: `/pdfbooks/store-book/wafi-book/wafi-${key}/${section}/cover/${key}-1.png`,
+        pdfUrl: `/api/books/store-book/wafi-book/wafi-${key}/${section}/${key}-1.pdf`
       };
     });
   };

@@ -54,8 +54,8 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
       icon: 'solar:leaf-bold-duotone',
       color: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400',
       border: 'border-emerald-200 dark:border-emerald-800',
-      bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/hidayaFr-book/hidayaFr-${key}/cover/${key}-1.png`,
-      pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.pdf`
+      bookCover: `/pdfbooks/store-book/hidayaFr-book/hidayaFr-${key}/cover/${key}-1.png`,
+      pdfUrl: `/api/books/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.pdf`
     };
   });
 

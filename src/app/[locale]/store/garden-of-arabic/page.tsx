@@ -64,10 +64,10 @@ export default async function GardenOfArabicPage({
         icon: config.icon,
         color: `${config.color} dark:bg-emerald-900/30 dark:text-emerald-400`,
         border: `${config.border} dark:border-emerald-800`,
-        bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/garden-book/garden-${key}/${section}/cover/${key}.jpg`,
+        bookCover: `/pdfbooks/store-book/garden-book/garden-${key}/${section}/cover/${key}.jpg`,
         pdfUrl: isExercises 
-          ? `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/garden-book/garden-${key}/${section}/${key}.pdf`
-          : `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/garden-book/garden-${key}/${section}/gardenAsses${key}.pdf`
+          ? `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/garden-book/garden-${key}/${section}/${key}.pdf`
+          : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/garden-book/garden-${key}/${section}/gardenAsses${key}.pdf`
       };
     });
   };
@@ -112,7 +112,7 @@ export default async function GardenOfArabicPage({
         <p className="text-gray-500 dark:text-gray-400">{t('stagesDesc')}</p>
       </div>
 
-      <PdfBookGrid levels={levels} />
+      <PdfBookGrid levels={levels} watermark={true} />
 
       {/* ================= EXERCISES PATH ================= */}
       <div className="text-center px-4 py-10 mt-20 border-t border-gray-100 dark:border-gray-800/20">
@@ -124,7 +124,7 @@ export default async function GardenOfArabicPage({
         </p>
       </div>
 
-      <PdfBookGrid levels={exercisesLevels} />
+      <PdfBookGrid levels={exercisesLevels} watermark={true} />
 
       {/* ================= INTERACTIVE PREVIEW (The "Look Inside") ================= */}
       <section className="py-20 bg-emerald-50/50 dark:bg-[#061410] relative overflow-hidden mt-20">

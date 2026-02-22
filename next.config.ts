@@ -8,11 +8,18 @@ const nextConfig: NextConfig = {
     root: process.cwd(),
   },
   /* config options here */
+   transpilePackages: ["@aws-sdk/client-s3"],
    eslint: {
         ignoreDuringBuilds: true,
     },
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_R2_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_URL).hostname : process.env.NEXT_PUBLIC_R2_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_URL).hostname : 'pub-2e481fdf58914ed08e036eeb987a1a89.r2.dev',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: '3nvnebfanoina0ww.public.blob.vercel-storage.com',

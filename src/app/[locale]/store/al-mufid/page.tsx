@@ -33,8 +33,8 @@ export default async function AlMufidPage({ params }: { params: Promise<{ locale
   const levels = levelKeys.map(key => ({
     id: key,
     title: tLevels(key),
-    bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/mufid-book/mufid-${key}/cover/${key}-1.png`,
-    pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/mufid-book/mufid-${key}/${key}-1.pdf`
+    bookCover: `/pdfbooks/store-book/mufid-book/mufid-${key}/cover/${key}-1.png`,
+    pdfUrl: `/api/books/store-book/mufid-book/mufid-${key}/${key}-1.pdf`
   }));
 
   return (

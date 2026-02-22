@@ -49,7 +49,7 @@ export default async function MufidGuidePage({ params }: { params: Promise<{ loc
               <BookViewer
                 key={idx}
                 title={t(`mufid.books.${item.key}`)}
-                pdfUrl={`https://3nvnebfanoina0ww.public.blob.vercel-storage.com/dalil-book/mufid-guide/${item.file}`}
+                pdfUrl={`${process.env.NEXT_PUBLIC_R2_BASE_URL}/dalil-book/mufid-guide/${item.file}`}
                 readLabel={t('readBtn')}
                 downloadLabel={t('downloadBtn')}
                 closeLabel={t('close')}

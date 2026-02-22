@@ -19,7 +19,7 @@ interface PdfBookGridProps {
   watermark?: boolean;
 }
 
-export default function PdfBookGrid({ levels, watermark = false }: PdfBookGridProps) {
+export default function PdfBookGrid({ levels, watermark = true }: PdfBookGridProps) {
   const tNav = useTranslations('nav');
   const tGuide = useTranslations('store');
   const locale = useLocale();

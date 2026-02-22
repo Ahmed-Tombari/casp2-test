@@ -14,7 +14,10 @@ export async function GET(request: NextRequest) {
 
   const originalUrl = decodeAssetUrl(encodedUrl);
 
-  if (!originalUrl || !originalUrl.includes('vercel-storage.com')) {
+  const r2BaseUrl = process.env.NEXT_PUBLIC_R2_BASE_URL || "https://pub-2e481fdf58914ed08e036eeb987a1a89.r2.dev";
+  const r2Domain = new URL(r2BaseUrl).hostname;
+
+  if (!originalUrl || (!originalUrl.includes('vercel-storage.com') && !originalUrl.includes(r2Domain))) {
     return new NextResponse('Invalid asset URL', { status: 400 });
   }
 

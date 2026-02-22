@@ -47,8 +47,8 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
               isIntermediate ? [t('topicTravel'), t('topicHealth'), t('topicShopping')] :
               [t('topicGreeting'), t('topicFamily'), t('topicDaily')],
       color: isAdvanced ? 'bg-brand-navy' : isIntermediate ? 'bg-brand-sky' : 'bg-emerald-500',
-      bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/shamil-book/shamil-${key}/cover/${key}.jpg`,
-      pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/shamil-book/shamil-${key}/${key}.pdf`
+      bookCover: `/pdfbooks/store-book/shamil-book/shamil-${key}/cover/${key}.jpg`,
+      pdfUrl: `/api/books/store-book/shamil-book/shamil-${key}/${key}.pdf`
     };
   });
 

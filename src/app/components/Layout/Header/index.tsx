@@ -52,9 +52,14 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
   };
 
   const handleClickOutside = useCallback((event: MouseEvent) => {
+    const target = event.target as Element;
+    if (target.closest && target.closest('#auth-modal')) {
+      return;
+    }
+
     if (
       signInRef.current &&
-      !signInRef.current.contains(event.target as Node)
+      !signInRef.current.contains(target as Node)
     ) {
       setIsSignInOpen(false);
     }

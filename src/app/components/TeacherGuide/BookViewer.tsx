@@ -6,6 +6,8 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Document, Page, pdfjs } from "react-pdf";
 import { encodeAssetUrl } from "@/utils/obfuscation";
+
+// Import CSS for react-pdf
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
@@ -23,12 +25,12 @@ interface BookViewerProps {
   icon: string;
   isRTL: boolean;
   coverImage?: string;
-  watermark?: boolean;
+  watermark?: boolean; // Ensure watermark prop is maintained
 }
 
 export default function BookViewer({
   title,
-  pdfUrl,
+  pdfUrl: initialPdfUrl,
   readLabel,
   downloadLabel,
   closeLabel,
@@ -37,7 +39,7 @@ export default function BookViewer({
   icon,
   isRTL,
   coverImage,
-  watermark = false,
+  watermark = true,
 }: BookViewerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -60,25 +62,17 @@ export default function BookViewer({
       try {
         let fetchUrl = url;
         
-        if (url.toLowerCase().endsWith('.pdf') || url.includes('/api/pdf')) {
-          // Use or update the secure PDF endpoint
-          let baseUrl = url;
-          const params = new URLSearchParams();
-
-          if (!url.includes('/api/pdf')) {
-            baseUrl = '/api/pdf';
-            params.set('url', url);
-          } else {
-            // Extract existing params if any
-            const [path, query] = url.split('?');
-            baseUrl = path;
-            if (query) {
-              new URLSearchParams(query).forEach((val, key) => params.set(key, val));
-            }
+        const isPdf = url.toLowerCase().endsWith('.pdf');
+        const isApiPdf = url.includes('/api/pdf');
+        
+        if (isPdf || isApiPdf) {
+          // Use the secure proxy endpoint with watermarking support
+          if (isPdf) {
+            fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
           }
           
           if (watermark) {
-            params.set('watermark', 'true');
+            fetchUrl += (fetchUrl.includes('?') ? '&' : '?') + 'watermark=true';
           }
           
           // Try to get access code from URL or local storage
@@ -88,12 +82,10 @@ export default function BookViewer({
           const code = urlCode || storedCode;
           
           if (code) {
-            params.set('code', code);
+            fetchUrl += `&code=${code}`;
           }
-
-          fetchUrl = `${baseUrl}?${params.toString()}`;
-        } else if (!url.startsWith('/') && !url.includes(window.location.origin)) {
-          // Proxy images
+        } else if (!url.startsWith('/') && !url.includes(typeof window !== "undefined" ? window.location.origin : '')) {
+          // Proxy images (only if external)
           const encoded = encodeAssetUrl(url);
           fetchUrl = `/api/assets?url=${encoded}`;
         }
@@ -113,8 +105,15 @@ export default function BookViewer({
       }
     };
 
-    if (pdfUrl) fetchAsset(pdfUrl, setBlobPdfUrl, pdfBlobRef);
-    if (coverImage) fetchAsset(coverImage, setBlobCoverUrl, coverBlobRef);
+    if (initialPdfUrl) fetchAsset(initialPdfUrl, setBlobPdfUrl, pdfBlobRef);
+    if (coverImage) {
+        // If cover image is a local path (starts with /), just use it directly or fetch as blob for protection
+        if (coverImage.startsWith('/')) {
+            setBlobCoverUrl(coverImage);
+        } else {
+            fetchAsset(coverImage, setBlobCoverUrl, coverBlobRef);
+        }
+    }
 
     return () => {
       if (pdfBlobRef.current) URL.revokeObjectURL(pdfBlobRef.current);
@@ -122,7 +121,7 @@ export default function BookViewer({
       pdfBlobRef.current = null;
       coverBlobRef.current = null;
     };
-  }, [pdfUrl, coverImage, watermark]);
+  }, [initialPdfUrl, coverImage, watermark]);
 
   // soft protection: handle context menu and key shortcuts
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -230,6 +229,7 @@ export default function BookViewer({
                   src={blobCoverUrl}
                   alt={title}
                   fill
+                  unoptimized // Support blob URLs
                   className="object-contain transition-transform duration-700 group-hover:scale-110 p-2"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
@@ -238,7 +238,7 @@ export default function BookViewer({
                   <Icon icon="solar:gallery-bold-duotone" className="text-4xl text-gray-400" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-linear-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
             </div>
           </div>
         ) : (
@@ -262,7 +262,7 @@ export default function BookViewer({
                 <Icon icon="solar:eye-bold" className={isRTL ? "rotate-0" : ""} />
              </span>
              {/* Shine Effect on Button */}
-             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
+             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
          </button>
       </div>
 
@@ -277,7 +277,7 @@ export default function BookViewer({
           >
             <div
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              className="w-full max-w-6xl h-[95vh] bg-gray-100 dark:bg-[#0f172a] rounded-4xl shadow-2xl flex flex-col overflow-hidden relative animate-in zoom-in-95 duration-300 ring-1 ring-white/10"
+              className="w-full max-w-6xl h-[95vh] bg-gray-100 dark:bg-[#0f172a] rounded-4xl shadow-2xl flex flex-col overflow-hidden relative animate-in zoom-in-95 duration-300 ring-1 ring-white/10 cursor-default"
             >
               {/* Header */}
               <div className="flex items-center justify-between p-4 bg-white dark:bg-[#1e293b] border-b border-gray-200 dark:border-white/5 z-20 shadow-sm shrink-0">
@@ -293,7 +293,7 @@ export default function BookViewer({
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  {/* Download Button (Disabled) */}
+                  {/* Download Button (Disabled/Protected in this design) */}
                   {!hasError && (
                     <button
                       disabled
@@ -363,8 +363,19 @@ export default function BookViewer({
               <div
                 ref={containerRef}
                 onContextMenu={handleContextMenu}
-                className="flex-1 overflow-y-auto overflow-x-hidden bg-gray-200/50 dark:bg-[#020617] relative p-4 md:p-8 flex flex-col items-center select-none"
+                className="flex-1 overflow-y-auto overflow-x-hidden bg-gray-200/50 dark:bg-[#020617] relative p-4 md:p-8 flex flex-col items-center select-none custom-scrollbar"
               >
+                {/* Watermark Background */}
+                <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05]">
+                    <Image 
+                        src="/images/logo/logo-casp.png" 
+                        alt="" 
+                        width={500} 
+                        height={500} 
+                        className="object-contain"
+                    />
+                </div>
+
                 {/* Loader */}
                 {isLoading && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-white/50 dark:bg-black/50 backdrop-blur-sm">
@@ -414,7 +425,7 @@ export default function BookViewer({
                             width={pageWidth * zoom}
                             loading={
                               <div
-                                style={{ width: pageWidth * zoom, height: pageWidth * zoom * 1.4 }}
+                                style={{ width: pageWidth * zoom, height: pageWidth * (zoom || 1) * 1.4 }}
                                 className="bg-white flex items-center justify-center text-gray-400 animate-pulse"
                               >
                                 Loading Page {index + 1}...
@@ -433,6 +444,28 @@ export default function BookViewer({
           </div>,
           document.body,
         )}
+
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      `}</style>
     </>
   );
 }

@@ -74,8 +74,8 @@ export default async function TheHappyMuslimPage({
       icon: ['R', 'P', '1'].includes(key) ? 'solar:sun-2-bold-duotone' : key === '2' ? 'solar:hand-shake-bold-duotone' : key === '3' ? 'solar:book-minimalistic-bold-duotone' : 'solar:globus-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-brand-gold-light/20 text-brand-gold-dark dark:bg-brand-gold/10 dark:text-brand-gold' : key === '2' ? 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400' : key === '3' ? 'bg-brand-navy-light/20 text-brand-navy dark:bg-brand-navy/30 dark:text-brand-sky' : 'bg-brand-sky-light/20 text-brand-sky-dark dark:bg-brand-sky/10 dark:text-brand-sky',
       border: ['R', 'P', '1'].includes(key) ? 'border-brand-gold/30' : key === '2' ? 'border-teal-200 dark:border-teal-800' : key === '3' ? 'border-brand-navy/20' : 'border-brand-sky/30',
-      bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/happymuslimEn-book/happymuslimEn-${key}/cover/${key}-1.png`,
-      pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/happymuslimEn-book/happymuslimEn-${key}/${key}-1.pdf`
+      bookCover: `/pdfbooks/store-book/happymuslimEn-book/happymuslimEn-${key}/cover/${key}-1.png`,
+      pdfUrl: `/api/books/store-book/happymuslimEn-book/happymuslimEn-${key}/${key}-1.pdf`
     };
   });
 

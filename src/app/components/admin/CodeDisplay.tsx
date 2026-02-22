@@ -30,7 +30,7 @@ export function CodeDisplay({ codes }: CodeDisplayProps) {
         {codeList.map((code, index) => (
           <div key={index} className="flex items-center gap-2">
             <span className={`font-mono text-sm ${isVisible ? 'text-slate-800 dark:text-white font-medium' : 'text-slate-500 dark:text-slate-400 tracking-widest'}`}>
-               {isVisible ? code : '••••••••••••'}
+               {isVisible ? code : '••••••'}
             </span>
           </div>
         ))}

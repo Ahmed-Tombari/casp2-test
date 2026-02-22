@@ -3,6 +3,7 @@
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import crypto from 'crypto'
+import { customAlphabet } from 'nanoid'
 import { encrypt, decrypt } from '@/lib/encryption'
 
 // --- User Management ---
@@ -65,12 +66,15 @@ export async function getAccessCodes() {
   }))
 }
 
+
 export async function generateAccessCode(data: {
   validityDays: number
   userId?: string
   email?: string
 }) {
-  const rawCode = crypto.randomBytes(12).toString('hex').toUpperCase()
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*'
+  const generateComplexCode = customAlphabet(alphabet, 6)
+  const rawCode = generateComplexCode()
   const codeHash = crypto.createHash('sha256').update(rawCode).digest('hex')
   
   const expiresAt = new Date()

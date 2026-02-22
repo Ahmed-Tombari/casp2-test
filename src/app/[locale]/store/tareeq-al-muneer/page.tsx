@@ -76,8 +76,8 @@ export default async function TareeqAlMuneerArPage({
       icon: key === '2' ? 'solar:soundwave-bold-duotone' : key === '3' ? 'solar:widget-add-bold-duotone' : ['4', '5', '6'].includes(key) ? 'solar:book-2-bold-duotone' : 'solar:letter-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' : key === '2' ? 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400' : key === '3' ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400',
       border: ['R', 'P', '1'].includes(key) ? 'border-amber-200 dark:border-amber-800' : key === '2' ? 'border-teal-200 dark:border-teal-800' : key === '3' ? 'border-indigo-200 dark:border-indigo-800' : 'border-rose-200 dark:border-rose-800',
-      bookCover: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/tarikmunirAr-book/tarikmunirAr-${key}/cover/1-${assetKey}.jpg`,
-      pdfUrl: `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/tarikmunirAr-book/tarikmunirAr-${key}/1-${assetKey}.pdf`
+      bookCover: `/pdfbooks/store-book/tarikmunirAr-book/tarikmunirAr-${key}/cover/1-${assetKey}.jpg`,
+      pdfUrl: `/api/books/store-book/tarikmunirAr-book/tarikmunirAr-${key}/1-${assetKey}.pdf`
     };
   });
 

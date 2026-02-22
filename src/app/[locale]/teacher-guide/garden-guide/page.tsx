@@ -52,7 +52,7 @@ export default async function GardenGuidePage({ params }: { params: Promise<{ lo
               <BookViewer
                 key={idx}
                 title={t(`garden.books.${item.key}`)}
-                pdfUrl={`https://3nvnebfanoina0ww.public.blob.vercel-storage.com/dalil-book/garden-guide/${item.file}`}
+                pdfUrl={`${process.env.NEXT_PUBLIC_R2_BASE_URL}/dalil-book/garden-guide/${item.file}`}
                 readLabel={t('readBtn')}
                 downloadLabel={t('downloadBtn')}
                 closeLabel={t('close')}

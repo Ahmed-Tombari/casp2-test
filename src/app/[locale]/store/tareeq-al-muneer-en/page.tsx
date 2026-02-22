@@ -39,8 +39,8 @@ export default async function TareeqAlMuneerEnPage({ params }: { params: Promise
       icon: ['R', 'P', '1'].includes(key) ? 'solar:letter-bold-duotone' : key === '2' ? 'solar:pen-new-square-bold-duotone' : 'solar:headphones-round-sound-bold-duotone',
       color: ['R', 'P', '1', '2'].includes(key) ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-brand-orange-light text-brand-orange-dark dark:bg-brand-orange/10 dark:text-brand-orange',
       border: ['R', 'P', '1', '2'].includes(key) ? 'border-blue-200 dark:border-blue-800' : 'border-brand-orange/30',
-      bookCover: isPlaceholder ? '' : `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/tarikmunirEn-book/tarikmunirEn-${key}/cover/1-${assetKey}.jpg`,
-      pdfUrl: isPlaceholder ? '' : `https://3nvnebfanoina0ww.public.blob.vercel-storage.com/store-book/tarikmunirEn-book/tarikmunirEn-${key}/1-${assetKey}.pdf`
+      bookCover: isPlaceholder ? '' : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/tarikmunirEn-book/tarikmunirEn-${key}/cover/1-${assetKey}.jpg`,
+      pdfUrl: isPlaceholder ? '' : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/tarikmunirEn-book/tarikmunirEn-${key}/1-${assetKey}.pdf`
     };
   });
 
