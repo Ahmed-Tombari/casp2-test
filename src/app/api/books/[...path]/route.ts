@@ -57,7 +57,7 @@ export async function GET(
       status: 200,
       headers: {
         "Content-Type": contentType,
-        "Cache-Control": `public, s-maxage=${revalidateTime}, max-age=${cacheMaxAge}, immutable`,
+        "Cache-Control": `public, max-age=${cacheMaxAge}, s-maxage=${revalidateTime}, stale-while-revalidate=86400, immutable`,
       },
     });
   } catch (error: unknown) {

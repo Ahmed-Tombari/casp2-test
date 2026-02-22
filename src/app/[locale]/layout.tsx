@@ -66,13 +66,22 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Casp Education',
+  alternateName: 'Casp Arabic Center',
+  description: 'Online learning platform offering high-quality Arabic education and professional courses.',
   url: 'https://centerarabic.com',
   logo: 'https://centerarabic.com/logo.png',
   sameAs: [
-    // Add social media links if known, otherwise leave empty or add placeholders
-    'https://www.facebook.com/caspeducation', 
+    'https://www.facebook.com/caspeducation',
     'https://www.instagram.com/caspeducation',
+    'https://twitter.com/caspeducation',
+    'https://www.linkedin.com/company/caspeducation'
   ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'contact@centerarabic.com',
+    availableLanguage: ['Arabic', 'English', 'French']
+  }
 };
 
 export default async function PagesLayout({
