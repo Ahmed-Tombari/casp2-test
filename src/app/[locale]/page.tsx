@@ -43,7 +43,7 @@ export default async function HomePage() {
   return (
     <main className="relative">
       {/* Global Background Logo Watermark */}
-      <div className="fixed inset-0 top-[0%] pointer-events-none z-0 overflow-hidden flex items-center justify-center opacity-[0.05] dark:opacity-[0.5]">
+      <div className="fixed inset-0 top-[0%] pointer-events-none z-0 overflow-hidden flex items-center justify-center opacity-[0.05] dark:opacity-[0.05]">
         <Image 
           src="/images/logo/casp-logo.png" 
           alt="" 

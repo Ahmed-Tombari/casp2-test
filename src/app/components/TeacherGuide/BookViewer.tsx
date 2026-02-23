@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Icon } from "@iconify/react";
@@ -55,52 +55,64 @@ export default function BookViewer({
   const pdfBlobRef = useRef<string | null>(null);
 
   // Shared function to fetch assets securely
-  const fetchAsset = useCallback(async (url: string, setter: (blobUrl: string) => void, ref: React.MutableRefObject<string | null>) => {
-    try {
-      let fetchUrl = url;
-      
-      const isPdf = url.toLowerCase().endsWith('.pdf');
-      const isApiPdf = url.includes('/api/pdf');
-      
-      if (isPdf || isApiPdf) {
-        // Use the secure proxy endpoint with watermarking support
-        if (isPdf) {
-          fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
-        }
-        
-        if (watermark) {
-          fetchUrl += (fetchUrl.includes('?') ? '&' : '?') + 'watermark=true';
-        }
-        
-        // Try to get access code from URL or local storage
-        const searchParams = new URLSearchParams(window.location.search);
-        const urlCode = searchParams.get('token') || searchParams.get('code');
-        const storedCode = localStorage.getItem('accessCode');
-        const code = urlCode || storedCode;
-        
-        if (code) {
-          fetchUrl += `&code=${code}`;
-        }
-      } else if (!url.startsWith('/') && !url.includes(typeof window !== "undefined" ? window.location.origin : '')) {
-        // Proxy images (only if external)
-        const encoded = encodeAssetUrl(url);
-        fetchUrl = `/api/assets?url=${encoded}`;
-      }
+  const fetchAsset = useCallback(
+    async (
+      url: string,
+      setter: (blobUrl: string) => void,
+      ref: React.MutableRefObject<string | null>,
+    ) => {
+      try {
+        let fetchUrl = url;
 
-      const response = await fetch(fetchUrl);
-      if (!response.ok) throw new Error("Failed to fetch asset");
-      const blob = await response.blob();
-      const blobUrl = URL.createObjectURL(blob);
-      
-      if (ref.current) URL.revokeObjectURL(ref.current);
-      
-      ref.current = blobUrl;
-      setter(blobUrl);
-    } catch (error) {
-      console.error("Failed to load protected asset:", error);
-      setHasError(true);
-    }
-  }, [watermark]);
+        const isPdf = url.toLowerCase().endsWith(".pdf");
+        const isApiPdf = url.includes("/api/pdf");
+
+        if (isPdf || isApiPdf) {
+          // Use the secure proxy endpoint with watermarking support
+          if (isPdf) {
+            fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
+          }
+
+          if (watermark) {
+            fetchUrl += (fetchUrl.includes("?") ? "&" : "?") + "watermark=true";
+          }
+
+          // Try to get access code from URL or local storage
+          const searchParams = new URLSearchParams(window.location.search);
+          const urlCode = searchParams.get("token") || searchParams.get("code");
+          const storedCode = localStorage.getItem("accessCode");
+          const code = urlCode || storedCode;
+
+          if (code) {
+            fetchUrl += `&code=${code}`;
+          }
+        } else if (
+          !url.startsWith("/") &&
+          !url.includes(
+            typeof window !== "undefined" ? window.location.origin : "",
+          )
+        ) {
+          // Proxy images (only if external)
+          const encoded = encodeAssetUrl(url);
+          fetchUrl = `/api/assets?url=${encoded}`;
+        }
+
+        const response = await fetch(fetchUrl);
+        if (!response.ok) throw new Error("Failed to fetch asset");
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        if (ref.current) URL.revokeObjectURL(ref.current);
+
+        ref.current = blobUrl;
+        setter(blobUrl);
+      } catch (error) {
+        console.error("Failed to load protected asset:", error);
+        setHasError(true);
+      }
+    },
+    [watermark],
+  );
 
   // Asset protection: Fetch PDF only when the modal is opened
   useEffect(() => {
@@ -144,7 +156,7 @@ export default function BookViewer({
   const updatePageWidth = useCallback(() => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
-      setPageWidth(Math.min(width * 0.95, 800)); 
+      setPageWidth(Math.min(width * 0.95, 800));
     }
   }, []);
 
@@ -216,7 +228,7 @@ export default function BookViewer({
         {/* Icon Box or Cover Image */}
         {coverImage ? (
           <div className="w-full aspect-3/4 mb-8 relative z-10 group-hover:-translate-y-4 transition-transform duration-500 ease-out perspective-1000">
-            <div 
+            <div
               onContextMenu={handleContextMenu}
               className="relative w-full h-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] rounded-2xl overflow-hidden transform group-hover:rotate-x-2 group-hover:scale-105 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/10 group-hover:ring-4 group-hover:ring-brand-gold/20 dark:group-hover:ring-brand-sky/20 bg-gray-50 dark:bg-white/5"
             >
@@ -230,7 +242,10 @@ export default function BookViewer({
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 animate-pulse">
-                  <Icon icon="solar:gallery-bold-duotone" className="text-4xl text-gray-400" />
+                  <Icon
+                    icon="solar:gallery-bold-duotone"
+                    className="text-4xl text-gray-400"
+                  />
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -248,20 +263,19 @@ export default function BookViewer({
           {title}
         </h3>
 
-         {/* Action Button 2 */}
-          <button 
-           onClick={() => setIsOpen(true)}
-           className="group relative px-8 py-4 bg-brand-gold text-brand-navy-dark rounded-2xl font-bold shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-             <span className="relative z-10 flex items-center gap-2">
-              {readLabel}
-                <Icon icon="solar:eye-bold" className={isRTL ? "rotate-0" : ""} />
-             </span>
-             {/* Shine Effect on Button */}
-             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
-         </button>
+        {/* Action Button 2 */}
+        <button
+          onClick={() => setIsOpen(true)}
+          className="group relative px-8 py-4 bg-brand-gold text-brand-navy-dark rounded-2xl font-bold shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+        >
+          <span className="relative z-10 flex items-center gap-2">
+            {readLabel}
+            <Icon icon="solar:eye-bold" className={isRTL ? "rotate-0" : ""} />
+          </span>
+          {/* Shine Effect on Button */}
+          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
+        </button>
       </div>
-
-    
 
       {/* PDF Modal */}
       {isOpen &&
@@ -319,13 +333,16 @@ export default function BookViewer({
               {!hasError && (
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30 hidden sm:flex flex-col items-center bg-white/90 dark:bg-brand-navy-dark/90 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden min-w-14 animate-in slide-in-from-right-10 duration-500">
                   <button
-                    onClick={() => setZoom(prev => Math.min(prev + 0.1, 2.0))}
+                    onClick={() => setZoom((prev) => Math.min(prev + 0.1, 2.0))}
                     className="w-full h-14 flex items-center justify-center hover:bg-brand-sky hover:text-white dark:hover:bg-brand-sky text-brand-navy dark:text-white transition-all duration-300 group/btn"
                     title="Zoom In"
                   >
-                    <Icon icon="solar:add-circle-bold-duotone" className="text-3xl group-hover/btn:scale-110 transition-transform" />
+                    <Icon
+                      icon="solar:add-circle-bold-duotone"
+                      className="text-3xl group-hover/btn:scale-110 transition-transform"
+                    />
                   </button>
-                  
+
                   <div className="w-8 h-px bg-gray-200 dark:bg-white/10 mx-auto"></div>
 
                   <button
@@ -333,17 +350,23 @@ export default function BookViewer({
                     className="w-full h-14 flex items-center justify-center hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 text-brand-navy dark:text-white transition-all duration-300 group/btn"
                     title="Reset Zoom"
                   >
-                    <Icon icon="solar:refresh-linear" className="text-2xl group-hover/btn:rotate-180 transition-transform duration-500" />
+                    <Icon
+                      icon="solar:refresh-linear"
+                      className="text-2xl group-hover/btn:rotate-180 transition-transform duration-500"
+                    />
                   </button>
 
                   <div className="w-8 h-px bg-gray-200 dark:bg-white/10 mx-auto"></div>
 
                   <button
-                    onClick={() => setZoom(prev => Math.max(prev - 0.1, 0.5))}
+                    onClick={() => setZoom((prev) => Math.max(prev - 0.1, 0.5))}
                     className="w-full h-14 flex items-center justify-center hover:bg-brand-sky hover:text-white dark:hover:bg-brand-sky text-brand-navy dark:text-white transition-all duration-300 group/btn"
                     title="Zoom Out"
                   >
-                    <Icon icon="solar:minus-circle-bold-duotone" className="text-3xl group-hover/btn:scale-110 transition-transform" />
+                    <Icon
+                      icon="solar:minus-circle-bold-duotone"
+                      className="text-3xl group-hover/btn:scale-110 transition-transform"
+                    />
                   </button>
 
                   <div className="w-full py-2 bg-gray-50 dark:bg-white/5 text-center border-t border-gray-200 dark:border-white/10">
@@ -362,13 +385,13 @@ export default function BookViewer({
               >
                 {/* Watermark Background */}
                 <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05]">
-                    <Image 
-                        src="/images/logo/casp-logo.png" 
-                        alt="" 
-                        width={500} 
-                        height={500} 
-                        className="object-contain"
-                    />
+                  <Image
+                    src="/images/logo/casp-logo.png"
+                    alt=""
+                    width={500}
+                    height={500}
+                    className="object-contain"
+                  />
                 </div>
 
                 {/* Loader */}
@@ -385,13 +408,17 @@ export default function BookViewer({
                 {hasError && (
                   <div className="flex flex-col items-center justify-center h-full text-center p-8">
                     <div className="w-20 h-20 rounded-full bg-orange-100 dark:bg-orange-500/20 flex items-center justify-center mb-6">
-                      <Icon icon="solar:shield-warning-bold-duotone" className="text-5xl text-orange-500" />
+                      <Icon
+                        icon="solar:shield-warning-bold-duotone"
+                        className="text-5xl text-orange-500"
+                      />
                     </div>
                     <h4 className="text-2xl font-bold text-brand-navy dark:text-white mb-2">
-                       Coming Soon!
+                      Coming Soon!
                     </h4>
                     <p className="text-gray-500 dark:text-gray-400 max-w-md">
-                      This book is currently being prepared and will be available shortly. Thank you for your patience.
+                      This book is currently being prepared and will be
+                      available shortly. Thank you for your patience.
                     </p>
                   </div>
                 )}
@@ -431,24 +458,43 @@ export default function BookViewer({
         )}
 
       <style jsx global>{`
+        .custom-scrollbar {
+          scrollbar-gutter: stable;
+          direction: ltr !important;
+        }
+        
+        .custom-scrollbar > * {
+          direction: ${isRTL ? 'rtl' : 'ltr'};
+        }
+
         .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
+          width: 20px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
+          background: rgba(0, 0, 0, 0.08);
+          border-radius: 0;
+          border-left: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-left: 1px solid rgba(255, 255, 255, 0.05);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(0, 0, 0, 0.1);
+          background: rgba(0, 0, 0, 0.4);
           border-radius: 20px;
+          border: 5px solid transparent;
+          background-clip: content-box;
         }
         .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.4);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(0, 0, 0, 0.2);
+          background: rgba(0, 0, 0, 0.6);
+          background-clip: content-box;
         }
         .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.6);
+          background-clip: content-box;
         }
       `}</style>
     </>
@@ -481,9 +527,9 @@ function LazyPage({ pageNumber, width, loading }: LazyPageProps) {
         }
       },
       {
-        rootMargin: '400px 0px', // Load pages ahead of scroll
+        rootMargin: "400px 0px", // Load pages ahead of scroll
         threshold: 0,
-      }
+      },
     );
 
     if (containerRef.current) {
@@ -502,9 +548,9 @@ function LazyPage({ pageNumber, width, loading }: LazyPageProps) {
     <div
       ref={containerRef}
       className="relative shadow-lg md:shadow-2xl rounded-sm overflow-hidden bg-white"
-      style={{ 
-        width: width, 
-        minHeight: isVisible ? 'auto' : estimatedHeight 
+      style={{
+        width: width,
+        minHeight: isVisible ? "auto" : estimatedHeight,
       }}
     >
       {isVisible ? (
@@ -521,7 +567,7 @@ function LazyPage({ pageNumber, width, loading }: LazyPageProps) {
           }
           renderTextLayer={true}
           renderAnnotationLayer={true}
-          className="bg-white block" 
+          className="bg-white block"
         />
       ) : (
         <div
