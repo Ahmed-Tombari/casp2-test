@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { motion, Variants } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PremiumButton from "@/app/components/UI/PremiumButton";
-import GlassCard from "@/app/components/UI/GlassCard";
 
 const Banner = () => {
   const t = useTranslations("home");
@@ -49,7 +48,7 @@ const Banner = () => {
     <section
       id="Home"
       aria-label="Hero section"
-      className="relative overflow-hidden pt-28 lg:pt-32 bg-transparent"
+      className="relative overflow-hidden pt-36 lg:pt-44 bg-transparent"
     >
       {/* ================= BACKGROUND ELEMENTS ================= */}
       <div className="absolute inset-0 -z-20 pointer-events-none select-none overflow-hidden">
@@ -83,14 +82,21 @@ const Banner = () => {
             
             {/* Heading */}
             <motion.div 
-               className="space-y-2"
+               className="relative space-y-2"
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.3 }}
             >
-               <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-[120px] text-[#2c75a4] dark:text-white text-center font-cairo">
-                ( Version de Test )
-              </h1>
+              {/* Background Logo behind title */}
+              {/* <div className="absolute top-[65%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] sm:w-[550px] sm:h-[550px] lg:w-[600px] lg:h-[600px] opacity-[0.07] dark:opacity-5 pointer-events-none -z-10">
+                <Image
+                  src="/images/logo/casp-logo.png"
+                  alt=""
+                  fill
+                  className="object-contain"
+                />
+              </div> */}
+
               <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-[120px] text-[#2c75a4] dark:text-white text-center font-cairo">
                 {t('heroTitle')}
               </h1>

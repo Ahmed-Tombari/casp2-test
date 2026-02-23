@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Normalize code to uppercase since admin generates uppercase hex codes
-    const normalizedCode = code.trim().toUpperCase();
+    // Use original case since admin generates mixed-case alphanumeric and symbols
+    const normalizedCode = code.trim();
     const codeHash = crypto.createHash('sha256').update(normalizedCode).digest('hex');
 
     // 1. Find the access code in database

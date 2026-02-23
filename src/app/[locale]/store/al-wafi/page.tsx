@@ -26,24 +26,7 @@ export default async function AlWafiPage({
   const t = await getTranslations({ locale: locale, namespace: 'store.alWafi' });
   const tLevels = await getTranslations({ locale: locale, namespace: 'store.levels' });
 
-  // --- Al Wafi Features ---
-  const features = [
-    {
-      title: t('comprehensiveGrammar'),
-      desc: t('grammarDesc'),
-      icon: 'solar:ruler-pen-bold-duotone',
-    },
-    {
-      title: t('audioSupport'),
-      desc: t('audioDesc'),
-      icon: 'solar:headphones-round-sound-bold-duotone',
-    },
-    {
-      title: t('exercises'),
-      desc: t('exercisesDesc'),
-      icon: 'solar:document-add-bold-duotone',
-    },
-  ];
+
 
   // --- Al Wafi Levels & Assets ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8'];
@@ -98,22 +81,7 @@ export default async function AlWafiPage({
         </div>
       </section>
 
-      {/* ================= FEATURES ================= */}
-      <section className="py-20 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="bg-white dark:bg-brand-navy-dark p-8 rounded-4xl shadow-soft hover:-translate-y-2 transition-transform duration-300 border-t-4 border-brand-sky flex flex-col items-center text-center">
-                     <div className="w-16 h-16 rounded-full bg-brand-navy/5 text-brand-navy dark:text-brand-sky flex items-center justify-center mb-6 text-3xl">
-                        <Icon icon={feature.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{feature.title}</h3>
-                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= MAIN LEVELS GRID ================= */}
       <div className="text-center mb-16 px-4">

@@ -34,30 +34,7 @@ export default async function TareeqAlMuneerArPage({
   const t = await getTranslations({ locale: locale, namespace: 'store.tareeqAlMuneerAr' });
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
-  // --- Core Features (The "Light" Pillars) ---
-  const features = [
-    {
-      title: t('phoneticMastery'),
-      desc: t('phoneticDesc'),
-      icon: 'solar:microphone-large-bold-duotone',
-      color: 'bg-amber-100',
-      textColor: 'text-amber-600',
-    },
-    {
-      title: t('visualClarity'),
-      desc: t('visualDesc'),
-      icon: 'solar:eye-bold-duotone',
-      color: 'bg-teal-100',
-      textColor: 'text-teal-600',
-    },
-    {
-      title: t('gradualProgress'),
-      desc: t('gradualDesc'),
-      icon: 'mdi:stairs',
-      color: 'bg-orange-100',
-      textColor: 'text-orange-600',
-    },
-  ];
+
 
   // --- The Milestones (Levels) ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6'];
@@ -76,7 +53,7 @@ export default async function TareeqAlMuneerArPage({
       icon: key === '2' ? 'solar:soundwave-bold-duotone' : key === '3' ? 'solar:widget-add-bold-duotone' : ['4', '5', '6'].includes(key) ? 'solar:book-2-bold-duotone' : 'solar:letter-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' : key === '2' ? 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400' : key === '3' ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400',
       border: ['R', 'P', '1'].includes(key) ? 'border-amber-200 dark:border-amber-800' : key === '2' ? 'border-teal-200 dark:border-teal-800' : key === '3' ? 'border-indigo-200 dark:border-indigo-800' : 'border-rose-200 dark:border-rose-800',
-      bookCover: `/pdfbooks/store-book/tarikmunirAr-book/tarikmunirAr-${key}/cover/1-${assetKey}.jpg`,
+      bookCover: `/pdfbooks/store-book/tarikmunirAr-book/tarikmunirAr-${key}/1-${assetKey}.jpg`,
       pdfUrl: `/api/books/store-book/tarikmunirAr-book/tarikmunirAr-${key}/1-${assetKey}.pdf`
     };
   });
@@ -113,22 +90,7 @@ export default async function TareeqAlMuneerArPage({
         </div>
       </section>
 
-      {/* ================= FEATURES (Overlapping Grid) ================= */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="glass p-8 flex flex-col items-center text-center shadow-soft-md hover:-translate-y-2 transition-transform duration-300 bg-white dark:bg-brand-navy-dark">
-                     <div className={`w-16 h-16 rounded-2xl bg-opacity-10 ${feature.color.replace('bg-', 'bg-')} ${feature.textColor} flex items-center justify-center mb-4 text-3xl`}>
-                        <Icon icon={feature.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-2">{feature.title}</h3>
-                     <p className="text-sm text-brand-navy/60 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= THE PATH MILESTONES ================= */}
         <div className="text-center py-10">

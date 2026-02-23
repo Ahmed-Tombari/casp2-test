@@ -49,79 +49,75 @@ export default function BookViewer({
 
   const [hasError, setHasError] = useState(false);
   const [blobPdfUrl, setBlobPdfUrl] = useState<string | null>(null);
-  const [blobCoverUrl, setBlobCoverUrl] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
   const pdfBlobRef = useRef<string | null>(null);
-  const coverBlobRef = useRef<string | null>(null);
 
-  // Asset protection: Fetch and create Blob URLs
-  useEffect(() => {
-    const fetchAsset = async (url: string, setter: (blobUrl: string) => void, ref: React.MutableRefObject<string | null>) => {
-      try {
-        let fetchUrl = url;
-        
-        const isPdf = url.toLowerCase().endsWith('.pdf');
-        const isApiPdf = url.includes('/api/pdf');
-        
-        if (isPdf || isApiPdf) {
-          // Use the secure proxy endpoint with watermarking support
-          if (isPdf) {
-            fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
-          }
-          
-          if (watermark) {
-            fetchUrl += (fetchUrl.includes('?') ? '&' : '?') + 'watermark=true';
-          }
-          
-          // Try to get access code from URL or local storage
-          const searchParams = new URLSearchParams(window.location.search);
-          const urlCode = searchParams.get('token') || searchParams.get('code');
-          const storedCode = localStorage.getItem('accessCode');
-          const code = urlCode || storedCode;
-          
-          if (code) {
-            fetchUrl += `&code=${code}`;
-          }
-        } else if (!url.startsWith('/') && !url.includes(typeof window !== "undefined" ? window.location.origin : '')) {
-          // Proxy images (only if external)
-          const encoded = encodeAssetUrl(url);
-          fetchUrl = `/api/assets?url=${encoded}`;
+  // Shared function to fetch assets securely
+  const fetchAsset = useCallback(async (url: string, setter: (blobUrl: string) => void, ref: React.MutableRefObject<string | null>) => {
+    try {
+      let fetchUrl = url;
+      
+      const isPdf = url.toLowerCase().endsWith('.pdf');
+      const isApiPdf = url.includes('/api/pdf');
+      
+      if (isPdf || isApiPdf) {
+        // Use the secure proxy endpoint with watermarking support
+        if (isPdf) {
+          fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
         }
+        
+        if (watermark) {
+          fetchUrl += (fetchUrl.includes('?') ? '&' : '?') + 'watermark=true';
+        }
+        
+        // Try to get access code from URL or local storage
+        const searchParams = new URLSearchParams(window.location.search);
+        const urlCode = searchParams.get('token') || searchParams.get('code');
+        const storedCode = localStorage.getItem('accessCode');
+        const code = urlCode || storedCode;
+        
+        if (code) {
+          fetchUrl += `&code=${code}`;
+        }
+      } else if (!url.startsWith('/') && !url.includes(typeof window !== "undefined" ? window.location.origin : '')) {
+        // Proxy images (only if external)
+        const encoded = encodeAssetUrl(url);
+        fetchUrl = `/api/assets?url=${encoded}`;
+      }
 
-        const response = await fetch(fetchUrl);
-        if (!response.ok) throw new Error("Failed to fetch asset");
-        const blob = await response.blob();
-        const blobUrl = URL.createObjectURL(blob);
-        
-        if (ref.current) URL.revokeObjectURL(ref.current);
-        
-        ref.current = blobUrl;
-        setter(blobUrl);
-      } catch (error) {
-        console.error("Failed to load protected asset:", error);
-        setHasError(true);
+      const response = await fetch(fetchUrl);
+      if (!response.ok) throw new Error("Failed to fetch asset");
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      
+      if (ref.current) URL.revokeObjectURL(ref.current);
+      
+      ref.current = blobUrl;
+      setter(blobUrl);
+    } catch (error) {
+      console.error("Failed to load protected asset:", error);
+      setHasError(true);
+    }
+  }, [watermark]);
+
+  // Asset protection: Fetch PDF only when the modal is opened
+  useEffect(() => {
+    if (isOpen && initialPdfUrl && !blobPdfUrl) {
+      fetchAsset(initialPdfUrl, setBlobPdfUrl, pdfBlobRef);
+    }
+  }, [isOpen, initialPdfUrl, blobPdfUrl, fetchAsset]);
+
+  // Cleanup PDF blob on unmount
+  useEffect(() => {
+    return () => {
+      if (pdfBlobRef.current) {
+        URL.revokeObjectURL(pdfBlobRef.current);
+        pdfBlobRef.current = null;
       }
     };
-
-    if (initialPdfUrl) fetchAsset(initialPdfUrl, setBlobPdfUrl, pdfBlobRef);
-    if (coverImage) {
-        // If cover image is a local path (starts with /), just use it directly or fetch as blob for protection
-        if (coverImage.startsWith('/')) {
-            setBlobCoverUrl(coverImage);
-        } else {
-            fetchAsset(coverImage, setBlobCoverUrl, coverBlobRef);
-        }
-    }
-
-    return () => {
-      if (pdfBlobRef.current) URL.revokeObjectURL(pdfBlobRef.current);
-      if (coverBlobRef.current) URL.revokeObjectURL(coverBlobRef.current);
-      pdfBlobRef.current = null;
-      coverBlobRef.current = null;
-    };
-  }, [initialPdfUrl, coverImage, watermark]);
+  }, []);
 
   // soft protection: handle context menu and key shortcuts
   const handleContextMenu = (e: React.MouseEvent) => {
@@ -224,12 +220,11 @@ export default function BookViewer({
               onContextMenu={handleContextMenu}
               className="relative w-full h-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] rounded-2xl overflow-hidden transform group-hover:rotate-x-2 group-hover:scale-105 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/10 group-hover:ring-4 group-hover:ring-brand-gold/20 dark:group-hover:ring-brand-sky/20 bg-gray-50 dark:bg-white/5"
             >
-              {blobCoverUrl ? (
+              {coverImage ? (
                 <Image
-                  src={blobCoverUrl}
+                  src={coverImage}
                   alt={title}
                   fill
-                  unoptimized // Support blob URLs
                   className="object-contain transition-transform duration-700 group-hover:scale-110 p-2"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
@@ -368,7 +363,7 @@ export default function BookViewer({
                 {/* Watermark Background */}
                 <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.03] dark:opacity-[0.05]">
                     <Image 
-                        src="/images/logo/logo-casp.png" 
+                        src="/images/logo/casp-logo.png" 
                         alt="" 
                         width={500} 
                         height={500} 
@@ -413,29 +408,19 @@ export default function BookViewer({
                     }
                     className="flex flex-col gap-6 md:gap-8 items-center w-full"
                   >
-                    {/* Render all pages */}
+                    {/* Render all pages with lazy loading */}
                     {numPages &&
                       Array.from(new Array(numPages), (el, index) => (
-                        <div
+                        <LazyPage
                           key={`page_${index + 1}`}
-                          className="relative shadow-lg md:shadow-2xl rounded-sm overflow-hidden bg-white"
-                        >
-                           <Page
-                            pageNumber={index + 1}
-                            width={pageWidth * zoom}
-                            loading={
-                              <div
-                                style={{ width: pageWidth * zoom, height: pageWidth * (zoom || 1) * 1.4 }}
-                                className="bg-white flex items-center justify-center text-gray-400 animate-pulse"
-                              >
-                                Loading Page {index + 1}...
-                              </div>
-                            }
-                            renderTextLayer={true}
-                            renderAnnotationLayer={true}
-                            className="bg-white block" 
-                          />
-                        </div>
+                          pageNumber={index + 1}
+                          width={pageWidth * zoom}
+                          loading={
+                            <div className="flex items-center justify-center text-gray-400">
+                              Loading Page {index + 1}...
+                            </div>
+                          }
+                        />
                       ))}
                   </Document>
                 )}
@@ -467,5 +452,85 @@ export default function BookViewer({
         }
       `}</style>
     </>
+  );
+}
+
+// Lazy loading component for PDF pages
+interface LazyPageProps {
+  pageNumber: number;
+  width: number;
+  loading: React.ReactNode;
+}
+
+function LazyPage({ pageNumber, width, loading }: LazyPageProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // If IntersectionObserver is not supported, just show it
+    if (!window.IntersectionObserver) {
+      setIsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: '400px 0px', // Load pages ahead of scroll
+        threshold: 0,
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
+  // Standard A4 aspect ratio is 1.414. Using 1.4 as a safe bet for most books.
+  const estimatedHeight = width * 1.4;
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative shadow-lg md:shadow-2xl rounded-sm overflow-hidden bg-white"
+      style={{ 
+        width: width, 
+        minHeight: isVisible ? 'auto' : estimatedHeight 
+      }}
+    >
+      {isVisible ? (
+        <Page
+          pageNumber={pageNumber}
+          width={width}
+          loading={
+            <div
+              style={{ width, height: estimatedHeight }}
+              className="bg-white flex items-center justify-center text-gray-400 animate-pulse transition-opacity duration-300"
+            >
+              {loading}
+            </div>
+          }
+          renderTextLayer={true}
+          renderAnnotationLayer={true}
+          className="bg-white block" 
+        />
+      ) : (
+        <div
+          style={{ width, height: estimatedHeight }}
+          className="bg-white flex items-center justify-center text-gray-400 animate-pulse"
+        >
+          {loading}
+        </div>
+      )}
+    </div>
   );
 }

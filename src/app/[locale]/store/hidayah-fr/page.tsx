@@ -15,29 +15,7 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
   // --- Pillars: Tailored for Francophones ---
-  const pillars = [
-    { 
-      title: t('bilingualValues'), 
-      desc: t('bilingualDesc'), 
-      icon: 'solar:chat-square-like-bold-duotone', 
-      color: 'bg-indigo-500', 
-      textColor: 'text-indigo-600' 
-    },
-    { 
-      title: t('westernContext'), 
-      desc: t('contextDesc'), 
-      icon: 'solar:city-bold-duotone', 
-      color: 'bg-brand-sky', 
-      textColor: 'text-brand-sky' 
-    },
-    { 
-      title: t('authenticSources'), 
-      desc: t('sourceDesc'), 
-      icon: 'solar:book-2-bold-duotone', 
-      color: 'bg-brand-gold', 
-      textColor: 'text-brand-gold-dark' 
-    },
-  ];
+
 
   // --- The Levels ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4'];
@@ -54,7 +32,7 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
       icon: 'solar:leaf-bold-duotone',
       color: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400',
       border: 'border-emerald-200 dark:border-emerald-800',
-      bookCover: `/pdfbooks/store-book/hidayaFr-book/hidayaFr-${key}/cover/${key}-1.png`,
+      bookCover: `/pdfbooks/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.png`,
       pdfUrl: `/api/books/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.pdf`
     };
   });
@@ -90,22 +68,7 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ================= PILLARS (The Bridge) ================= */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {pillars.map((pillar, i) => (
-                  <div key={i} className="glass p-8 flex flex-col items-center text-center shadow-soft-md hover:-translate-y-2 transition-transform duration-300 bg-white dark:bg-brand-navy-dark">
-                     <div className={`w-16 h-16 rounded-2xl bg-opacity-10 ${pillar.color.replace('bg-', 'bg-')} ${pillar.textColor} flex items-center justify-center mb-4 text-3xl`}>
-                        <Icon icon={pillar.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-2">{pillar.title}</h3>
-                     <p className="text-sm text-brand-navy/60 dark:text-gray-400 leading-relaxed">{pillar.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= LEVELS GRID ================= */}
         <div className="text-center py-10">

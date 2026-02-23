@@ -6,7 +6,7 @@ export async function watermarkPdf(pdfBuffer: ArrayBuffer) {
   const pdfDoc = await PDFDocument.load(pdfBuffer)
   const pages = pdfDoc.getPages()
   
-  const logoPath = path.join(process.cwd(), 'public', 'images', 'logo', 'logo-casp.png')
+  const logoPath = path.join(process.cwd(), 'public', 'images', 'logo', 'casp-logo.png')
   const logoBytes = fs.readFileSync(logoPath)
   const logoImage = await pdfDoc.embedPng(logoBytes)
   
@@ -28,8 +28,8 @@ export async function watermarkPdf(pdfBuffer: ArrayBuffer) {
       rotate: degrees(30),
     })
 
-    // 2. Tiled Grid Watermarks
-    const gridCount = 4
+    // 2. Tiled Grid Watermarks (Reduced density for performance)
+    const gridCount = 2
     for (let i = 0; i < gridCount; i++) {
       for (let j = 0; j < gridCount; j++) {
         // Offset tiles to not overlap center too much
@@ -41,7 +41,7 @@ export async function watermarkPdf(pdfBuffer: ArrayBuffer) {
           y,
           width: logoDimsSmall.width,
           height: logoDimsSmall.height,
-          opacity: 0.05,
+          opacity: 0.04,
           rotate: degrees(45),
         })
       }

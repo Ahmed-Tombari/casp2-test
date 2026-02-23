@@ -42,7 +42,6 @@ const Testimonial = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05] pointer-events-none" 
-           style={{ backgroundImage: `url('/images/realbg2.png')`, backgroundSize: '400px' }} 
            aria-hidden="true" />
       
       <div className='absolute top-0 start-0 w-full h-32 bg-linear-to-b from-white dark:from-brand-navy-dark to-transparent' aria-hidden="true" />

@@ -9,7 +9,7 @@ import PrivateBookClient from './PrivateBookClient';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'store.alMufid' });
+  const t = await getTranslations({ locale, namespace: 'PrivateBook' });
   return { title: t('title'), description: t('description') };
 }
 
@@ -20,6 +20,7 @@ interface Props {
 
 export default async function PrivateBookPage({ params }: Props) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'PrivateBook' });
   
   // --- Server-Side Session Check ---
   const cookieStore = await cookies();
@@ -45,16 +46,16 @@ export default async function PrivateBookPage({ params }: Props) {
         <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 text-red-500 rounded-full flex items-center justify-center mb-6 animate-pulse">
           <Icon icon="solar:shield-warning-bold" className="text-4xl" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Access Expired or Invalid</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{t('errorTitle')}</h1>
         <p className="text-gray-500 dark:text-gray-400 max-w-md mb-8">
-          The secure link you used is either expired or invalid. Access links are only valid for 10 minutes.
+          {t('errorDescription')}
         </p>
         <a 
           href={`/${locale}/services/book-access`}
           className="inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-gold/90 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-lg shadow-brand-gold/20"
         >
           <Icon icon="solar:refresh-bold" />
-          Request New Access
+          {t('requestNew')}
         </a>
       </div>
     );
@@ -64,7 +65,7 @@ export default async function PrivateBookPage({ params }: Props) {
     <main className="min-h-screen bg-background text-foreground relative pb-20">
        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center opacity-[0.03] dark:opacity-[0.05]">
             <Image 
-                src="/images/logo/logo-casp.png" 
+                src="/images/logo/casp-logo.png" 
                 alt="" 
                 width={600} 
                 height={600} 
@@ -75,8 +76,8 @@ export default async function PrivateBookPage({ params }: Props) {
 
         {/* Watermark Overlay for the whole page */}
        <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden flex items-end justify-end p-6">
-            <div className="px-4 py-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-right">
-                <p className="text-white/50 text-xs font-mono">Accessible by</p>
+            <div className="px-4 py-2 bg-black/50 backdrop-blur-md rounded-lg border border-white/10 text-end">
+                <p className="text-white/50 text-xs font-mono">{t('accessibleBy')}</p>
                 <p className="text-white/90 text-sm font-bold">{email}</p>
             </div>
        </div>
@@ -92,15 +93,15 @@ export default async function PrivateBookPage({ params }: Props) {
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-white text-sm font-bold mb-8 backdrop-blur-md">
             <Icon icon="solar:lock-unlocked-bold-duotone" className="text-brand-gold" />
-            <span>Secure Access</span>
+            <span>{t('secureAccess')}</span>
           </div>
           
           <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
-            Private Book Library
+            {t('title')}
           </h1>
           
           <p className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
-            Welcome to your secured digital library. Select a collection below to access.
+            {t('description')}
           </p>
 
         </div>

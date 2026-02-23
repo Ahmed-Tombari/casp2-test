@@ -9,6 +9,8 @@ type Tab = 'mufid' | 'garden' | 'wafi';
 
 export default function PrivateBookClient() {
   const [activeTab, setActiveTab] = useState<Tab>('mufid');
+  const t = useTranslations('PrivateBook');
+  const tStore = useTranslations('store');
   const tLevels = useTranslations('store.levels');
 
   // Mufid levels: 1 to 6 + P + R
@@ -79,9 +81,9 @@ export default function PrivateBookClient() {
       {/* Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-12 px-4">
         {[
-          { id: 'mufid', label: 'Al Mufid', icon: 'solar:star-fall-bold' },
-          { id: 'garden', label: 'Garden of Arabic', icon: 'solar:leaf-bold' },
-          { id: 'wafi', label: 'Al Wafi', icon: 'solar:verified-check-bold' },
+          { id: 'mufid', label: t('mufidBooks'), icon: 'solar:star-fall-bold' },
+          { id: 'garden', label: tStore('gardenOfArabic.title'), icon: 'solar:leaf-bold' },
+          { id: 'wafi', label: tStore('alWafi.title'), icon: 'solar:verified-check-bold' },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -104,7 +106,7 @@ export default function PrivateBookClient() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
              <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-                   Al Mufid Books
+                   {t('mufidBooks')}
                 </h2>
                 <div className="h-1 w-24 bg-brand-gold mx-auto rounded-full"></div>
              </div>
@@ -117,7 +119,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-white mb-4">
-                   Assas Books
+                   {t('assasBooks')}
                 </h2>
                 <div className="h-1 w-24 bg-emerald-500 mx-auto rounded-full"></div>
               </div>
@@ -127,7 +129,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-white mb-4">
-                   Exercices Books
+                   {t('exercicesBooks')}
                 </h2>
                 <div className="h-1 w-24 bg-emerald-500 mx-auto rounded-full"></div>
               </div>
@@ -141,7 +143,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-white mb-4">
-                   Assas Books
+                   {t('assasBooks')}
                 </h2>
                 <div className="h-1 w-24 bg-brand-sky mx-auto rounded-full"></div>
               </div>
@@ -151,7 +153,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-navy dark:text-white mb-4">
-                   Exercices Books
+                   {t('exercicesBooks')}
                 </h2>
                 <div className="h-1 w-24 bg-brand-sky mx-auto rounded-full"></div>
               </div>

@@ -11,7 +11,7 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email) {
@@ -39,8 +39,12 @@ const ForgotPassword = () => {
 
       setEmail("");
       setLoader(false);
-    } catch (error: any) {
-      toast.error(error?.response.data);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error?.response?.data);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
       setLoader(false);
     }
   };
@@ -57,7 +61,7 @@ const ForgotPassword = () => {
               <div className="mb-10 text-center">
                 <Link href="/" className="mx-auto inline-block max-w-[160px]">
                   <Image
-                    src="/images/logo/logo-casp.png"
+                    src="/images/logo/casp-logo.png"
                     alt="logo"
                     width={80}
                     height={80}

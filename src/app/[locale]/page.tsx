@@ -1,6 +1,7 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 import Hero from '@/app/components/Home/Hero';
@@ -40,7 +41,19 @@ export async function generateMetadata({
 
 export default async function HomePage() {
   return (
-    <main>
+    <main className="relative">
+      {/* Global Background Logo Watermark */}
+      <div className="fixed inset-0 top-[0%] pointer-events-none z-0 overflow-hidden flex items-center justify-center opacity-[0.05] dark:opacity-[0.5]">
+        <Image 
+          src="/images/logo/casp-logo.png" 
+          alt="" 
+          width={800} 
+          height={800} 
+          className="object-contain"
+          priority
+        />
+      </div>
+
       <Hero />
       <Companies />
       <Partners />

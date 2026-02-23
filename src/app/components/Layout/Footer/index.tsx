@@ -57,7 +57,7 @@ const Footer = () => {
               aria-label="Casp Education Home"
             >
               <Image
-                src='/images/logo/logo-casp.png'
+                src='/images/logo/casp-logo.png'
                 alt='Casp Education Logo'
                 width={80}
                 height={80}
@@ -185,7 +185,7 @@ const Footer = () => {
           </p>
           <div className='flex items-center justify-center'>
              <Image
-               src="/images/logo/logo-casp.png"
+               src="/images/logo/casp-logo.png"
                alt="Accepted payment methods"
                width={50}
                height={30}

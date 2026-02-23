@@ -35,7 +35,7 @@ export default async function GardenOfArabicPage({
   const tLevels = await getTranslations({ locale: locale, namespace: 'store.levels' });
 
   // --- Dynamic Level Generation ---
-  const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8'];
   
   const generateLevels = (isExercises = false) => {
     return levelKeys.map(key => {
@@ -126,48 +126,7 @@ export default async function GardenOfArabicPage({
 
       <PdfBookGrid levels={exercisesLevels} watermark={true} />
 
-      {/* ================= INTERACTIVE PREVIEW (The "Look Inside") ================= */}
-      <section className="py-20 bg-emerald-50/50 dark:bg-[#061410] relative overflow-hidden mt-20">
-         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-            <div className="bg-white dark:bg-brand-navy-dark rounded-[3rem] shadow-soft-lg border border-emerald-100 dark:border-emerald-900/30 overflow-hidden flex flex-col md:flex-row">
-               
-               {/* Illustration / Image Area */}
-               <div className="w-full md:w-1/2 bg-emerald-100 dark:bg-emerald-900/20 p-12 flex items-center justify-center relative">
-                  <Icon icon="solar:book-2-bold-duotone" className="text-9xl text-emerald-600/20 absolute" />
-                  <div className="relative z-10 bg-white dark:bg-brand-navy p-6 rounded-3xl shadow-soft-lg max-w-sm rotate-3 hover:rotate-0 transition-transform duration-500">
-                     <div className="h-4 w-1/3 bg-emerald-100 rounded-full mb-4"></div>
-                     <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full mb-2"></div>
-                     <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full mb-2"></div>
-                     <div className="h-2 w-2/3 bg-gray-100 dark:bg-gray-800 rounded-full mb-6"></div>
-                     <div className="aspect-video bg-emerald-50 rounded-xl flex items-center justify-center">
-                        <Icon icon="solar:play-circle-bold" className="text-4xl text-emerald-500" />
-                     </div>
-                  </div>
-               </div>
 
-               {/* Content Area */}
-               <div className="w-full md:w-1/2 p-12 md:p-16 flex flex-col justify-center">
-                  <h3 className="text-3xl font-bold text-brand-navy dark:text-white mb-6">
-                     {t('interactiveTitle')}
-                  </h3>
-                  <ul className="space-y-6 mb-10">
-                     {[t('feature1'), t('feature2'), t('feature3')].map((item, i) => (
-                        <li key={i} className="flex items-start gap-4">
-                           <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-1">
-                              <Icon icon="solar:check-circle-bold" />
-                           </div>
-                           <p className="text-lg text-gray-600 dark:text-gray-300">{item}</p>
-                        </li>
-                     ))}
-                  </ul>
-                  <button className="w-full sm:w-auto px-8 py-4 bg-brand-navy text-white rounded-2xl font-bold shadow-3d hover:shadow-3d-pressed hover:translate-y-1 transition-all">
-                     {t('downloadSample')}
-                  </button>
-               </div>
-
-            </div>
-         </div>
-      </section>
     </main>
   );
 }

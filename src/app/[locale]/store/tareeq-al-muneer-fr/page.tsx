@@ -34,30 +34,7 @@ export default async function TareeqAlMuneerFrPage({
   const t = await getTranslations({ locale, namespace: 'store.tareeqAlMuneerFr' });
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
-  // --- Features: Tailored for Francophones ---
-  const features = [
-    {
-      title: t('bilingualMethod'),
-      desc: t('bilingualDesc'),
-      icon: 'solar:chat-square-check-bold-duotone',
-      color: 'bg-indigo-100',
-      textColor: 'text-indigo-600',
-    },
-    {
-      title: t('phoneticComparisons'),
-      desc: t('phoneticDesc'),
-      icon: 'solar:soundwave-square-bold-duotone',
-      color: 'bg-rose-100',
-      textColor: 'text-rose-600',
-    },
-    {
-      title: t('culturalBridge'),
-      desc: t('culturalDesc'),
-      icon: 'solar:globus-bold-duotone',
-      color: 'bg-brand-sky',
-      textColor: 'text-brand-sky-dark',
-    },
-  ];
+
 
   // --- The Learning Stages ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -74,7 +51,7 @@ export default async function TareeqAlMuneerFrPage({
       icon: ['R', 'P', '1'].includes(key) ? 'solar:book-bookmark-bold-duotone' : key === '2' ? 'solar:pen-new-square-bold-duotone' : key === '3' ? 'solar:chat-round-line-bold-duotone' : 'solar:diploma-verified-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : key === '2' ? 'bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400' : key === '3' ? 'bg-sky-100 text-sky-600 dark:bg-sky-900/30 dark:text-sky-400' : 'bg-brand-gold-light/20 text-brand-gold-dark dark:bg-brand-gold/10 dark:text-brand-gold',
       border: ['R', 'P', '1'].includes(key) ? 'border-indigo-200 dark:border-indigo-800' : key === '2' ? 'border-rose-200 dark:border-rose-800' : key === '3' ? 'border-sky-200 dark:border-sky-800' : 'border-brand-gold/30',
-      bookCover: "/images/books/سلسلة-الطريق-المنير-213x300.png",
+      bookCover: "/images/ourbooks/Illuminating Path Series.png",
       pdfUrl: "#"
     };
   });
@@ -112,22 +89,7 @@ export default async function TareeqAlMuneerFrPage({
         </div>
       </section>
 
-      {/* ================= METHODOLOGY (The Bridge) ================= */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="glass p-8 flex flex-col items-center text-center shadow-soft-md hover:-translate-y-2 transition-transform duration-300 bg-white dark:bg-brand-navy-dark">
-                     <div className={`w-16 h-16 rounded-2xl bg-opacity-10 ${feature.color.replace('bg-', 'bg-')} ${feature.textColor} flex items-center justify-center mb-4 text-3xl`}>
-                        <Icon icon={feature.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-2">{feature.title}</h3>
-                     <p className="text-sm text-brand-navy/60 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= LEARNING STAGES ================= */}
         <div className="text-center py-10">

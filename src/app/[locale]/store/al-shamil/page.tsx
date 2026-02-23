@@ -3,12 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { Icon } from '@iconify/react';
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
 
-// --- Type Definitions ---
-interface Feature {
-  title: string;
-  desc: string;
-  icon: string;
-}
+
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -21,12 +16,7 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
   const t = await getTranslations({ locale, namespace: 'store.alShamil' });
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
-  // --- Features: Why Al-Shamil? ---
-  const features: Feature[] = [
-    { title: t('academicRigor'), desc: t('academicDesc'), icon: 'solar:diploma-verified-bold-duotone' },
-    { title: t('modernTopics'), desc: t('modernDesc'), icon: 'solar:global-bold-duotone' },
-    { title: t('skillIntegration'), desc: t('skillDesc'), icon: 'solar:layers-minimalistic-bold-duotone' },
-  ];
+
 
   // --- The Levels (Modules) ---
   const levelKeys = ['1', '2', '3', '4'];
@@ -47,7 +37,7 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
               isIntermediate ? [t('topicTravel'), t('topicHealth'), t('topicShopping')] :
               [t('topicGreeting'), t('topicFamily'), t('topicDaily')],
       color: isAdvanced ? 'bg-brand-navy' : isIntermediate ? 'bg-brand-sky' : 'bg-emerald-500',
-      bookCover: `/pdfbooks/store-book/shamil-book/shamil-${key}/cover/${key}.jpg`,
+      bookCover: `/pdfbooks/store-book/shamil-book/shamil-${key}/${key}.jpg`,
       pdfUrl: `/api/books/store-book/shamil-book/shamil-${key}/${key}.pdf`
     };
   });
@@ -80,22 +70,7 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
         </div>
       </section>
 
-      {/* ================= METHODOLOGY ================= */}
-      <section className="py-20 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="bg-white dark:bg-brand-navy-dark p-8 rounded-4xl shadow-soft hover:-translate-y-2 transition-transform duration-300 border-t-4 border-brand-gold flex flex-col items-center text-center">
-                     <div className="w-16 h-16 rounded-full bg-brand-navy/5 text-brand-navy dark:text-brand-sky flex items-center justify-center mb-6 text-3xl">
-                        <Icon icon={feature.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{feature.title}</h3>
-                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">

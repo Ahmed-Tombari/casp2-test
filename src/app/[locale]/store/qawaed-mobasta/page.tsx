@@ -15,12 +15,7 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
   const t = await getTranslations({ locale, namespace: 'store.qawaedMobasta' });
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
-  // --- Why Simplified? ---
-  const features = [
-    { title: t('visualMethod'), desc: t('visualDesc'), icon: 'solar:eye-bold-duotone', color: 'text-brand-sky' },
-    { title: t('colorCoded'), desc: t('colorDesc'), icon: 'solar:palette-bold-duotone', color: 'text-rose-500' },
-    { title: t('mindMaps'), desc: t('mapsDesc'), icon: 'solar:branching-paths-down-bold-duotone', color: 'text-brand-gold' },
-  ];
+
 
   // --- The Levels (The Toolkit) ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -36,7 +31,7 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
       desc: t(['R', 'P', '1'].includes(key) ? 'sentenceDesc' : key === '2' ? 'tensesDesc' : key === '3' ? 'pronounsDesc' : 'particlesDesc'),
       icon: ['R', 'P', '1'].includes(key) ? 'solar:ruler-pen-bold-duotone' : key === '2' ? 'solar:history-bold-duotone' : key === '3' ? 'solar:users-group-two-rounded-bold-duotone' : 'solar:link-circle-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-brand-navy' : key === '2' ? 'bg-brand-orange' : key === '3' ? 'bg-teal-600' : 'bg-rose-500',
-      bookCover: "/images/books/سلسلة-القواعد-المبسّطة-213x300.png",
+      bookCover: "/images/ourbooks/Arabic Shamel Series.png",
       pdfUrl: "#"
     };
   });
@@ -67,20 +62,7 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {/* ================= VISUAL METHODOLOGY ================= */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="bg-white dark:bg-brand-navy-dark p-8 rounded-4xl shadow-soft flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300">
-                     <Icon icon={feature.icon} className={`text-5xl mb-4 ${feature.color}`} />
-                     <h3 className="text-lg font-bold text-brand-navy dark:text-white mb-2">{feature.title}</h3>
-                     <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= TOPICS GRID (The "Smart Cards") ================= */}
 

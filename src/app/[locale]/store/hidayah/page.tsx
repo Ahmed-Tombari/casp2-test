@@ -35,29 +35,7 @@ export default async function HidayahPage({
   const tLevels = await getTranslations({ locale: locale, namespace: 'store.levels' });
 
   // --- Pillars (The Overlapping Feature Grid) ---
-  const pillars = [
-    {
-      title: t('aqidahTitle'),
-      desc: t('aqidahDesc'),
-      icon: 'solar:sun-2-bold-duotone',
-      color: 'bg-yellow-100',
-      textColor: 'text-yellow-600',
-    },
-    {
-      title: t('fiqhTitle'),
-      desc: t('fiqhDesc'),
-      icon: 'solar:book-2-bold-duotone',
-      color: 'bg-teal-100',
-      textColor: 'text-teal-600',
-    },
-    {
-      title: t('akhlaqTitle'),
-      desc: t('akhlaqDesc'),
-      icon: 'solar:heart-bold-duotone',
-      color: 'bg-rose-100',
-      textColor: 'text-rose-600',
-    },
-  ];
+
 
   // --- Journey Levels (The Main Content Cards) ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -74,7 +52,7 @@ export default async function HidayahPage({
       icon: ['R', 'P', '1'].includes(key) ? 'solar:leaf-bold-duotone' : key === '2' ? 'solar:heart-shine-bold-duotone' : key === '3' ? 'mdi:road' : 'solar:users-group-rounded-bold-duotone',
       color: ['R', 'P', '1'].includes(key) ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' : key === '2' ? 'bg-brand-gold-light/20 text-brand-gold-dark dark:bg-brand-gold/10 dark:text-brand-gold' : key === '3' ? 'bg-brand-sky-light/20 text-brand-sky-dark dark:bg-brand-sky/10 dark:text-brand-sky' : 'bg-brand-navy-light/20 text-brand-navy dark:bg-brand-navy/30 dark:text-white',
       border: ['R', 'P', '1'].includes(key) ? 'border-emerald-200 dark:border-emerald-800' : key === '2' ? 'border-brand-gold/30' : key === '3' ? 'border-brand-sky/30' : 'border-brand-navy/20',
-      bookCover: "/images/books/سلسلة-في-حديقة-اللغة-العربية-213x300.png",
+      bookCover: "/images/ourbooks/Arabic Garden Series.png",
       pdfUrl: "#"
     };
   });
@@ -110,22 +88,7 @@ export default async function HidayahPage({
         </div>
       </section>
 
-      {/* ================= PILLARS (Overlapping Grid) ================= */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {pillars.map((pillar, i) => (
-                  <div key={i} className="glass p-8 flex flex-col items-center text-center shadow-soft-md hover:-translate-y-2 transition-transform duration-300 bg-white dark:bg-brand-navy-dark">
-                     <div className={`w-16 h-16 rounded-2xl bg-opacity-10 ${pillar.color} ${pillar.textColor} flex items-center justify-center mb-4 text-3xl`}>
-                        <Icon icon={pillar.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-2">{pillar.title}</h3>
-                     <p className="text-sm text-brand-navy/60 dark:text-gray-400 leading-relaxed">{pillar.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* ================= THE JOURNEY (Level Cards) ================= */}
       <div className="text-center py-10">

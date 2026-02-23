@@ -14,12 +14,7 @@ export default async function TareeqAlMuneerEnPage({ params }: { params: Promise
   const t = await getTranslations({ locale, namespace: 'store.tareeqAlMuneerEn' });
   const tLevels = await getTranslations({ locale, namespace: 'store.levels' });
 
-  // --- Features (Self-Study Focus) ---
-  const features = [
-    { title: t('englishInstructions'), desc: t('englishDesc'), icon: 'solar:chat-square-check-bold-duotone', color: 'bg-blue-100', textColor: 'text-blue-600' },
-    { title: t('phoneticBridge'), desc: t('phoneticDesc'), icon: 'solar:soundwave-bold-duotone', color: 'bg-indigo-100', textColor: 'text-indigo-600' },
-    { title: t('selfStudy'), desc: t('selfStudyDesc'), icon: 'solar:user-hand-up-bold-duotone', color: 'bg-brand-sky-light', textColor: 'text-brand-sky-dark' },
-  ];
+
 
   // --- Milestones ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6'];
@@ -39,7 +34,7 @@ export default async function TareeqAlMuneerEnPage({ params }: { params: Promise
       icon: ['R', 'P', '1'].includes(key) ? 'solar:letter-bold-duotone' : key === '2' ? 'solar:pen-new-square-bold-duotone' : 'solar:headphones-round-sound-bold-duotone',
       color: ['R', 'P', '1', '2'].includes(key) ? 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' : 'bg-brand-orange-light text-brand-orange-dark dark:bg-brand-orange/10 dark:text-brand-orange',
       border: ['R', 'P', '1', '2'].includes(key) ? 'border-blue-200 dark:border-blue-800' : 'border-brand-orange/30',
-      bookCover: isPlaceholder ? '' : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/tarikmunirEn-book/tarikmunirEn-${key}/cover/1-${assetKey}.jpg`,
+      bookCover: isPlaceholder ? '' : `/pdfbooks/store-book/tarikmunirEn-book/tarikmunirEn-${key}/1-${assetKey}.jpg`,
       pdfUrl: isPlaceholder ? '' : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/store-book/tarikmunirEn-book/tarikmunirEn-${key}/1-${assetKey}.pdf`
     };
   });
@@ -64,22 +59,7 @@ export default async function TareeqAlMuneerEnPage({ params }: { params: Promise
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-16 -mt-12 relative z-20 px-4">
-         <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-               {features.map((feature, i) => (
-                  <div key={i} className="bg-white dark:bg-[#112240] p-8 rounded-4xl shadow-soft flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
-                     <div className={`w-16 h-16 rounded-2xl bg-opacity-20 ${feature.color} ${feature.textColor} flex items-center justify-center mb-4 text-3xl`}>
-                        <Icon icon={feature.icon} />
-                     </div>
-                     <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-2">{feature.title}</h3>
-                     <p className="text-sm text-brand-navy/60 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
-                  </div>
-               ))}
-            </div>
-         </div>
-      </section>
+
 
       {/* Milestones Grid */}
       <div className="text-center py-10">

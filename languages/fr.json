@@ -17,7 +17,15 @@
     "errorGeneric": "Quelque chose s'est mal passé.",
     "errorNetwork": "Erreur réseau. Veuillez réessayer.",
     "expired": "Ce code a expiré.",
-    "invalid": "E-mail ou code invalide."
+    "invalid": "E-mail ou code invalide.",
+    "errorTitle": "Accès expiré ou invalide",
+    "errorDescription": "Le lien sécurisé que vous avez utilisé est soit expiré, soit invalide. Les liens d'accès ne sont valides que pendant 10 minutes.",
+    "requestNew": "Demander un nouvel accès",
+    "secureAccess": "Accès Sécurisé",
+    "accessibleBy": "Accessible par",
+    "assasBooks": "Livres Assas",
+    "exercicesBooks": "Livres d'exercices",
+    "mufidBooks": "Livres Al Mufid"
   },
 "nav": {
   "home": "Accueil",
@@ -65,7 +73,7 @@
     "littleTitle": "La plateforme éducative Casp de référence",
     "title": "Bienvenue chez Casp Éducation",
     "subtitle": "Nous offrons les meilleures ressources éducatives pour l'arabe",
-    "heroTitle": "Centre arabe pour les services éducatifs au Canada",
+    "heroTitle": "Centre Arabe pour les Services Pédagogiques / Canada",
     "heroTitle2": "Bienvenue",
     "heroDescription": "Découvrez une large gamme de livres, leçons et ressources éducatives conçues spécialement pour apprendre l'arabe",
     "trustedBy": "Approuvé par plus de 25 000 étudiants et enseignants",

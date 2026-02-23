@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
       role="banner"
     >
       <div>
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20 lg:h-28">
           <Logo />
           <nav 
             className={`hidden lg:flex grow items-center gap-2 justify-center ${
