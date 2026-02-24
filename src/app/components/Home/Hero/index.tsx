@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { motion, Variants } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PremiumButton from "@/app/components/UI/PremiumButton";
-
 const Banner = () => {
   const t = useTranslations("home");
 
@@ -48,7 +47,7 @@ const Banner = () => {
     <section
       id="Home"
       aria-label="Hero section"
-      className="relative overflow-hidden pt-36 lg:pt-44 bg-transparent"
+      className="relative overflow-hidden pt-10 lg:pt-10 bg-transparent"
     >
       {/* ================= BACKGROUND ELEMENTS ================= */}
       <div className="absolute inset-0 -z-20 pointer-events-none select-none overflow-hidden">
@@ -97,7 +96,7 @@ const Banner = () => {
                 />
               </div> */}
 
-              <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-tight sm:leading-snug lg:leading-[120px] text-[#2c75a4] dark:text-white text-center font-cairo">
+              <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-extrabold leading-tight sm:leading-tight lg:leading-[1.1] text-[#2c75a4] dark:text-white text-center font-cairo">
                 {t('heroTitle')}
               </h1>
               
@@ -111,13 +110,13 @@ const Banner = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex justify-center"
+              className="flex justify-center flex-col items-center w-full"
             >
               <Link href="/store">
                 <PremiumButton 
                   variant="primary" 
                   size="lg" 
-                  className="text-lg rounded-xl shadow-[0_10px_30px_rgba(251,191,36,0.3)] bg-gradient-to-b from-[#ffdb6d] to-[#ffc53d] border-none text-[#5d4a1b]"
+                  className="text-lg rounded-xl shadow-[0_10px_30px_rgba(251,191,36,0.3)] bg-linear-to-b from-[#ffdb6d] to-[#ffc53d] border-none text-[#5d4a1b]"
                 >
                   <Icon icon="solar:cart-large-2-bold" className="text-2xl" />
                   {t('premiumButton1')}
@@ -136,13 +135,14 @@ const Banner = () => {
                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
                className="relative z-20 flex justify-center"
              >
-                <div className="relative w-full aspect-[2/1] max-w-[1950px]">
+                <div className="relative w-full aspect-2/1 max-w-[1950px]">
                    <Image 
                      src="/images/hero/child-img.png" 
                      alt="Happy kids learning"
                      fill
                      className="object-contain"
                      priority
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                    />
                 </div>
              </motion.div>
@@ -152,9 +152,9 @@ const Banner = () => {
                initial={{ opacity: 0, scale: 0.9, y: 20 }}
                animate={{ opacity: 1, scale: 1, y: 0 }}
                transition={{ delay: 0.9, duration: 0.6 }}
-               className="absolute bottom-[5%] left-1/2 -translate-x-1/2 z-30 w-[100%] max-w-xl"
+               className="absolute bottom-[5%] left-1/2 -translate-x-1/2 z-30 w-full max-w-xl"
              >
-                <div className="relative aspect-[16/3] w-full">
+                <div className="relative aspect-16/3 w-full">
                    <Image 
                      src="/images/hero/discipt-bar.png" 
                      alt="Verified Content & Safe for Kids"

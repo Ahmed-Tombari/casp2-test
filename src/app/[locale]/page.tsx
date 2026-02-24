@@ -7,6 +7,8 @@ import dynamic from 'next/dynamic';
 import Hero from '@/app/components/Home/Hero';
 import Companies from '@/app/components/Home/Companies';
 import Partners from '@/app/components/Home/Partners';
+import NewsTicker from '@/app/components/Home/NewsTicker';
+import Platforms from '@/app/components/Home/Platforms/Platforms';
 
 
 const Mentor = dynamic(() => import('@/app/components/Home/Mentor'));
@@ -54,8 +56,12 @@ export default async function HomePage() {
         />
       </div>
 
+      <div className="pt-22 lg:pt-22">
+        <NewsTicker />
+      </div>
       <Hero />
       <Companies />
+      <Platforms />
       <Partners />
       <Publications />
       <About />

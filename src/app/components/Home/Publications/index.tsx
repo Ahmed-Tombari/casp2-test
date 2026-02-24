@@ -2,117 +2,67 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 
 const FloatingOrb = ({ icon, label, delay }: { icon: string; label: string; delay: number }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay, duration: 0.5 }}
     className="absolute -top-4 -end-4 z-30"
-    style={{ transform: "translateZ(80px)" }}
   >
-    <motion.div
-      animate={{ 
-        y: [0, -10, 0],
-        rotate: [0, 5, -5, 0]
-      }}
-      transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-      className="relative group cursor-help"
-    >
-      {/* Outer Glow Ring */}
-      <div className="absolute inset-0 rounded-full bg-white/40 blur-md animate-pulse" />
-      
-      {/* Premium Glass Orb */}
-      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-brand-orange text-white flex flex-col items-center justify-center shadow-2xl border-2 border-white/50 backdrop-blur-xl overflow-hidden">
-        {/* Internal Specular Highlight */}
-        <div className="absolute top-1 start-2 w-4 h-2 bg-white/40 rounded-full blur-[2px]" />
-        
-        <Icon icon={icon} className="text-xl md:text-5xl mb-0.5 drop-shadow-md" />
-        <span className="text-[7px] md:text-[8px] font-black uppercase tracking-tighter opacity-90">
-           {label}
-        </span>
-
-        {/* Liquid Shine Overlay */}
-        <div className="absolute inset-0 bg-linear-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-      </div>
-    </motion.div>
+    <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-brand-orange text-white flex flex-col items-center justify-center shadow-lg border-2 border-white/50">
+      <Icon icon={icon} className="text-xl md:text-5xl mb-0.5 drop-shadow-md" />
+      <span className="text-[7px] md:text-[8px] font-black uppercase tracking-tighter opacity-90">
+         {label}
+      </span>
+    </div>
   </motion.div>
 );
 
-const TiltCard = ({ item, tPub, index }: { item: any; tPub: any; index: number }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+interface PublicationItem {
+  id: string;
+  theme: string;
+  image: string;
+  badgeIcon: string;
+  badgeLabel?: string;
+}
 
+const TiltCard = ({ item, tPub, index }: { item: PublicationItem; tPub: (key: string) => string; index: number }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        x.set((e.clientX - rect.left) / rect.width - 0.5);
-        y.set((e.clientY - rect.top) / rect.height - 0.5);
-      }}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className="relative group w-full"
     >
-      {/* Floating Category Orb */}
-      <FloatingOrb icon={item.badgeIcon} label={item.badgeLabel} delay={0.5 + (index * 0.1)} />
+      {/* Category Badge */}
+      <FloatingOrb icon={item.badgeIcon} label={item.badgeLabel || ""} delay={0.5 + (index * 0.1)} />
 
       <div className="flex flex-col gap-6">
-        {/* Square Image Card */}
-        <div className={`relative aspect-square w-full bg-linear-to-br ${item.theme} rounded-3xl md:rounded-[2.5rem] p-1 border border-white/30 shadow-2xl transition-all duration-700 overflow-hidden flex items-center justify-center group-hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.4)] group-hover:border-white/50 group-hover:scale-105`}>
-          
-          <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px] opacity-20" />
-          
-          <div 
-            className="relative w-full h-full rounded-[2.2rem] overflow-hidden"
-            style={{ transform: "translateZ(30px)" }}
-          >
+        {/* Image Card */}
+        <div className={`relative aspect-square w-full bg-linear-to-br ${item.theme} rounded-3xl md:rounded-[2.5rem] p-1 border border-white/20 shadow-xl transition-all duration-500 overflow-hidden flex items-center justify-center group-hover:shadow-2xl group-hover:scale-105`}>
+          <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden">
             <Image
               src={item.image}
               alt={tPub(item.id)}
               fill
-              className="object-contain transition-transform duration-1000 group-hover:scale-115"
+              className="object-contain transition-transform duration-700 group-hover:scale-110"
               priority
               quality={100}
             />
-            {/* Liquid Shine effect */}
-            <div className="absolute inset-0 bg-linear-to-tr from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-out pointer-events-none" />
           </div>
         </div>
 
-        {/* Professional Title (Below) */}
-        <div 
-          className="text-center px-2"
-          style={{ transform: "translateZ(50px)" }}
-        >
+        {/* Title (Below) */}
+        <div className="text-center px-2">
           <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white leading-tight transition-colors group-hover:text-brand-orange">
             {tPub(item.id)}
           </h3>
-          
-          <div className="mt-2 overflow-hidden h-6 flex items-center justify-center">
-             <motion.div 
-                initial={{ opacity: 0, y: 10 }}
-                whileHover={{ opacity: 1, y: 0 }}
-                className="opacity-0 group-hover:opacity-100 transition-all duration-300"
-             >
-                {/* <button className="flex items-center gap-2 text-brand-orange font-black text-xs uppercase tracking-[0.2em]">
-                   {tLearnMore}
-                   <Icon icon="solar:round-arrow-right-up-bold" className="text-lg" />
-                </button> */}
-             </motion.div>
-          </div>
         </div>
       </div>
     </motion.div>

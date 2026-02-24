@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 
 const About = () => {
   const t = useTranslations('home')
@@ -13,7 +13,7 @@ const About = () => {
     { key: 'aboutPoint3', icon: 'solar:user-speak-bold-duotone' },
   ]
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -23,7 +23,7 @@ const About = () => {
     }
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
     visible: { 
       opacity: 1, 

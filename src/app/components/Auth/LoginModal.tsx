@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import SocialSignIn from "./SocialSignIn";
 import { Input } from "@/app/components/UI";
 import PremiumButton from "@/app/components/UI/PremiumButton";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { login } from "@/actions/auth";
 
 export function LoginModal({
@@ -128,19 +128,25 @@ export function LoginModal({
           </svg>
         </button>
 
+        <div className="flex justify-center mb-6">
+          <Image
+            src="/images/logo/casp-logo.png"
+            alt="CASP Logo"
+            width={180}
+            height={60}
+            className="h-12 w-auto object-contain"
+            priority
+          />
+        </div>
+
         <h2 className="text-2xl font-bold mb-6 text-brand-navy dark:text-white text-center">
           {tAuth("signInButton")}
         </h2>
 
-        <SocialSignIn />
+    
 
         <div className="relative my-6 flex items-center">
-          <div className="flex-1 border-t border-brand-sky/20"></div>
-          <span className="relative z-10 px-4 text-xs font-bold uppercase tracking-widest text-brand-navy/40 dark:text-white/40">
-            {tAuth("or")}
-          </span>
-          <div className="flex-1 border-t border-brand-sky/20"></div>
-        </div>
+           <div className="flex-1 border-t mt-2 mb-2 border-brand-sky/20"></div>  </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input

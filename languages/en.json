@@ -99,7 +99,25 @@
     "premiumIcon1": "Certified Curricula",
     "premiumIcon2": "Educational Community",
     "videoTitle": "Discover the Casp Education Universe",
-    "videoSubtitle": "A quick look at our mission, programs, and our impact on Arabic language education."
+    "videoSubtitle": "A quick look at our mission, programs, and our impact on Arabic language education.",
+    "newsTicker": {
+      "label": "Latest News",
+      "item1": "Launching the new 'Garden of Arabic' series soon!",
+      "item2": "20% discount on all e-books for the back-to-school season.",
+      "item3": "Join our educational platform today and explore new horizons."
+    },
+    "platforms": {
+      "label": "OUR PLATFORMS",
+      "title": "Explore Our Leading Platforms",
+      "subtitle": "We provide integrated digital solutions to support your educational journey and open new horizons of creativity.",
+      "keetabyTitle": "Keetaby Platform",
+      "keetabyDesc": "The smartest library and the most enjoyable interactive reading experience.",
+      "qalamnetTitle": "QalamNet Platform",
+      "qalamnetDesc": "A space for creators and writers to share ideas and interact.",
+      "wafiTitle": "Al-Wafi Platform",
+      "wafiDesc": "The integrated educational environment for learning management.",
+      "visitPlatform": "Visit Platform"
+    }
   },
   "publications": {
     "happyMuslim": "The Happy Muslim Series",
@@ -476,6 +494,7 @@
   "services": {
     "title": "Our Educational Services",
     "description": "Integrated solutions for institutions and individuals to elevate Arabic education.",
+    "badge": "Educational Services",
     "curriculumDesign": "Curriculum Design",
     "curriculumDesc": "Building content according to modern standards.",
     "teacherTraining": "Teacher Training",
@@ -1012,5 +1031,17 @@
     "showCode": "Show Code",
     "days": "days",
     "unassigned": "Unassigned"
+  },
+  "academy": {
+    "title": "Training Academy",
+    "subtitle": "Explore our educational library of video lessons and professional training.",
+    "badge": "Educational Academy",
+    "educatorZone": "Educator Zone",
+    "exploreVideos": "Explore Videos",
+    "videoDesc": "Enhance your skills with high-quality video content.",
+    "watchNow": "Watch Now",
+    "video1Title": "Professional Introduction",
+    "video2Title": "Advanced Training Lesson",
+    "video3Title": "Comprehensive User Guide"
   }
 }

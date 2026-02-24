@@ -87,20 +87,20 @@ export function AuthStatus({ user }: { user: User | null }) {
     <>
       <div className="flex items-center gap-3">
         <PremiumButton
-          variant="secondary"
+          variant="primary"
           size="sm"
           onClick={() => setShowLogin(true)}
         >
           {tAuth('signInButton')}
         </PremiumButton>
 
-        <PremiumButton
+        {/* <PremiumButton
           variant="primary"
           size="sm"
           onClick={() => setShowRegister(true)}
         >
           {tAuth('signUpButton')}
-        </PremiumButton>
+        </PremiumButton> */}
       </div>
 
       {showLogin && (

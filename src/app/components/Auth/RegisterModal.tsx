@@ -9,6 +9,7 @@ import SocialSignUp from './SocialSignUp'
 import { Input } from '@/app/components/UI'
 import PremiumButton from '@/app/components/UI/PremiumButton'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 import { register } from '@/actions/auth'
 
 export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => void, onSwitchToLogin: () => void }) {
@@ -137,6 +138,17 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
           </svg>
         </button>
 
+        <div className="flex justify-center mb-6">
+          <Image
+            src="/images/logo/casp-logo.png"
+            alt="CASP Logo"
+            width={180}
+            height={60}
+            className="h-12 w-auto object-contain"
+            priority
+          />
+        </div>
+
         <h2 className="text-2xl font-bold mb-6 text-brand-navy dark:text-white text-center">{tAuth('signUpButton')}</h2>
 
         {/* <SocialSignUp />
@@ -150,7 +162,7 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
         </div> */
         }
 
-        <div className="flex-1 border-t mt-5 mb-5 border-brand-sky/20"></div>
+        <div className="flex-1 border-t mt-2 mb-2 border-brand-sky/20"></div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">

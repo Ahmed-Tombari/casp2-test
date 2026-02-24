@@ -13,7 +13,7 @@ export async function generateMetadata({
 
   return {
     title: t('contact'),
-    description: `Get in touch with Casp Education`,
+    description: `Get in touch with Casp Education to learn more about our Arabic curriculum and educational services.`,
     alternates: {
       canonical: `/${locale}/contact`,
       languages: {
@@ -21,6 +21,28 @@ export async function generateMetadata({
         'fr': '/fr/contact',
         'en': '/en/contact',
       },
+    },
+    openGraph: {
+      title: `${t('contact')} | Casp Education`,
+      description: 'Get in touch with Casp Education for any inquiries or support.',
+      url: `https://centerarabic.com/${locale}/contact`,
+      siteName: 'Casp Education',
+      images: [
+        {
+          url: '/logo.png',
+          width: 800,
+          height: 600,
+          alt: 'Casp Education',
+        },
+      ],
+      locale: locale === 'ar' ? 'ar_AR' : locale === 'fr' ? 'fr_FR' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${t('contact')} | Casp Education`,
+      description: 'Get in touch with Casp Education for any inquiries or support.',
+      images: ['/logo.png'],
     },
   };
 }

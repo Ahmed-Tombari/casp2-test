@@ -25,15 +25,18 @@ const nextConfig: NextConfig = {
     ]
   },
   /* config options here */
-   transpilePackages: ["@aws-sdk/client-s3"],
-   eslint: {
-        ignoreDuringBuilds: true,
-    },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  transpilePackages: ["@aws-sdk/client-s3"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_R2_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_URL).hostname : process.env.NEXT_PUBLIC_R2_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_URL).hostname : 'pub-2e481fdf58914ed08e036eeb987a1a89.r2.dev',
+        hostname: process.env.NEXT_PUBLIC_R2_PUBLIC_URL ? new URL(process.env.NEXT_PUBLIC_R2_PUBLIC_URL).hostname : 'pub-2e481fdf58914ed08e036eeb987a1a89.r2.dev',
         port: '',
         pathname: '/**',
       },
@@ -45,6 +48,8 @@ const nextConfig: NextConfig = {
       },
     ],
     qualities: [75, 85, 90, 100],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 }
 

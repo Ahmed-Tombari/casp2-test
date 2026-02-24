@@ -101,7 +101,25 @@
     "premiumIcon1": "Programmes certifiés",
     "premiumIcon2": "Communauté éducative",
     "videoTitle": "Découvrez l'Univers Casp Éducation",
-    "videoSubtitle": "Un aperçu rapide de notre mission, nos programmes et notre impact sur l'éducation en langue arabe."
+    "videoSubtitle": "Un aperçu rapide de notre mission, nos programmes et notre impact sur l'éducation en langue arabe.",
+    "newsTicker": {
+      "label": "Dernières Nouvelles",
+      "item1": "Lancement prochain de la nouvelle série 'Jardin de l'arabe' !",
+      "item2": "20% de réduction sur tous les e-books pour la rentrée scolaire.",
+      "item3": "Rejoignez notre plateforme éducative dès aujourd'hui."
+    },
+    "platforms": {
+      "label": "NOS PLATEFORMES",
+      "title": "Découvrez nos plateformes éducatives",
+      "subtitle": "Nous fournissons des solutions numériques intégrées pour soutenir votre parcours pédagogique.",
+      "keetabyTitle": "Plateforme Keetaby",
+      "keetabyDesc": "La bibliothèque la plus intelligente et l'expérience de lecture interactive.",
+      "qalamnetTitle": "Plateforme QalamNet",
+      "qalamnetDesc": "Un espace pour les créateurs et les écrivains pour partager des idées.",
+      "wafiTitle": "Plateforme Al-Wafi",
+      "wafiDesc": "L'environnement éducatif intégré pour la gestion de l'apprentissage.",
+      "visitPlatform": "Visiter la plateforme"
+    }
   },
   "publications": {
     "happyMuslim": "Série The Happy Muslim",
@@ -476,6 +494,7 @@
   "services": {
     "title": "Nos Services Éducatifs",
     "description": "Solutions intégrées pour élever l'enseignement de l'arabe.",
+    "badge": "Services Éducatifs",
     "curriculumDesign": "Conception de Programmes",
     "curriculumDesc": "Création de contenu selon les normes modernes.",
     "teacherTraining": "Formation des Enseignants",
@@ -1012,5 +1031,17 @@
     "showCode": "Afficher le code",
     "days": "jours",
     "unassigned": "Non assigné"
+  },
+  "academy": {
+    "title": "Académie de Formation",
+    "subtitle": "Explorez notre bibliothèque éducative de leçons vidéo et de formations professionnelles.",
+    "badge": "Académie Éducative",
+    "educatorZone": "Espace Éducateur",
+    "exploreVideos": "Explorer les Vidéos",
+    "videoDesc": "Améliorez vos compétences avec un contenu vidéo de haute qualité.",
+    "watchNow": "Regarder Maintenant",
+    "video1Title": "Introduction Professionnelle",
+    "video2Title": "Leçon de Formation Avancée",
+    "video3Title": "Guide d'Utilisation Complet"
   }
 }

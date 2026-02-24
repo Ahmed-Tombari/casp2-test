@@ -60,7 +60,7 @@ const Companies = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-sm font-bold text-brand-navy/40 dark:text-white/40 text-center mb-12 uppercase tracking-widest">
+          <p className="text-lg font-bold text-brand-navy-dark/60 dark:text-white/40 text-center mb-12 uppercase tracking-widest">
             {t('trustedByFull')}
           </p>
           

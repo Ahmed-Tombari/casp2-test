@@ -55,6 +55,7 @@ const navKeys = {
     alTareeqAlMuneerFrench: 'الطريق المنير (فرنسي)',
     alTareeqAlMuneerEnglish: 'الطريق المنير (إنجليزي)',
     theHappyMuslim: 'المسلم السعيد',
+    academy: 'أكاديمية التدريب',
   },
 
   en: {
@@ -107,12 +108,13 @@ const navKeys = {
     alTareeqAlMuneerFrench: 'Al-Tareeq Al-Muneer (French)',
     alTareeqAlMuneerEnglish: 'Al-Tareeq Al-Muneer (English)',
     theHappyMuslim: 'the happy muslim',
+    academy: 'Training Academy',
   },
 
   fr: {
     home: 'Accueil',
 
-    teacherGuide: 'Guide prof',
+    teacherGuide: 'Guide Prof',
       gardenGuide: 'Guide du jardin',
       wafiGuide: 'Guide du wafi',
       mufidGuide: 'Guide du mufid',
@@ -159,6 +161,7 @@ const navKeys = {
     alTareeqAlMuneerFrench: 'Al-Tareeq Al-Muneer (Français)',
     alTareeqAlMuneerEnglish: 'Al-Tareeq Al-Muneer (Anglais)',
     theHappyMuslim: 'Happy Muslim',
+    academy: 'Académie',
   },
 } as const;
 
@@ -196,7 +199,6 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
       label: t.services,
       href: '/services',
       submenu: [
-        { label: t.contact, href: '/services/contact' },
         { label: t.accessBook, href: '/services/book-access' },
       ],
     },
@@ -238,6 +240,14 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
         { label: t.youtubeChannel, href: 'https://www.youtube.com/@%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%88%D9%8A%D8%A9-%D9%83%D9%86' },
         { label: t.facebookChannel, href: 'https://www.facebook.com/caspeducation?rdid=gMP9FoFjFiCWfr4W&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1HDVhzFqx4%2F#' },
       ],
+    },
+    {
+      label: t.academy,
+      href: '/academy',
+    },
+    {
+      label: t.contact,
+      href: '/contact',
     },
   ];
 }

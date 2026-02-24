@@ -131,6 +131,8 @@ export default async function TeacherGuidePage({
                     alt={guide.title}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 160px, 200px"
+                    priority={guides.indexOf(guide) < 4}
                   />
                   {/* Overlay sheen effect */}
                   <div className="absolute inset-0 bg-linear-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

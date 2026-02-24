@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import SocialSignIn from '../SocialSignIn'
+
 import { Input } from '@/app/components/UI'
 import PremiumButton from '@/app/components/UI/PremiumButton'
 import { useTranslations } from 'next-intl'
@@ -70,7 +70,7 @@ const Signin = () => {
 
   return (
     <div className="w-full">
-      <SocialSignIn />
+
 
       <div className="relative my-8 flex items-center">
         <div className="flex-1 border-t border-brand-sky/20"></div>
