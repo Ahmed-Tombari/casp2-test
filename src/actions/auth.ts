@@ -41,7 +41,7 @@ export async function register(formData: FormData) {
 
   // Create session
   const expires = new Date(Date.now() + 24 * 60 * 60 * 1000)
-  const session = await encrypt({ user: { id: user.id, email: user.email, role: user.role, name: `${user.firstName} ${user.lastName}` } })
+  const session = await encrypt({ user: { id: user.id, email: user.email, role: user.role, name: `${user.firstName} ${user.lastName}`, firstName: user.firstName } })
 
   ;(await cookies()).set('session', session, { expires, httpOnly: true, secure: true, sameSite: 'strict' })
 
@@ -57,17 +57,17 @@ export async function login(formData: FormData) {
   })
 
   if (!user) {
-    return { error: 'Invalid credentials' }
+    return { error: 'invalidCredentials' }
   }
 
   const validPassword = await bcrypt.compare(password, user.passwordHash)
 
   if (!validPassword) {
-    return { error: 'Invalid credentials' }
+    return { error: 'invalidCredentials' }
   }
 
   const expires = new Date(Date.now() + 24 * 60 * 60 * 1000)
-  const session = await encrypt({ user: { id: user.id, email: user.email, role: user.role, name: `${user.firstName} ${user.lastName}` } })
+  const session = await encrypt({ user: { id: user.id, email: user.email, role: user.role, name: `${user.firstName} ${user.lastName}`, firstName: user.firstName } })
 
   ;(await cookies()).set('session', session, { expires, httpOnly: true, secure: true, sameSite: 'strict' })
 

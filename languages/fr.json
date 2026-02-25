@@ -19,13 +19,18 @@
     "expired": "Ce code a expiré.",
     "invalid": "E-mail ou code invalide.",
     "errorTitle": "Accès expiré ou invalide",
-    "errorDescription": "Le lien sécurisé que vous avez utilisé est soit expiré, soit invalide. Les liens d'accès ne sont valides que pendant 10 minutes.",
+    "errorDescription": "Le lien sécurisé que vous avez utilisé est soit expiré, soit invalide. Essayer de nouveau",
     "requestNew": "Demander un nouvel accès",
     "secureAccess": "Accès Sécurisé",
     "accessibleBy": "Accessible par",
     "assasBooks": "Livres Assas",
     "exercicesBooks": "Livres d'exercices",
-    "mufidBooks": "Livres Al Mufid"
+    "mufidBooks": "Livres Al Mufid",
+    "shamilBooks": "Livres Shamil",
+    "tarikmunirArBooks": "Livres Tareeq Al-Muneer Arabes",
+    "hidayaFrBooks": "Livres Hidayah Français",
+    "happymuslimEnBooks": "Livres Happy Muslim Anglais",
+    "welcome": "Bienvenue dans notre collection de livres privés"
   },
 "nav": {
   "home": "Accueil",
@@ -602,6 +607,7 @@
     "agreeTerms": "En créant un compte, vous acceptez notre",
     "privacyPolicy": "Politique de confidentialité",
     "termsOfService": "Conditions d'utilisation",
+    "invalidCredentials": "E-mail ou mot de passe invalide",
     "loginSuccess": "Connexion réussie",
     "registerSuccess": "Inscription réussie",
     "invalidEmail": "Veuillez entrer un e-mail valide",

@@ -468,22 +468,23 @@ export default function BookViewer({
         }
 
         .custom-scrollbar::-webkit-scrollbar {
-          width: 20px;
+          width: 32px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
           background: rgba(0, 0, 0, 0.08);
-          border-radius: 0;
-          border-left: 1px solid rgba(0, 0, 0, 0.05);
+          border-radius: 16px;
+          border: 4px solid transparent;
+          background-clip: content-box;
         }
         .dark .custom-scrollbar::-webkit-scrollbar-track {
           background: rgba(255, 255, 255, 0.05);
-          border-left: 1px solid rgba(255, 255, 255, 0.05);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
           background: rgba(0, 0, 0, 0.4);
-          border-radius: 20px;
-          border: 5px solid transparent;
+          border-radius: 100px;
+          border: 6px solid transparent;
           background-clip: content-box;
+          min-height: 80px;
         }
         .dark .custom-scrollbar::-webkit-scrollbar-thumb {
           background: rgba(255, 255, 255, 0.4);

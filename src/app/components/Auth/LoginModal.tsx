@@ -10,6 +10,7 @@ import PremiumButton from "@/app/components/UI/PremiumButton";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { login } from "@/actions/auth";
+import { Icon } from "@iconify/react";
 
 export function LoginModal({
   onClose,
@@ -28,6 +29,7 @@ export function LoginModal({
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {},
   );
+  const [serverError, setServerError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
@@ -66,7 +68,9 @@ export function LoginModal({
       const res = await login(submitData);
 
       if (res?.error) {
-        toast.error(res.error);
+        const errorMessage = tAuth(res.error);
+        setServerError(errorMessage);
+        toast.error(errorMessage);
         setLoading(false);
       } else if (res?.success) {
         toast.success(tAuth("loginSuccess"));
@@ -82,7 +86,7 @@ export function LoginModal({
     } catch (err: unknown) {
       setLoading(false);
       const errorMessage =
-        err instanceof Error ? err.message : "An error occurred";
+        err instanceof Error ? err.message : tAuth("errorGeneric");
       toast.error(errorMessage);
     }
   };
@@ -94,6 +98,9 @@ export function LoginModal({
       if (errors[field]) {
         setErrors({ ...errors, [field]: undefined });
       }
+      if (serverError) {
+        setServerError(null);
+      }
     };
 
   const [mounted, setMounted] = useState(false);
@@ -103,11 +110,21 @@ export function LoginModal({
     return () => setMounted(false);
   }, []);
 
+  // Auto-hide server error after 10 seconds
+  React.useEffect(() => {
+    if (serverError) {
+      const timer = setTimeout(() => {
+        setServerError(null);
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [serverError]);
+
   if (!mounted) return null;
 
   return createPortal(
     <div id="auth-modal" className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-white/90 dark:bg-brand-navy/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20 relative animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-md bg-white/90 dark:bg-brand-navy/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 relative animate-in zoom-in-95 duration-200">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
@@ -128,20 +145,27 @@ export function LoginModal({
           </svg>
         </button>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-2 mt-0 pt-0">
           <Image
             src="/images/logo/casp-logo.png"
             alt="CASP Logo"
-            width={180}
-            height={60}
-            className="h-12 w-auto object-contain"
+            width={100}
+            height={100}
+            className="h-20 w-auto object-contain"
             priority
           />
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 text-brand-navy dark:text-white text-center">
+        <h2 className="text-2xl font-bold mb-2 text-brand-navy dark:text-white text-center">
           {tAuth("signInButton")}
         </h2>
+
+        {serverError && (
+          <div className="mb-4 p-3 bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400 rounded-xl flex items-center gap-3 animate-in shake duration-300">
+            <Icon icon="solar:danger-circle-bold" className="text-xl shrink-0" />
+            <span className="text-sm font-bold">{serverError}</span>
+          </div>
+        )}
 
     
 

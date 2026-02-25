@@ -23,6 +23,7 @@ interface HeaderProps {
     email: string;
     role: string;
     name: string;
+    firstName?: string;
   } | null;
 }
 

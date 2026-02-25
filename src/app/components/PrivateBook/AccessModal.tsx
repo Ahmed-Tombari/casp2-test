@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Icon } from '@iconify/react';
 import { toast } from 'react-hot-toast';
@@ -15,6 +15,7 @@ interface AccessModalProps {
 export default function AccessModal({ isOpen, closeModal }: AccessModalProps) {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const t = useTranslations('PrivateBook'); 
   const router = useRouter();
@@ -42,15 +43,27 @@ export default function AccessModal({ isOpen, closeModal }: AccessModalProps) {
         setCode('');
       } else {
         const errorMsg = data.error === 'expired' ? t('expired') : data.error === 'invalid' ? t('invalid') : t('errorGeneric');
+        setError(errorMsg);
         toast.error(errorMsg);
       }
     } catch (error) {
       console.error('Submission error:', error);
+      setError(t('errorNetwork'));
       toast.error(t('errorNetwork'));
     } finally {
       setLoading(false);
     }
   };
+
+  // Auto-hide error after 10 seconds
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -121,6 +134,13 @@ export default function AccessModal({ isOpen, closeModal }: AccessModalProps) {
                     </p>
                   </div>
 
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-100 dark:bg-red-500/20 text-red-600 dark:text-red-400 rounded-2xl flex items-center gap-3 animate-in shake duration-300">
+                      <Icon icon="solar:danger-circle-bold" className="text-xl shrink-0" />
+                      <span className="text-sm font-bold">{error}</span>
+                    </div>
+                  )}
+
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-5">
                       {/* Email Field */}
@@ -139,7 +159,10 @@ export default function AccessModal({ isOpen, closeModal }: AccessModalProps) {
                             className="block w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-white/10 rounded-2xl bg-gray-50/50 dark:bg-white/5 focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition-all outline-none dark:text-white rtl:pl-4 rtl:pr-12 text-base font-medium placeholder:text-gray-400 dark:placeholder:text-white/20"
                             placeholder={t('emailPlaceholder')}
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                              if (error) setError(null);
+                            }}
                           />
                         </div>
                       </div>
@@ -160,7 +183,10 @@ export default function AccessModal({ isOpen, closeModal }: AccessModalProps) {
                             className="block w-full pl-12 pr-4 py-4 border border-gray-200 dark:border-white/10 rounded-2xl bg-gray-50/50 dark:bg-white/5 focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition-all outline-none dark:text-white rtl:pl-4 rtl:pr-12 text-base font-mono tracking-[0.2em] font-bold uppercase placeholder:tracking-normal placeholder:font-sans placeholder:text-gray-400 dark:placeholder:text-white/20"
                             placeholder={t('codePlaceholder')}
                             value={code}
-                            onChange={(e) => setCode(e.target.value)}
+                            onChange={(e) => {
+                              setCode(e.target.value);
+                              if (error) setError(null);
+                            }}
                           />
                         </div>
                       </div>

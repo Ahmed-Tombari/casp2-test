@@ -1,7 +1,7 @@
 'use client'
 import { createPortal } from 'react-dom'
 
-import React, { useState } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
@@ -11,6 +11,9 @@ import PremiumButton from '@/app/components/UI/PremiumButton'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { register } from '@/actions/auth'
+import { Icon } from '@iconify/react'
+import { Listbox, Transition } from '@headlessui/react'
+import { countries, Country } from '@/data/countries'
 
 export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => void, onSwitchToLogin: () => void }) {
   const router = useRouter()
@@ -21,14 +24,17 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
     lastName: '',
     email: '',
     phone: '',
+    phoneCode: '+966',
     country: '',
     password: '',
   })
-  const [errors, setErrors] = useState<{ firstName?: string; lastName?: string; email?: string; phone?: string; country?: string; password?: string }>({})
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
+  const [selectedPhoneCountry, setSelectedPhoneCountry] = useState<Country>(countries[0])
+  const [errors, setErrors] = useState<Partial<Record<keyof typeof formData, string>>>({})
   const [loading, setLoading] = useState(false)
 
   const validateForm = () => {
-    const newErrors: { firstName?: string; lastName?: string; email?: string; phone?: string; country?: string; password?: string } = {}
+    const newErrors: Partial<Record<keyof typeof formData, string>> = {}
     
     if (!formData.firstName.trim()) {
       newErrors.firstName = tAuth('nameRequired')
@@ -69,27 +75,9 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
     submitData.append('firstName', formData.firstName)
     submitData.append('lastName', formData.lastName)
     submitData.append('email', formData.email)
-    submitData.append('phone', formData.phone)
-    submitData.append('country', formData.country)
+    submitData.append('phone', `${formData.phoneCode}${formData.phone}`)
+    submitData.append('country', selectedCountry?.name || formData.country)
     submitData.append('password', formData.password)
-    // Adding optional fields as empty strings if backend expects them, though we verified it's safe to omit if not required by action (which they are not strictly checked in snippet, but `auth.ts` uses `formData.get('phone') as string` which might result in "null" string if not present? No, `get` returns null, `as string` just casts it.
-    // Wait, `auth.ts` does:
-    // const phone = formData.get('phone') as string
-    // const country = formData.get('country') as string
-    // And then passes them to prisma.user.create.
-    // If they are null, prisma might complain if the DB column is non-nullable and no default.
-    // Usually prisma schema defines optional fields.
-    // Let's assume safely that we should send empty strings if we don't have them, or rely on them being optional in DB.
-    // The original `RegisterModal` had inputs for them.
-    // I will append empty strings to be safe or just not append them.
-    // If I look at `auth.ts`, it accesses them. `prisma.user.create` will receive `null` cast to `string` (which is still `null` at runtime) if I don't append.
-    // I'll append empty to be safe against `null` constraint if any (though likely optional).
-    // Actually, `formData.get` returns `FormDataEntryValue | null`.
-    // If I append nothing, it gets null.
-    // Let's check `auth.ts` snippet again.
-    // It creates user with phone, country.
-    // I will verify `RegisterModal` previously had them.
-    // I will NOT include them in the form for design reasons (as per plan), but I should probably send empty strings or sensible defaults.
     
     try {
       const res = await register(submitData)
@@ -121,7 +109,7 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
 
   const [mounted, setMounted] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true)
     return () => setMounted(false)
   }, [])
@@ -130,7 +118,7 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
 
   return createPortal(
     <div id="auth-modal" className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-lg bg-white/90 dark:bg-brand-navy/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20 relative animate-in zoom-in-95 duration-200">
+      <div className="w-full max-w-lg bg-white/90 dark:bg-brand-navy/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 relative animate-in zoom-in-95 duration-200">
         
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,29 +126,18 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
           </svg>
         </button>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-2 mt-0 pt-0">
           <Image
             src="/images/logo/casp-logo.png"
             alt="CASP Logo"
-            width={180}
-            height={60}
-            className="h-12 w-auto object-contain"
+            width={100}
+            height={100}
+            className="h-20 w-auto object-contain"
             priority
           />
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 text-brand-navy dark:text-white text-center">{tAuth('signUpButton')}</h2>
-
-        {/* <SocialSignUp />
-
-        <div className="relative my-6 flex items-center">
-          <div className="flex-1 border-t border-brand-sky/20"></div>
-          <span className='relative z-10 px-4 text-xs font-bold uppercase tracking-widest text-brand-navy/40 dark:text-white/40'>
-            {tAuth('or')}
-          </span>
-          <div className="flex-1 border-t border-brand-sky/20"></div>
-        </div> */
-        }
+        <h2 className="text-2xl font-bold mb-4 text-brand-navy dark:text-white text-center">{tAuth('signUpButton')}</h2>
 
         <div className="flex-1 border-t mt-2 mb-2 border-brand-sky/20"></div>
 
@@ -194,31 +171,119 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
               />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-              <Input
-                type='tel'
-                label={tAuth('phoneLabel')}
-                placeholder={tAuth('phonePlaceholder')}
-                value={formData.phone}
-                onChange={handleChange('phone')}
-                // error={errors.phone} // Optional
-                leftIcon="solar:phone-bold-duotone"
-                fullWidth
-                autoComplete="tel"
-                className="bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm"
-              />
-              <Input
-                type='text'
-                label={tAuth('countryLabel')}
-                placeholder={tAuth('countryPlaceholder')}
-                value={formData.country}
-                onChange={handleChange('country')}
-                // error={errors.country} // Optional
-                leftIcon="solar:globe-bold-duotone"
-                fullWidth
-                autoComplete="country-name"
-                className="bg-white/50 dark:bg-brand-navy/50 backdrop-blur-sm"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_0.6fr] gap-4">
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-brand-navy dark:text-white mb-2">
+                  {tAuth('phoneLabel')}
+                </label>
+                <div className="flex gap-2">
+                  <Listbox value={selectedPhoneCountry} onChange={(c) => {
+                    setSelectedPhoneCountry(c)
+                    setFormData({ ...formData, phoneCode: c.dialCode })
+                  }}>
+                    <div className="relative">
+                      <Listbox.Button className="h-[52px] flex items-center justify-center gap-2 px-3 border-2 border-brand-sky/20 hover:border-brand-orange/30 rounded-xl bg-white/50 dark:bg-brand-navy/50 transition-all outline-none">
+                        <Icon icon={selectedPhoneCountry.flag} className="text-2xl pt-1" />
+                        <span className="text-xs font-bold pt-1">{selectedPhoneCountry.dialCode}</span>
+                      </Listbox.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-[200px] overflow-auto rounded-xl bg-white dark:bg-brand-navy-dark py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                          {countries.map((country, idx) => (
+                            <Listbox.Option
+                              key={idx}
+                              className={({ active }) =>
+                                `relative cursor-default select-none py-2 pl-4 pr-4 ${
+                                  active ? 'bg-brand-orange/10 text-brand-orange' : 'text-brand-navy dark:text-white'
+                                }`
+                              }
+                              value={country}
+                            >
+                              <div className="flex items-center gap-3">
+                                <Icon icon={country.flag} className="text-xl" />
+                                <span className="text-xs font-bold">{country.dialCode}</span>
+                                <span className="text-xs truncate">{country.name}</span>
+                              </div>
+                            </Listbox.Option>
+                          ))}
+                        </Listbox.Options>
+                      </Transition>
+                    </div>
+                  </Listbox>
+                  <div className="flex-1">
+                    <input
+                      type="tel"
+                      placeholder={tAuth('phonePlaceholder')}
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full h-[52px] px-4 text-base text-brand-navy bg-white/50 dark:bg-brand-navy/50 dark:text-white border-2 border-brand-sky/20 hover:border-brand-orange/30 rounded-xl transition-all outline-none placeholder:text-brand-navy/40 dark:placeholder:text-white/40 focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-brand-navy dark:text-white mb-2">
+                  {tAuth('countryLabel')}
+                </label>
+                <Listbox value={selectedCountry} onChange={setSelectedCountry}>
+                  <div className="relative">
+                    <Listbox.Button className="w-full h-[52px] flex items-center gap-3 px-4 border-2 border-brand-sky/20 hover:border-brand-orange/30 rounded-xl bg-white/50 dark:bg-brand-navy/50 transition-all outline-none text-start pr-10">
+                      {selectedCountry ? (
+                        <>
+                          <Icon icon={selectedCountry.flag} className="text-xl" />
+                          <span className="text-sm truncate pt-1">{selectedCountry.name}</span>
+                        </>
+                      ) : (
+                        <span className="text-brand-navy/40 dark:text-white/40 text-sm">{tAuth('countryPlaceholder')}</span>
+                      )}
+                      <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                        <Icon icon="solar:alt-arrow-down-linear" className="h-5 w-5 text-gray-400" />
+                      </span>
+                    </Listbox.Button>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-xl bg-white dark:bg-brand-navy-dark py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        {countries.map((country, idx) => (
+                          <Listbox.Option
+                            key={idx}
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-4 pr-10 ${
+                                active ? 'bg-brand-orange/10 text-brand-orange' : 'text-brand-navy dark:text-white'
+                              }`
+                            }
+                            value={country}
+                          >
+                            <div className="flex items-center gap-3">
+                              <Icon icon={country.flag} className="text-xl" />
+                              <span className="text-sm">{country.name}</span>
+                            </div>
+                            {selectedCountry?.code === country.code && (
+                              <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-brand-orange">
+                                <Icon icon="solar:check-read-linear" className="h-4 w-4" />
+                              </span>
+                            )}
+                          </Listbox.Option>
+                        ))}
+                      </Listbox.Options>
+                    </Transition>
+                  </div>
+                </Listbox>
+              </div>
           </div>
           
           <Input
@@ -267,11 +332,11 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
               <span className="text-xs text-brand-navy/70 dark:text-white/70 group-hover:text-brand-navy dark:group-hover:text-white transition-colors leading-relaxed">
                 {tAuth('agreeTerms')}{' '}
                 <Link href='/privacy' className='text-brand-orange hover:text-brand-orange-dark font-bold underline decoration-brand-orange/20 underline-offset-4 transition-all'>
-                  {tAuth('privacyPolicy')}
+                   {tAuth('privacyPolicy')}
                 </Link>{' '}
                 &{' '}
                 <Link href='/terms' className='text-brand-orange hover:text-brand-orange-dark font-bold underline decoration-brand-orange/20 underline-offset-4 transition-all'>
-                  {tAuth('termsOfService')}
+                   {tAuth('termsOfService')}
                 </Link>
               </span>
             </label>

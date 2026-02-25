@@ -37,7 +37,7 @@ const navKeys = {
     // services
     services: 'الخدمات',
     contact: 'اتصل بنا',
-    accessBook: 'الوصول للكتاب',
+    accessBook: 'الوصول  إلى المناهج',
     
     // store
     store: 'المتجر',
@@ -108,7 +108,7 @@ const navKeys = {
     alTareeqAlMuneerFrench: 'Al-Tareeq Al-Muneer (French)',
     alTareeqAlMuneerEnglish: 'Al-Tareeq Al-Muneer (English)',
     theHappyMuslim: 'the happy muslim',
-    academy: 'Training Academy',
+    academy: 'Academy',
   },
 
   fr: {
@@ -143,7 +143,7 @@ const navKeys = {
     // services
     services: 'Services',
     contact: 'Contact',
-    accessBook: 'Accès au livre',
+    accessBook: 'Accès au livres',
 
     // store
     store: 'Boutique',
@@ -197,10 +197,7 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
     },
     {
       label: t.services,
-      href: '/services',
-      submenu: [
-        { label: t.accessBook, href: '/services/book-access' },
-      ],
+      href: '#',
     },
     {
           label: t.teacherGuide,
@@ -226,7 +223,7 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
         },
         {
       label: t.platforms,
-      href: '/platform',
+      href: '#',
       submenu: [
         { label: t.qalamNetPlatform, href: 'https://qalamnet.com/' },
         { label: t.wafiPlatform, href: 'https://alwafi.academy/' },

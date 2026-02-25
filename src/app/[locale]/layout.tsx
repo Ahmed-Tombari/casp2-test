@@ -12,6 +12,7 @@ import { isRTL, type Locale } from "@/i18n/config";
 import { ThemeProvider } from "@/app/components/Theme/ThemeProvider";
 import { CartProvider } from "@/app/context/cart.context";
 import { getSession } from "@/lib/auth";
+import { Toaster } from "react-hot-toast";
 
 // Cairo font for Arabic-first design
 const cairo = Cairo({
@@ -180,6 +181,7 @@ export default async function PagesLayout({
                 </div>
               </Aoscompo>
               <ScrollToTop />
+              <Toaster position="top-center" reverseOrder={false} />
             </CartProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
