@@ -7,6 +7,8 @@ import { getTranslations } from 'next-intl/server'
 
 import { Pagination } from '@/app/components/admin/Pagination'
 import { TableSearch } from '@/app/components/admin/TableSearch'
+import { AddUserButton } from '@/app/components/admin/AddUserButton'
+import { UserDetailsButton } from '@/app/components/admin/UserDetailsButton'
 
 export default async function AdminUsersPage({
   searchParams,
@@ -36,11 +38,7 @@ export default async function AdminUsersPage({
         </div>
 
         <div className="flex gap-3">
-             <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-navy dark:bg-white text-white dark:text-brand-navy font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
-                <Icon icon="solar:user-plus-bold" />
-                <span>{t('addUser')}</span>
-             </button>
-
+             <AddUserButton label={t('addUser')} />
         </div>
       </div>
 
@@ -99,6 +97,7 @@ export default async function AdminUsersPage({
                     <td className="px-6 py-4 text-sm text-end space-x-2">
 
                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <UserDetailsButton user={user} />
                             <form action={async () => {
                                 'use server'
                                 await updateUserRole(user.id, user.role === 'ADMIN' ? 'USER' : 'ADMIN')

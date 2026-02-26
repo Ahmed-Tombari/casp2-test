@@ -111,13 +111,21 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
 
   useEffect(() => {
     setMounted(true)
-    return () => setMounted(false)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      setMounted(false)
+      document.body.style.overflow = 'unset'
+    }
   }, [])
 
   if (!mounted) return null
 
   return createPortal(
-    <div id="auth-modal" className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+    <div 
+      id="auth-modal" 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div className="w-full max-w-lg bg-white/90 dark:bg-brand-navy/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/20 relative animate-in zoom-in-95 duration-200">
         
         <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
@@ -195,21 +203,20 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-[200px] overflow-auto rounded-xl bg-white dark:bg-brand-navy-dark py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Listbox.Options className="absolute z-50 mt-1 max-h-60 w-[110px] overflow-auto rounded-xl bg-white dark:bg-brand-navy-dark py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                           {countries.map((country, idx) => (
                             <Listbox.Option
                               key={idx}
                               className={({ active }) =>
-                                `relative cursor-default select-none py-2 pl-4 pr-4 ${
+                                `relative cursor-default select-none py-2 px-2 ${
                                   active ? 'bg-brand-orange/10 text-brand-orange' : 'text-brand-navy dark:text-white'
                                 }`
                               }
                               value={country}
                             >
-                              <div className="flex items-center gap-3">
+                              <div className="flex items-center gap-2">
                                 <Icon icon={country.flag} className="text-xl" />
                                 <span className="text-xs font-bold">{country.dialCode}</span>
-                                <span className="text-xs truncate">{country.name}</span>
                               </div>
                             </Listbox.Option>
                           ))}
@@ -239,7 +246,7 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
                       {selectedCountry ? (
                         <>
                           <Icon icon={selectedCountry.flag} className="text-xl" />
-                          <span className="text-sm truncate pt-1">{selectedCountry.name}</span>
+                          <span className="text-sm truncate pt-1">{selectedCountry.code3}</span>
                         </>
                       ) : (
                         <span className="text-brand-navy/40 dark:text-white/40 text-sm">{tAuth('countryPlaceholder')}</span>
@@ -270,7 +277,7 @@ export function RegisterModal({ onClose, onSwitchToLogin }: { onClose: () => voi
                           >
                             <div className="flex items-center gap-3">
                               <Icon icon={country.flag} className="text-xl" />
-                              <span className="text-sm">{country.name}</span>
+                              <span className="text-sm">{country.code3}</span>
                             </div>
                             {selectedCountry?.code === country.code && (
                               <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-brand-orange">

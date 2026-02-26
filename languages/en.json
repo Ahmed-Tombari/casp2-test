@@ -36,6 +36,8 @@
   },
   "nav": {
     "home": "Home",
+    "curricula": "Curricula",
+    "quizzes": "Tests",
     "channel": "Channel",
     "platforms": "Platforms",
     "services": "Services",
@@ -50,7 +52,10 @@
     "readBook": "Read Book",
     "printedBooks": "Printed Books",
     "ebooks": "E-Books",
+    "educationalCDs": "Educational CDs",
     "teachingTools": "Teaching Tools",
+    "handwritingExercises": "Handwriting Exercises",
+    "letterColoring": "Letter Coloring",
     "academy": "Training Academy"
   },
   "common": {
@@ -979,6 +984,7 @@
   },
   
    "admin": {
+    "close": "Close",
     "dashboard": "Dashboard",
     "overview": "Overview",
     "welcome": "Welcome back to the admin dashboard.",

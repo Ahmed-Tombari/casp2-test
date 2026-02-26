@@ -5,8 +5,43 @@ import { revalidatePath } from 'next/cache'
 import crypto from 'crypto'
 import { customAlphabet } from 'nanoid'
 import { encrypt, decrypt } from '@/lib/encryption'
+import bcrypt from 'bcrypt'
 
 // --- User Management ---
+
+export async function createUser(data: {
+  firstName: string
+  lastName: string
+  email: string
+  password?: string
+  country?: string
+  phone?: string
+}) {
+  const existingUser = await prisma.user.findUnique({
+    where: { email: data.email },
+  })
+
+  if (existingUser) {
+    return { error: 'Email already exists' }
+  }
+
+  const hashedPassword = await bcrypt.hash(data.password || '123456', 10)
+
+  const user = await prisma.user.create({
+    data: {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      passwordHash: hashedPassword,
+      role: 'USER',
+      country: data.country,
+      phone: data.phone,
+    },
+  })
+
+  revalidatePath('/admin/users')
+  return { success: true, user }
+}
 
 export async function getUsers(limit: number = 5, search?: string, cursor?: string, direction: 'next' | 'prev' = 'next') {
   const whereClause = search ? {
@@ -207,13 +242,38 @@ export async function assignCode(codeId: string, userId: string) {
 
   if (!user) throw new Error('User not found')
 
-  const updatedCode = await prisma.accessCode.update({
+  // Check if the code is already assigned to someone else
+  const targetCode = await prisma.accessCode.findUnique({
     where: { id: codeId },
-    data: {
-      userId,
-      email: user.email,
-    },
+    select: { userId: true }
   })
+
+  if (targetCode?.userId) {
+    throw new Error('This code is already assigned to another user')
+  }
+
+  // Transaction to unassign old codes and assign the new one
+  const [updatedCode] = await prisma.$transaction([
+    // Update the new code with user info
+    prisma.accessCode.update({
+      where: { id: codeId },
+      data: {
+        userId,
+        email: user.email,
+      },
+    }),
+    // Unassign any other codes currently assigned to this user
+    prisma.accessCode.updateMany({
+      where: {
+        userId: userId,
+        NOT: { id: codeId }
+      },
+      data: {
+        userId: null,
+        email: null,
+      }
+    })
+  ])
 
   revalidatePath('/admin/users')
   revalidatePath('/admin/codes')

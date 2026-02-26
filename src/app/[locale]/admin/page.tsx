@@ -4,6 +4,7 @@ import AdminCard from '@/app/components/admin/AdminCard'
 import { Icon } from '@iconify/react'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
+import { AddUserQuickAction } from '@/app/components/admin/AddUserQuickAction'
 
 export default async function AdminDashboard() {
   const t = await getTranslations('admin')
@@ -52,12 +53,7 @@ export default async function AdminDashboard() {
                     <h3 className="text-xl font-bold text-slate-800 dark:text-white">{t('quickActions')}</h3>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <Link href="/admin/users" className="p-4 rounded-xl bg-sky-50 dark:bg-sky-900/20 hover:bg-sky-100 dark:hover:bg-sky-900/30 transition-colors flex flex-col items-center justify-center gap-2 group border border-sky-100 dark:border-sky-800">
-                        <div className="w-10 h-10 rounded-full bg-brand-navy dark:bg-white text-white dark:text-brand-navy flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                             <Icon icon="solar:user-plus-bold-duotone" width={20} />
-                        </div>
-                        <span className="font-semibold text-slate-700 dark:text-white text-sm">{t('addUser')}</span>
-                    </Link>
+                    <AddUserQuickAction label={t('addUser')} />
                     <Link href="/admin/codes" className="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/20 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-colors flex flex-col items-center justify-center gap-2 group border border-orange-100 dark:border-orange-800">
                          <div className="w-10 h-10 rounded-full bg-brand-gold text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
                              <Icon icon="solar:ticket-sale-bold-duotone" width={20} />
