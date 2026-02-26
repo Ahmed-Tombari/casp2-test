@@ -425,7 +425,7 @@ export default function BookViewer({
                   </div>
                 )}
 
-                {!hasError && isOpen && blobPdfUrl && (
+                {!hasError && blobPdfUrl && (
                   <Document
                     file={blobPdfUrl}
                     onLoadSuccess={onDocumentLoadSuccess}
