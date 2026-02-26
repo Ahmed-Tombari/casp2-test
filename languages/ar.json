@@ -36,8 +36,6 @@
   },
   "nav": {
     "home": "الرئيسية",
-    "curricula": "المناهج",
-    "quizzes": "الاختبارات",
     "channel": "القناة",
     "platforms": "المنصات",
     "services": "الخدمات",
@@ -52,11 +50,8 @@
     "readBook": "تصفح الكتاب",
     "printedBooks": "الكتب المطبوعة",
     "ebooks": "الكتب الإلكترونية",
-    "educationalCDs": "الأقراص التعليمية",
     "teachingTools": "الوسائل التعليمية",
     "gardenOfArabic": "حديقة اللغة العربية",
-    "handwritingExercises": "تمارين الخط",
-    "letterColoring": "أوراق تلوين الحروف",
     "academy": "أكاديمية التدريب"
   },
   "common": {

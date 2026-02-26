@@ -36,8 +36,6 @@
   },
 "nav": {
   "home": "Accueil",
-  "curricula": "Programmes",
-  "quizzes": "Tests",
   "channel": "Chaîne",
   "platforms": "Plateformes",
   "services": "Services",
@@ -52,11 +50,8 @@
   "readBook": "Lire le Livre",
   "printedBooks": "Livres imprimés",
   "ebooks": "Livres numériques",
-  "educationalCDs": "CD éducatifs",
   "teachingTools": "Outils pédagogiques",
   "gardenOfArabic": "Jardin de l'arabe",
-  "handwritingExercises": "Exercices d’écriture",
-  "letterColoring": "Coloriage des lettres",
   "academy": "Académie de formation"
 },
   "common": {
