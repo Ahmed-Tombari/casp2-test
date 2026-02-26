@@ -66,7 +66,7 @@ const Platforms = () => {
   };
 
   return (
-    <section className="relative py-24 bg-white dark:bg-brand-navy-dark overflow-hidden">
+    <section id="platforms" className="relative py-24 bg-white dark:bg-brand-navy-dark overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 start-0 w-[400px] h-[400px] bg-brand-sky/10 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2" />

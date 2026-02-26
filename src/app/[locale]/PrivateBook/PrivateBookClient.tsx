@@ -131,12 +131,12 @@ export default function PrivateBookClient() {
           { id: "mufid", label: t("mufidBooks"), icon: "solar:star-fall-bold" },
           {
             id: "garden",
-            label: tStore("gardenOfArabic.title"),
+            label: t("gardenBooks"),
             icon: "solar:leaf-bold",
           },
           {
             id: "wafi",
-            label: tStore("alWafi.title"),
+            label: t("wafiBooks"),
             icon: "solar:verified-check-bold",
           },
           { id: "shamil", label: t("shamilBooks"), icon: "solar:library-bold" },
@@ -190,7 +190,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-                  {t("assasBooks")}
+                  {t("gardenBooks")}
                 </h2>
                 <div className="h-1 w-24 bg-emerald-500 mx-auto rounded-full"></div>
               </div>
@@ -214,7 +214,7 @@ export default function PrivateBookClient() {
             <div>
               <div className="text-center mb-10 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-                  {t("assasBooks")}
+                  {t("wafiBooks")}
                 </h2>
                 <div className="h-1 w-24 bg-brand-sky mx-auto rounded-full"></div>
               </div>

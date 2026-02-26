@@ -8,27 +8,69 @@ import { encrypt, decrypt } from '@/lib/encryption'
 
 // --- User Management ---
 
-export async function getUsers() {
-  const users = await prisma.user.findMany({
-    include: {
-      accessCodes: {
-        select: {
-          code: true,
-          used: true,
-          expiresAt: true,
-        },
-      },
-    },
-    orderBy: { createdAt: 'desc' },
-  })
+export async function getUsers(limit: number = 5, search?: string, cursor?: string, direction: 'next' | 'prev' = 'next') {
+  const whereClause = search ? {
+    OR: [
+      { firstName: { contains: search, mode: 'insensitive' as const } },
+      { lastName: { contains: search, mode: 'insensitive' as const } },
+      { email: { contains: search, mode: 'insensitive' as const } },
+    ]
+  } : {}
 
-  return users.map(user => ({
-    ...user,
-    accessCodes: user.accessCodes.map(ac => ({
-      ...ac,
-      code: ac.code ? decrypt(ac.code) : null
-    }))
-  }))
+  const takeCount = direction === 'next' ? limit + 1 : -(limit + 1)
+
+  const [total, usersRaw] = await Promise.all([
+    prisma.user.count({ where: whereClause }),
+    prisma.user.findMany({
+      where: whereClause,
+      take: takeCount,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
+      include: {
+        accessCodes: {
+          select: { code: true, used: true, expiresAt: true }
+        }
+      },
+      orderBy: [
+        { createdAt: 'desc' },
+        { id: 'desc' }
+      ]
+    })
+  ])
+
+  let hasNextPage = false
+  let hasPrevPage = false
+  let usersToReturn = usersRaw
+
+  if (direction === 'next') {
+    if (usersRaw.length > limit) {
+      hasNextPage = true
+      usersToReturn = usersRaw.slice(0, limit)
+    }
+    hasPrevPage = !!cursor
+  } else {
+    if (usersRaw.length > limit) {
+      hasPrevPage = true
+      usersToReturn = usersRaw.slice(1)
+    }
+    hasNextPage = true
+  }
+
+  const nextCursor = usersToReturn.length > 0 ? usersToReturn[usersToReturn.length - 1].id : undefined
+  const prevCursor = usersToReturn.length > 0 ? usersToReturn[0].id : undefined
+
+  return {
+    users: usersToReturn.map(user => ({
+      ...user,
+      accessCodes: user.accessCodes.map(ac => ({
+        ...ac,
+        code: ac.code ? decrypt(ac.code) : null
+      }))
+    })),
+    total,
+    nextCursor: hasNextPage ? nextCursor : undefined,
+    prevCursor: hasPrevPage ? prevCursor : undefined,
+  }
 }
 
 export async function deleteUser(id: string) {
@@ -46,24 +88,65 @@ export async function updateUserRole(id: string, role: 'USER' | 'ADMIN') {
 
 // --- Access Code Management ---
 
-export async function getAccessCodes() {
-  const codes = await prisma.accessCode.findMany({
-    include: {
-      user: {
-        select: {
-          firstName: true,
-          lastName: true,
-          email: true,
-        },
-      },
-    },
-    orderBy: { createdAt: 'desc' },
-  })
+export async function getAccessCodes(limit: number = 5, search?: string, cursor?: string, direction: 'next' | 'prev' = 'next') {
+  const whereClause = search ? {
+    OR: [
+      { email: { contains: search, mode: 'insensitive' as const } },
+      { user: { firstName: { contains: search, mode: 'insensitive' as const } } },
+      { user: { lastName: { contains: search, mode: 'insensitive' as const } } },
+      { user: { email: { contains: search, mode: 'insensitive' as const } } },
+    ]
+  } : {}
 
-  return codes.map(code => ({
-    ...code,
-    code: code.code ? decrypt(code.code) : null
-  }))
+  const takeCount = direction === 'next' ? limit + 1 : -(limit + 1)
+
+  const [total, codesRaw] = await Promise.all([
+    prisma.accessCode.count({ where: whereClause }),
+    prisma.accessCode.findMany({
+      where: whereClause,
+      take: takeCount,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
+      include: {
+        user: { select: { firstName: true, lastName: true, email: true } },
+      },
+      orderBy: [
+        { createdAt: 'desc' },
+        { id: 'desc' }
+      ]
+    })
+  ])
+
+  let hasNextPage = false
+  let hasPrevPage = false
+  let codesToReturn = codesRaw
+
+  if (direction === 'next') {
+    if (codesRaw.length > limit) {
+      hasNextPage = true
+      codesToReturn = codesRaw.slice(0, limit)
+    }
+    hasPrevPage = !!cursor
+  } else {
+    if (codesRaw.length > limit) {
+      hasPrevPage = true
+      codesToReturn = codesRaw.slice(1)
+    }
+    hasNextPage = true
+  }
+
+  const nextCursor = codesToReturn.length > 0 ? codesToReturn[codesToReturn.length - 1].id : undefined
+  const prevCursor = codesToReturn.length > 0 ? codesToReturn[0].id : undefined
+
+  return {
+    codes: codesToReturn.map(code => ({
+      ...code,
+      code: code.code ? decrypt(code.code) : null
+    })),
+    total,
+    nextCursor: hasNextPage ? nextCursor : undefined,
+    prevCursor: hasPrevPage ? prevCursor : undefined,
+  }
 }
 
 

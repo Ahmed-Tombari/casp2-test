@@ -106,7 +106,7 @@ const Footer = () => {
               <FooterLink href="/" label={navT('home')} />
               <FooterLink href="/store" label={navT('store')} />
               <FooterLink href="/teacher-guide" label={navT('teacherGuide')} />
-              <FooterLink href="/placement-test" label={navT('placementTest')} />
+              <FooterLink href="/academy" label={navT('academy')} />
               <FooterLink href="/contact" label={navT('contact')} />
             </ul>
           </motion.div>
@@ -121,10 +121,10 @@ const Footer = () => {
               {t('about')}
             </h4>
             <ul className='space-y-3 md:space-y-4' role="list">
-              <FooterLink href="/platform" label={navT('educationalPlatform')} />
-              <FooterLink href="/channel" label={navT('educationalChannel')} />
-              <FooterLink href="/privacy" label={t('privacy')} />
-              <FooterLink href="/terms" label={t('terms')} />
+              <FooterLink href="/#platforms" label={navT('educationalPlatform')} />
+              <FooterLink href="https://www.youtube.com/@%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%88%D9%8A%D8%A9-%D9%83%D9%86" label={navT('educationalChannel')} />
+              <FooterLink href="#" label={t('privacy')} />
+              <FooterLink href="#" label={t('terms')} />
             </ul>
           </motion.div>
 
@@ -153,10 +153,10 @@ const Footer = () => {
                 <div>
                   <p className='text-white/50 text-xs mb-1 uppercase tracking-wider'>{contactT('phoneTitle')}</p>
                   <a
-                    href="tel:+966110000000"
+                    href="tel:+21650970330"
                     className='text-white font-bold tracking-wider hover:text-brand-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy-dark rounded'
                   >
-                    +966 11 000 0000
+                    +216 50 970 330
                   </a>
                 </div>
               </li>
@@ -167,10 +167,10 @@ const Footer = () => {
                 <div>
                   <p className='text-white/50 text-xs mb-1 uppercase tracking-wider'>{contactT('emailTitle')}</p>
                   <a
-                    href="mailto:contact@centerarabic.com"
+                    href="mailto:dargouthy@yahoo.fr"
                     className='text-white font-bold hover:text-brand-gold transition-colors break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy-dark rounded'
                   >
-                    contact@centerarabic.com
+                    {/* contact@centerarabic.com */}dargouthy@yahoo.fr
                   </a>
                 </div>
               </li>

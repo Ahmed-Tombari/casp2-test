@@ -25,6 +25,8 @@
     "accessibleBy": "Accessible by",
     "assasBooks": "Assas Books",
     "exercicesBooks": "Exercices Books",
+    "wafiBooks": "Al Wafi Books",
+    "gardenBooks": "Garden of Arabic Books",
     "mufidBooks": "Al Mufid Books",
     "shamilBooks": "Shamil Books",
     "tarikmunirArBooks": "Tareeq Al-Muneer Arabic Books",
@@ -53,7 +55,8 @@
     "educationalCDs": "Educational CDs",
     "teachingTools": "Teaching Tools",
     "handwritingExercises": "Handwriting Exercises",
-    "letterColoring": "Letter Coloring"
+    "letterColoring": "Letter Coloring",
+    "academy": "Training Academy"
   },
   "common": {
     "signIn": "Sign In",
@@ -1001,6 +1004,7 @@
     "newThisWeek": "new this week",
     "activeRate": "active rate",
     "search": "Search...",
+    "searchCodeOrEmail": "Search access code, email, name...",
     "userManagement": "User Management",
     "manageUsersDesc": "Manage users and their access roles.",
     "name": "Name",
@@ -1036,7 +1040,11 @@
     "hideCode": "Hide Code",
     "showCode": "Show Code",
     "days": "days",
-    "unassigned": "Unassigned"
+    "unassigned": "Unassigned",
+    "previous": "Previous",
+    "next": "Next",
+    "itemsPerPage": "Items per page",
+    "total": "Total"
   },
   "academy": {
     "title": "Training Academy",

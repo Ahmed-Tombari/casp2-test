@@ -197,7 +197,10 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
     },
     {
       label: t.services,
-      href: '#',
+      href: '/services',
+      submenu: [
+        { label: t.accessBook, href: '/services/book-access' },
+      ],
     },
     {
           label: t.teacherGuide,

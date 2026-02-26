@@ -57,7 +57,7 @@ export function AuthStatus({ user }: { user: User | null }) {
         </button>
 
         {showMenu && (
-          <div className="absolute right-0 mt-3 w-55 bg-white dark:bg-brand-navy-dark rounded-2xl shadow-soft-lg py-2 border border-brand-sky/20 dark:border-white/10 z-50 backdrop-blur-xl">
+        <div className="absolute mt-3 w-56 ltr:right-0 rtl:left-0 bg-white dark:bg-brand-navy-dark rounded-2xl shadow-soft-lg py-2 border border-brand-sky/20 dark:border-white/10 z-50 backdrop-blur-xl">
             <div className="px-4 py-3 border-b border-brand-sky/10 dark:border-white/5 mb-2">
               <p className="text-xs text-gray-400 font-medium">
                 {tAuth("signedInAs")}

@@ -11,7 +11,7 @@
     "getLink": "طلب رابط الوصول",
     "verify": "التحقق من الرمز",
     "sending": "جاري المعالجة...",
-    "expiryNote": "صلاحية 24 ساعة",
+    "expiryNote": "صلاحية محدودة",
     "noDownloads": "لا يمكن التنزيل",
     "emailSent": "تم إرسال الرابط إلى بريدك الإلكتروني!",
     "errorGeneric": "حدث خطأ ما.",
@@ -25,6 +25,8 @@
     "accessibleBy": "متاح بواسطة",
     "assasBooks": "كتب الأساس",
     "exercicesBooks": "كتب التمارين",
+    "wafiBooks": "كتب الوافي",
+    "gardenBooks": "كتب حديقة اللغة العربية",
     "mufidBooks": "كتب المفيد",
     "shamilBooks": "كتب الشامل",
     "tarikmunirArBooks": "كتب الطريق المنير",
@@ -54,7 +56,8 @@
     "teachingTools": "الوسائل التعليمية",
     "gardenOfArabic": "حديقة اللغة العربية",
     "handwritingExercises": "تمارين الخط",
-    "letterColoring": "أوراق تلوين الحروف"
+    "letterColoring": "أوراق تلوين الحروف",
+    "academy": "أكاديمية التدريب"
   },
   "common": {
     "signIn": "تسجيل الدخول",
@@ -1036,6 +1039,7 @@
     "newThisWeek": "جديد هذا الأسبوع",
     "activeRate": "نسبة النشاط",
     "search": "بحث...",
+    "searchCodeOrEmail": "ابحث عن رمز الوصول، البريد الإلكتروني، أو الاسم...",
     "userManagement": "إدارة المستخدمين",
     "manageUsersDesc": "إدارة المستخدمين وأدوار الوصول الخاصة بهم.",
     "name": "الاسم",
@@ -1071,7 +1075,11 @@
     "hideCode": "إخفاء الرمز",
     "showCode": "إظهار الرمز",
     "days": "أيام",
-    "unassigned": "غير مخصص"
+    "unassigned": "غير مخصص",
+    "previous": "السابق",
+    "next": "التالي",
+    "itemsPerPage": "عناصر لكل صفحة",
+    "total": "المجموع"
   },
   "academy": {
     "title": "أكاديمية التدريب",

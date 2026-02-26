@@ -46,6 +46,7 @@ export default function BookViewer({
   const [isLoading, setIsLoading] = useState(true);
   const [pageWidth, setPageWidth] = useState(0);
   const [zoom, setZoom] = useState(1.0);
+  const [imageError, setImageError] = useState(false);
 
   const [hasError, setHasError] = useState(false);
   const [blobPdfUrl, setBlobPdfUrl] = useState<string | null>(null);
@@ -232,19 +233,20 @@ export default function BookViewer({
               onContextMenu={handleContextMenu}
               className="relative w-full h-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] rounded-2xl overflow-hidden transform group-hover:rotate-x-2 group-hover:scale-105 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/10 group-hover:ring-4 group-hover:ring-brand-gold/20 dark:group-hover:ring-brand-sky/20 bg-gray-50 dark:bg-white/5"
             >
-              {coverImage ? (
+              {coverImage && !imageError ? (
                 <Image
                   src={coverImage}
                   alt={title}
                   fill
                   className="object-contain transition-transform duration-700 group-hover:scale-110 p-2"
                   sizes="(max-width: 768px) 100vw, 33vw"
+                  onError={() => setImageError(true)}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 animate-pulse">
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800/50 p-6 text-center">
                   <Icon
-                    icon="solar:gallery-bold-duotone"
-                    className="text-4xl text-gray-400"
+                    icon="solar:book-2-bold-duotone"
+                    className="text-6xl text-brand-navy/20 dark:text-white/20 mb-3"
                   />
                 </div>
               )}

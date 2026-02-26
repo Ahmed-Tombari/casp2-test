@@ -64,15 +64,16 @@ export function CodeGenerator() {
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 ps-1">{t('assignToEmail')}</label>
 
           <div className="relative">
-             <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="user@example.com"
-                className="w-full p-3 ps-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-brand-navy/10 outline-none text-slate-800 dark:text-white placeholder:text-slate-400 transition-all"
+            <input 
+              type="email" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="user@example.com"
+              className="w-full p-3 ps-8 pe-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-brand-navy/10 outline-none text-slate-800 dark:text-white placeholder:text-slate-400 transition-all"
             />
-            <div className="absolute inset-inline-start-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                <Icon icon="solar:letter-bold" />
+
+            <div className="absolute mx-2 inset-inline-end-0 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 flex items-center">
+              <Icon icon="solar:letter-bold" width={18} />
             </div>
           </div>
         </div>

@@ -25,6 +25,8 @@
     "accessibleBy": "Accessible par",
     "assasBooks": "Livres Assas",
     "exercicesBooks": "Livres d'exercices",
+    "wafiBooks": "Livres Al Wafi",
+    "gardenBooks": "Livres du jardin d'arabe",
     "mufidBooks": "Livres Al Mufid",
     "shamilBooks": "Livres Shamil",
     "tarikmunirArBooks": "Livres Tareeq Al-Muneer Arabes",
@@ -54,8 +56,8 @@
   "teachingTools": "Outils pédagogiques",
   "gardenOfArabic": "Jardin de l'arabe",
   "handwritingExercises": "Exercices d’écriture",
-  "letterColoring": "Coloriage des lettres"
-
+  "letterColoring": "Coloriage des lettres",
+  "academy": "Académie de formation"
 },
   "common": {
     "signIn": "Se connecter",
@@ -1001,6 +1003,7 @@
     "newThisWeek": "nouveau cette semaine",
     "activeRate": "taux d'activité",
     "search": "Rechercher...",
+    "searchCodeOrEmail": "Rechercher un code d'accès, un e-mail, un nom...",
     "userManagement": "Gestion des Utilisateurs",
     "manageUsersDesc": "Gérez les utilisateurs et leurs rôles d'accès.",
     "name": "Nom",
@@ -1036,7 +1039,11 @@
     "hideCode": "Masquer le code",
     "showCode": "Afficher le code",
     "days": "jours",
-    "unassigned": "Non assigné"
+    "unassigned": "Non assigné",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "itemsPerPage": "Éléments par page",
+    "total": "Total"
   },
   "academy": {
     "title": "Académie de Formation",

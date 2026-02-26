@@ -5,6 +5,8 @@ import AdminCard from '@/app/components/admin/AdminCard'
 import { Icon } from '@iconify/react'
 import { getTranslations } from 'next-intl/server'
 
+import { Pagination } from '@/app/components/admin/Pagination'
+import { TableSearch } from '@/app/components/admin/TableSearch'
 
 interface AccessCodeWithUser {
   id: string
@@ -23,8 +25,25 @@ interface AccessCodeWithUser {
   } | null
 }
 
-export default async function AdminCodesPage() {
-  const codes = await getAccessCodes() as AccessCodeWithUser[]
+export default async function AdminCodesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    cursor?: string
+    direction?: 'next' | 'prev'
+    limit?: string
+    search?: string
+  }>
+}) {
+  const resolvedSearchParams = await searchParams
+  const cursor = resolvedSearchParams.cursor
+  const direction = resolvedSearchParams.direction || 'next'
+  const limit = Number(resolvedSearchParams.limit) || 5
+  const searchStr = resolvedSearchParams.search || ''
+
+  const data = await getAccessCodes(limit, searchStr, cursor, direction as 'next' | 'prev')
+  const codes = data.codes as AccessCodeWithUser[]
+  const { total, nextCursor, prevCursor } = data
   const t = await getTranslations('admin')
 
   function getStatus(code: AccessCodeWithUser) {
@@ -43,9 +62,13 @@ export default async function AdminCodesPage() {
       
       <CodeGenerator />
 
+      <div className="flex justify-between items-center bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+          <TableSearch placeholder={t('searchCodeOrEmail') || 'Search access code, email, name...'} />
+      </div>
+
       <AdminCard className="overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700">
         <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-start border-collapse">
             <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50">
                 <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-start">{t('accessCode')}</th>
@@ -62,10 +85,10 @@ export default async function AdminCodesPage() {
                 const status = getStatus(code)
                 return (
                     <tr key={code.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group">
-                    <td className="px-6 py-4 text-sm font-medium">
+                    <td className="px-6 py-4 text-sm font-medium text-start">
                         <CodeDisplay codes={code.code} />
                     </td>
-                    <td className="px-6 py-4 text-sm">
+                    <td className="px-6 py-4 text-sm text-start">
                         {code.user ? (
                             <div className="flex flex-col">
                                 <span className="font-bold text-slate-800 dark:text-white">{code.user.firstName} {code.user.lastName}</span>
@@ -77,14 +100,14 @@ export default async function AdminCodesPage() {
                             </span>
                         )}
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300 font-medium">
+                    <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-300 font-medium text-start">
                         {code.validityDays} {t('days')}
                     </td>
 
-                    <td className="px-6 py-4 text-slate-400 dark:text-slate-500 font-mono text-xs">
+                    <td className="px-6 py-4 text-slate-400 dark:text-slate-500 font-mono text-xs text-start">
                         {new Date(code.expiresAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 text-sm">
+                    <td className="px-6 py-4 text-sm text-start">
                         <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg w-fit text-xs font-bold ${status.class}`}>
                             <Icon icon={status.icon} width={14} />
                             {status.label}
@@ -108,6 +131,7 @@ export default async function AdminCodesPage() {
             </tbody>
             </table>
         </div>
+        <Pagination total={total} currentPageSize={limit} nextCursor={nextCursor} prevCursor={prevCursor} />
       </AdminCard>
     </div>
   )

@@ -105,7 +105,7 @@ const Publications = () => {
   ];
 
   return (
-    <section className="relative py-24 md:py-40 bg-[#F0F9FF] dark:bg-brand-navy-dark overflow-hidden">
+    <section id="publications" className="relative py-24 md:py-40 bg-[#F0F9FF] dark:bg-brand-navy-dark overflow-hidden">
       {/* Decorative Blobs */}
       <div className="absolute top-0 end-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 start-0 w-[500px] h-[500px] bg-brand-sky/10 rounded-full blur-[100px]" />
