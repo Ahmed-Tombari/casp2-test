@@ -55,8 +55,10 @@ export async function GET(request: NextRequest) {
 
     if (bookSessionToken) {
       try {
-        const payload = verifyPdfAccessToken(bookSessionToken);
+        const payload = verifyPdfAccessToken(bookSessionToken) as { email: string; userId?: string; codeId?: string };
         user = {
+          id: payload.userId || null,
+          codeId: payload.codeId || null,
           name: "Guest User",
           email: payload.email || "guest@example.com",
         };
@@ -81,10 +83,14 @@ export async function GET(request: NextRequest) {
       if (code && !code.used && new Date(code.expiresAt) > new Date()) {
         user = code.user
           ? {
+              id: code.userId,
+              codeId: code.id,
               name: `${code.user.firstName} ${code.user.lastName}`,
               email: code.user.email,
             }
           : {
+              id: null,
+              codeId: code.id,
               name: "Access Code User",
               email: code.email || "guest@example.com",
             };
@@ -117,17 +123,26 @@ export async function GET(request: NextRequest) {
       ? await watermarkPdf(pdfBuffer)
       : pdfBuffer;
 
-    // Log access if user is present
-    if (user || standardSession?.user) {
+    // Log access if user or session is present
+    const finalUserId = standardSession?.user?.id || (user as { id?: string | null })?.id || null;
+    const finalCodeId = (user as { codeId?: string | null })?.codeId || null;
+
+    if (finalUserId || finalCodeId) {
       try {
         await prisma.accessLog.create({
           data: {
-            userId: standardSession?.user?.id || null,
+            userId: finalUserId,
+            codeId: finalCodeId,
             ip: request.headers.get("x-forwarded-for") || "unknown",
           },
         });
       } catch (logError) {
-        console.error("Failed to log access:", logError);
+        // Handle P2003 (Foreign Key Violation) or other logging errors gracefully
+        if (typeof logError === 'object' && logError !== null && 'code' in logError && logError.code === 'P2003') {
+           console.warn("PDF Access Logging: Foreign key violation (P2003). Likely a stale session or invalid reference.");
+        } else {
+           console.error("Failed to log access:", logError);
+        }
       }
     }
 

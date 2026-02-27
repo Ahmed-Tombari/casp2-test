@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/routing';
 import { Icon } from '@iconify/react';
 
+export const revalidate = 86400; // 24 hours
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale: locale, namespace: 'store' });
@@ -176,7 +178,7 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
                   `}
                 ></div>
 
-                <div className={`w-20 h-20 rounded-[1.5rem] ${cat.color} flex items-center justify-center shrink-0 shadow-lg relative z-10`}>
+                <div className={`w-20 h-20 rounded-3xl ${cat.color} flex items-center justify-center shrink-0 shadow-lg relative z-10`}>
                    <Icon icon={cat.icon} className="text-4xl text-white" />
                 </div>
 

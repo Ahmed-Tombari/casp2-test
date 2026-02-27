@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Icon } from '@iconify/react';
+
+export const revalidate = 86400; // 24 hours
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {

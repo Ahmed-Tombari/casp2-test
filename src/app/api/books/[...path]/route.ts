@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { S3Client, GetObjectCommand, GetObjectCommandOutput } from "@aws-sdk/client-s3";
 
-export const runtime = "edge";
 
 const s3Client = new S3Client({
   region: "auto",
