@@ -18,7 +18,7 @@ import { Toaster } from "react-hot-toast";
 const cairo = Cairo({
   subsets: ["latin", "arabic"],
   variable: "--font-cairo",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "700", "800"],
   display: "swap",
 });
 

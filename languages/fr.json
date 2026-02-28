@@ -49,16 +49,18 @@
   "educationalChannel": "Chaîne éducative",
   "login": "Connexion",
   "register": "S'inscrire",
-  "readBook": "Lire le Livre",
+  "readBook": "Consulter le livre",
   "printedBooks": "Livres imprimés",
   "ebooks": "Livres numériques",
   "educationalCDs": "CD éducatifs",
   "teachingTools": "Outils pédagogiques",
   "gardenOfArabic": "Jardin de l'arabe",
   "handwritingExercises": "Exercices d’écriture",
-  "letterColoring": "Coloriage des lettres",
-  "academy": "Académie de formation"
-},
+    "letterColoring": "Coloriage des lettres",
+    "academy": "Académie de formation",
+    "download": "Télécharger",
+    "close": "Fermer"
+  },
   "common": {
     "signIn": "Se connecter",
     "signUp": "S'inscrire",

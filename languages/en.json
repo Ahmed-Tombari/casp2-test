@@ -56,7 +56,9 @@
     "teachingTools": "Teaching Tools",
     "handwritingExercises": "Handwriting Exercises",
     "letterColoring": "Letter Coloring",
-    "academy": "Training Academy"
+    "academy": "Training Academy",
+    "download": "Download",
+    "close": "Close"
   },
   "common": {
     "signIn": "Sign In",
