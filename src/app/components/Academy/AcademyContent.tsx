@@ -43,7 +43,7 @@ const AcademyContent: React.FC<AcademyContentProps> = ({ videos, translations })
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-brand-navy-black">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-20 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
           <Image 
             src="/images/logo/casp-logo.png" 
@@ -57,21 +57,11 @@ const AcademyContent: React.FC<AcademyContentProps> = ({ videos, translations })
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-sm font-bold mb-8 backdrop-blur-md"
-          >
-            <Icon icon="solar:video-library-bold-duotone" className="text-xl animate-pulse" />
-            <span>{translations.educatorZone}</span>
-          </motion.div>
-
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight"
+            className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight tracking-tight"
           >
             {translations.title}
           </motion.h1>
@@ -80,7 +70,7 @@ const AcademyContent: React.FC<AcademyContentProps> = ({ videos, translations })
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-xl text-orange-50/80 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl text-orange-50/80 max-w-2xl mx-auto leading-relaxed mb-2"
           >
             {translations.subtitle}
           </motion.p>

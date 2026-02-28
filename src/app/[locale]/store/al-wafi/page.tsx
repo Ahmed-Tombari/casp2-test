@@ -43,6 +43,7 @@ export default async function AlWafiPage({
       const section = isExercises ? 'exercices' : 'assas';
 
       return {
+        bookId: `wafi-${key}`,
         id,
         title: tLevels(titleKey),
         bookCover: `/pdfbooks/store-book/wafi-book/wafi-${key}/${section}/cover/${key}-1.png`,
@@ -58,7 +59,7 @@ export default async function AlWafiPage({
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-1 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -67,31 +68,19 @@ export default async function AlWafiPage({
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-sky-light text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:verified-check-bold" className="text-brand-gold" />
-            <span>{t('title')}</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-2 font-light">
             {t('description')}
           </p>
 
         </div>
       </section>
 
-
-
       {/* ================= MAIN LEVELS GRID ================= */}
-      <div className="text-center mb-16 px-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-           {tLevels('growthTitle') || 'Discover the Levels'}
-        </h2>
-        <div className="h-1 w-24 bg-brand-sky mx-auto rounded-full"></div>
-      </div>
 
       <PdfBookGrid levels={levels} />
 

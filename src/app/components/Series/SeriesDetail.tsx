@@ -41,7 +41,7 @@ export default function SeriesDetail({
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="relative bg-brand-navy pt-32 pb-32 rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative bg-brand-navy pt-24 pb-0 rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -62,7 +62,7 @@ export default function SeriesDetail({
                 {title}
              </h1>
              
-             <p className="text-xl text-gray-100 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+             <p className="text-xl text-gray-100 leading-relaxed mb-2 max-w-xl mx-auto lg:mx-0">
                 {description}
              </p>
 

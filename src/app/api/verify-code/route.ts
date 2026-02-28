@@ -51,7 +51,8 @@ export async function POST(request: NextRequest) {
     
     const token = generatePdfAccessToken({ 
       email: validCode.email!, 
-      blobPath: 'private/all' // Placeholder, the actual proxy handles specific files
+      blobPath: 'private/all', // Placeholder, the actual proxy handles specific files
+      watermark: true
     });
 
     // 4. Create response and set cookie

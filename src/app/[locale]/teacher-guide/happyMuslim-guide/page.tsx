@@ -24,7 +24,7 @@ export default async function HappyMuslimGuidePage({ params }: { params: Promise
     <main className="min-h-screen bg-gray-50 dark:bg-[#020617]">
       
       {/* Hero Section - Sky Blue Theme */}
-      <section className="relative overflow-hidden bg-sky-600 pt-32 pb-4 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-sky-600 pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Abstract Background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
@@ -33,16 +33,12 @@ export default async function HappyMuslimGuidePage({ params }: { params: Promise
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-sky-100 text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:smile-circle-bold-duotone" className="text-sky-300" />
-            <span>{t('happy.title')}</span>
-          </div>
           
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('happy.title')}
           </h1>
           
-          <p className="text-xl text-sky-100/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-sky-100/90 max-w-2xl mx-auto leading-relaxed mb-2">
             {t('happy.desc')}
           </p>
         </div>
@@ -61,7 +57,7 @@ export default async function HappyMuslimGuidePage({ params }: { params: Promise
               <BookViewer
                 key={idx}
                 title={t(`happy.books.${item.key}`)}
-                pdfUrl={`${process.env.NEXT_PUBLIC_R2_BASE_URL}/dalil-book/happyMuslim-guide/${item.file}`}
+                pdfUrl={`/dalil-book/happyMuslim-guide/${item.file}`}
                 readLabel={t('readBtn')}
                 downloadLabel={t('downloadBtn')}
                 closeLabel={t('close')}

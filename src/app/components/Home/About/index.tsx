@@ -77,7 +77,7 @@ const About = () => {
               <h2 className='text-3xl md:text-5xl font-extrabold text-brand-navy dark:text-white mb-8 leading-tight'>
                 {t('aboutTitle')}
               </h2>
-              <p className='text-lg text-brand-navy/70 dark:text-white/70 leading-relaxed mb-10'>
+              <p className='text-lg text-brand-navy/70 dark:text-white/70 leading-relaxed mb-2'>
                 {t('aboutDescription')}
               </p>
 

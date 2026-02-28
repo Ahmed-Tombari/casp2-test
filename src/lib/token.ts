@@ -7,6 +7,7 @@ import { JWT_SECRET } from './env';
 export interface PdfAccessPayload {
   email: string;
   blobPath: string; // The path to the PDF in Vercel Blob
+  watermark?: boolean;
 }
 
 /**

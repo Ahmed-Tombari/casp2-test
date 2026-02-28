@@ -4,10 +4,17 @@ import prisma from "@/lib/prisma";
 import { watermarkPdf } from "@/lib/pdf";
 import { verifyPdfAccessToken } from "@/lib/token";
 import { cookies } from "next/headers";
+import { decodeAssetUrl } from "@/utils/obfuscation";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   let blobUrl = searchParams.get("url");
+  
+  // De-obfuscate if the URL is provided and doesn't look like a plain relative path or API route
+  if (blobUrl && !blobUrl.startsWith("/") && !blobUrl.startsWith("http")) {
+    blobUrl = decodeAssetUrl(blobUrl);
+  }
+
   const accessCode = searchParams.get("code");
   const fileId = searchParams.get("file");
 
@@ -24,6 +31,11 @@ export async function GET(request: NextRequest) {
   }
 
   if (!blobUrl) return new NextResponse("Missing URL", { status: 400 });
+
+  // Handle relative URLs (prepend R2 Base URL)
+  if (blobUrl.startsWith("/") && !blobUrl.startsWith("/api/")) {
+    blobUrl = `${r2BaseUrl}${blobUrl}`;
+  }
 
   // Safety check: only allow proxying from the authorized R2 domain or local API routes
   const r2Domain = new URL(r2BaseUrl).hostname;
@@ -116,16 +128,35 @@ export async function GET(request: NextRequest) {
     }
 
     const pdfBuffer = await response.arrayBuffer();
+    
+    // Determine user identity for logging
+    const finalUserId = standardSession?.user?.id || (user as { id?: string | null })?.id || null;
+    const finalCodeId = (user as { codeId?: string | null })?.codeId || null;
 
     // Apply watermark if requested
-    const shouldWatermark = searchParams.get("watermark") === "true";
+    // Check multiple sources for watermark flag to allow hiding "?watermark=true"
+    const watermarkFromUrl = searchParams.get("watermark") === "true";
+    const watermarkFromObfuscated = searchParams.get("w") === "1";
+    const watermarkFromEncodedUrl = blobUrl.includes("watermark=true");
+    
+    // Also check token payload if it came from book_session
+    let watermarkFromToken = false;
+    const cookieStore = await cookies();
+    const bookSessionToken = cookieStore.get("book_session")?.value;
+    if (bookSessionToken) {
+      try {
+        const payload = verifyPdfAccessToken(bookSessionToken);
+        if (payload.watermark === true) {
+          watermarkFromToken = true;
+        }
+      } catch {}
+    }
+
+    const shouldWatermark = watermarkFromUrl || watermarkFromObfuscated || watermarkFromEncodedUrl || watermarkFromToken;
+    
     const finalBuffer = shouldWatermark
       ? await watermarkPdf(pdfBuffer)
       : pdfBuffer;
-
-    // Log access if user or session is present
-    const finalUserId = standardSession?.user?.id || (user as { id?: string | null })?.id || null;
-    const finalCodeId = (user as { codeId?: string | null })?.codeId || null;
 
     if (finalUserId || finalCodeId) {
       try {

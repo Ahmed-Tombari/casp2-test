@@ -25,13 +25,13 @@
     "accessibleBy": "متاح بواسطة",
     "assasBooks": "كتب الأساس",
     "exercicesBooks": "كتب التمارين",
-    "wafiBooks": "كتب الوافي",
-    "gardenBooks": "كتب حديقة اللغة العربية",
-    "mufidBooks": "كتب المفيد",
-    "shamilBooks": "كتب الشامل",
-    "tarikmunirArBooks": "كتب الطريق المنير",
-    "hidayaFrBooks": "كتب الهداية",
-    "happymuslimEnBooks": "كتب المسلم السعيد",
+    "wafiBooks": "الوافي",
+    "gardenBooks": "في الحديقة",
+    "mufidBooks": " المفيد",
+    "shamilBooks": " الشامل",
+    "tarikmunirArBooks": " الطريق المنير",
+    "hidayaFrBooks": "الهداية",
+    "happymuslimEnBooks": " المسلم السعيد",
     "welcome": "مرحباً بك في مجموعة كتبنا الخاصة"
   },
   "nav": {
@@ -555,7 +555,7 @@
     "placeholderPhone": "أدخل رقم هاتفك",
     "placeholderMessage": "كيف يمكننا مساعدتك؟",
     "officeTitle": "مكتبنا",
-    "officeAddress": "حي النصر، تونس",
+    "officeAddress": "مونتريال، كندا",
     "emailTitle": "البريد الإلكتروني",
     "phoneTitle": "الهاتف الموحد"
   },
@@ -627,6 +627,7 @@
     "downloadBtn": "تحميل PDF",
     "close": "إغلاق",
     "explore": "استكشف السلسلة",
+    "viewDetails": "عرض التفاصيل",
     "levels": {
       "growthTitle": "استكشف المستويات",
       "kg": "الروضة",

@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Icon } from '@iconify/react';
 
 export const revalidate = 86400; // 24 hours
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
@@ -28,6 +27,7 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
     else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
 
     return {
+      bookId: `hidayah-fr-${key}`,
       id,
       title: tLevels(titleKey),
       desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level1Desc' : key === '3' ? 'level1Desc' : 'level1Desc'), // Following existing pattern
@@ -43,7 +43,7 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="bg-brand-navy pt-32 pb-1 text-center relative overflow-hidden rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-brand-navy pt-24 pb-0 text-center relative overflow-hidden rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background: Abstract Map / Connections */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -54,31 +54,19 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-sm font-bold mb-8 backdrop-blur-md">
-             <Icon icon="solar:global-bold" />
-             <span>{t('francophoneEdition')}</span>
-          </div>
 
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-2 font-light">
             {t('description')}
           </p>
 
         </div>
       </section>
 
-
-
       {/* ================= LEVELS GRID ================= */}
-        <div className="text-center py-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-               {t('learningJourney')}
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('journeyDesc')}</p>
-          </div>
 
       <PdfBookGrid 
         levels={levels.map(l => ({

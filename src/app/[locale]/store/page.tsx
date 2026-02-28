@@ -123,7 +123,7 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
     <main className="min-h-screen bg-gray-50 dark:bg-[#09121E] text-foreground transition-colors duration-300">
       
       {/* Hero Section */}
-      <section className="bg-brand-navy pt-32 pb-1 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-brand-navy pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           {/* Abstract Background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
@@ -140,11 +140,7 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-gold text-sm font-bold mb-8 backdrop-blur-md">
-             <Icon icon="solar:shop-bold" />
-             <span>{t('officialStore')}</span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed font-light">

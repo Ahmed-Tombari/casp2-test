@@ -24,19 +24,16 @@ export default async function GardenGuidePage({ params }: { params: Promise<{ lo
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-[#020617]">
       
-      <section className="relative overflow-hidden bg-emerald-700 pt-32 pb-4 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-emerald-700 pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
            <Icon icon="solar:leaf-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
            <Icon icon="solar:leaf-bold" className="absolute bottom-20 right-10 text-8xl text-white animate-pulse-slow" style={{animationDelay: '2s'}} />
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-emerald-100 text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:leaf-bold-duotone" className="text-emerald-300" />
-            <span>{t('garden.title')}</span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">{t('garden.title')}</h1>
-          <p className="text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed">{t('garden.desc')}</p>
+         
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">{t('garden.title')}</h1>
+          <p className="text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed mb-2">{t('garden.desc')}</p>
         </div>
       </section>
 
@@ -52,7 +49,7 @@ export default async function GardenGuidePage({ params }: { params: Promise<{ lo
               <BookViewer
                 key={idx}
                 title={t(`garden.books.${item.key}`)}
-                pdfUrl={`${process.env.NEXT_PUBLIC_R2_BASE_URL}/dalil-book/garden-guide/${item.file}`}
+                pdfUrl={`/dalil-book/garden-guide/${item.file}`}
                 readLabel={t('readBtn')}
                 downloadLabel={t('downloadBtn')}
                 closeLabel={t('close')}

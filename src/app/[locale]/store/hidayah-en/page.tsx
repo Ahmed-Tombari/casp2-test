@@ -28,6 +28,7 @@ export default async function HidayahEnglishPage({ params }: { params: Promise<{
     else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
 
     return {
+      bookId: `hidayah-en-${key}`,
       id,
       title: tLevels(titleKey),
       desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level2Desc' : key === '3' ? 'level3Desc' : 'level4Desc'),
@@ -43,7 +44,7 @@ export default async function HidayahEnglishPage({ params }: { params: Promise<{
     <main className="min-h-screen bg-gray-50 dark:bg-[#09121E] text-foreground transition-colors duration-300">
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-1 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #EAB308 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
         <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
            <Icon icon="solar:moon-stars-bold" className="absolute top-10 right-10 text-9xl text-brand-gold animate-pulse-slow" />
@@ -51,22 +52,10 @@ export default async function HidayahEnglishPage({ params }: { params: Promise<{
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-gold-light text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:global-bold" />
-            <span>{t('englishEdition')}</span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">{t('title')}</h1>
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-10 font-light">{t('description')}</p>
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">{t('title')}</h1>
+          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-2 font-light">{t('description')}</p>
         </div>
       </section>
-
-
-
-      {/* Levels Grid */}
-       <div className="text-center py-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">{t('learningJourney')}</h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('journeyDesc')}</p>
-          </div>
 
       <PdfBookGrid 
         levels={levels} 

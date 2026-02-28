@@ -17,7 +17,6 @@ type Tab =
 export default function PrivateBookClient() {
   const [activeTab, setActiveTab] = useState<Tab>("mufid");
   const t = useTranslations("PrivateBook");
-  const tStore = useTranslations("store");
   const tLevels = useTranslations("store.levels");
 
   // Mufid levels: 1 to 6 + P + R
@@ -60,8 +59,8 @@ export default function PrivateBookClient() {
     const section = isExercises ? "exercices" : "assas";
     return gardenKeys.map((key) => {
       const pdfUrl = isExercises
-        ? `${process.env.NEXT_PUBLIC_R2_BASE_URL}/book-office/garden/${section}/${key}.pdf`
-        : `${process.env.NEXT_PUBLIC_R2_BASE_URL}/book-office/garden/${section}/${key}.pdf`;
+        ? `/book-office/garden/${section}/${key}.pdf`
+        : `/book-office/garden/${section}/${key}.pdf`;
 
       return {
         id: getLevelId(key),
@@ -175,7 +174,7 @@ export default function PrivateBookClient() {
       <div className="w-full">
         {activeTab === "mufid" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                 {t("mufidBooks")}
               </h2>
@@ -188,7 +187,7 @@ export default function PrivateBookClient() {
         {activeTab === "garden" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-16">
             <div>
-              <div className="text-center mb-10 px-4">
+              <div className="text-center mb-2 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                   {t("gardenBooks")}
                 </h2>
@@ -198,7 +197,7 @@ export default function PrivateBookClient() {
             </div>
 
             <div>
-              <div className="text-center mb-10 px-4">
+              <div className="text-center mb-2 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                   {t("exercicesBooks")}
                 </h2>
@@ -212,7 +211,7 @@ export default function PrivateBookClient() {
         {activeTab === "wafi" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-16">
             <div>
-              <div className="text-center mb-10 px-4">
+              <div className="text-center mb-2 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                   {t("wafiBooks")}
                 </h2>
@@ -222,7 +221,7 @@ export default function PrivateBookClient() {
             </div>
 
             <div>
-              <div className="text-center mb-10 px-4">
+              <div className="text-center mb-2 px-4">
                 <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                   {t("exercicesBooks")}
                 </h2>
@@ -235,7 +234,7 @@ export default function PrivateBookClient() {
 
         {activeTab === "shamil" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                 {t("shamilBooks")}
               </h2>
@@ -247,7 +246,7 @@ export default function PrivateBookClient() {
 
         {activeTab === "tarikmunirAr" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                 {t("tarikmunirArBooks")}
               </h2>
@@ -259,7 +258,7 @@ export default function PrivateBookClient() {
 
         {activeTab === "hidayaFr" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                 {t("hidayaFrBooks")}
               </h2>
@@ -271,7 +270,7 @@ export default function PrivateBookClient() {
 
         {activeTab === "happymuslimEn" && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="text-center mb-10 px-4">
+            <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
                 {t("happymuslimEnBooks")}
               </h2>

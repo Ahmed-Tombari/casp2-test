@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Icon } from '@iconify/react';
 
 export const revalidate = 86400; // 24 hours
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
@@ -32,6 +31,7 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
     const isIntermediate = ['2', '4', '5'].includes(key);
 
     return {
+      bookId: `shamil-${key}`,
       id,
       title: tLevels(titleKey),
       subtitle: t(isAdvanced ? 'level3Sub' : isIntermediate ? 'level2Sub' : 'level1Sub'),
@@ -48,7 +48,7 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-1 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background: Architectural Grid */}
         <div className="absolute inset-0 opacity-10" 
@@ -56,30 +56,16 @@ export default async function AlShamilPage({ params }: { params: Promise<{ local
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-gold-light text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:hat-graduation-bold" className="text-brand-gold" />
-            <span>{t('forUniversities')}</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-2 font-light">
             {t('description')}
           </p>
 
         </div>
       </section>
-
-
-
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-               {t('academicPath')}
-            </h2>
-            <div className="h-1 w-24 bg-brand-gold mx-auto rounded-full"></div>
-          </div>
 
       <PdfBookGrid 
         levels={levels} 

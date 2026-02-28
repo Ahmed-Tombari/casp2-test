@@ -48,6 +48,7 @@ export default async function HidayahPage({
     else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
 
     return {
+      bookId: `hidayah-ar-${key}`,
       id,
       title: tLevels(titleKey),
       desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level2Desc' : key === '3' ? 'level3Desc' : 'level4Desc'),
@@ -63,7 +64,7 @@ export default async function HidayahPage({
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-1 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Decorative Background (Subtle Islamic Pattern hint) */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" 
@@ -75,16 +76,11 @@ export default async function HidayahPage({
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-brand-gold-light text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:star-fall-bold" className="text-brand-gold" />
-            <span>{t('islamicStudies')}</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-2">
             {t('description')}
           </p>
         </div>
@@ -93,13 +89,7 @@ export default async function HidayahPage({
 
 
       {/* ================= THE JOURNEY (Level Cards) ================= */}
-      <div className="text-center py-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-               {t('educationalJourney')}
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('journeyDesc')}</p>
-          </div>
-
+     
       <PdfBookGrid 
         levels={levels} 
       />

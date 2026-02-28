@@ -44,7 +44,7 @@ const Newsletter = () => {
             <h3 className='text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight'>
               {t('newsletterTitle')}
             </h3>
-            <p className='text-white/80 text-lg md:text-xl font-medium mb-10'>
+            <p className='text-white/80 text-lg md:text-xl font-medium mb-2'>
               {t('description')}
             </p>
             

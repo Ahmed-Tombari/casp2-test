@@ -78,7 +78,7 @@ const contactInfo = [
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-brand-navy pt-32 pb-20 relative overflow-hidden text-center">
+      <section className="bg-brand-navy pt-24 pb-0 relative overflow-hidden text-center">
         <div className="absolute top-0 start-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
@@ -88,7 +88,7 @@ const contactInfo = [
       </section>
 
       {/* Contact Content */}
-      <section className="py-20 bg-brand-sky/5 dark:bg-brand-navy-dark transition-colors duration-300">
+      <section className="py-5 bg-brand-sky/5 dark:bg-brand-navy-dark transition-colors duration-300">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
             {contactInfo.map((info, idx) => (

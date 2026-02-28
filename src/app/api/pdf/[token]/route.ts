@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyPdfAccessToken } from '@/lib/token';
+import { watermarkPdf } from '@/lib/pdf';
 
 export async function GET(
   request: NextRequest,
@@ -50,7 +51,13 @@ export async function GET(
         return new NextResponse('PDF not found or inaccessible', { status: 404 });
     }
 
-    const pdfBuffer = await pdfResponse.arrayBuffer();
+    let pdfBuffer = await pdfResponse.arrayBuffer();
+
+    // Apply watermark if requested in token
+    if (payload.watermark) {
+      const watermarked = await watermarkPdf(pdfBuffer);
+      pdfBuffer = watermarked as ArrayBuffer;
+    }
 
     // Return as a stream
     return new NextResponse(pdfBuffer, {

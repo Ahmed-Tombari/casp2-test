@@ -83,7 +83,7 @@ export default async function PrivateBookPage({ params }: Props) {
        </div>
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-gold pt-32 pb-1 text-center rounded-b-[4rem] shadow-soft-lg z-10 mb-16">
+      <section className="relative overflow-hidden bg-brand-gold pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10 mb-16">
         
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-10" 
@@ -91,16 +91,12 @@ export default async function PrivateBookPage({ params }: Props) {
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 border border-white/20 text-white text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:lock-unlocked-bold-duotone" className="text-brand-gold" />
-            <span>{t('secureAccess')}</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed mb-10 font-light">
+          <p className="text-xl text-orange-50 max-w-3xl mx-auto leading-relaxed mb-2 font-light">
             {t('description')}
           </p>
 

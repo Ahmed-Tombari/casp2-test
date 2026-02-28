@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Icon } from '@iconify/react';
 
 export const revalidate = 86400; // 24 hours
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
@@ -28,6 +27,7 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
     else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
 
     return {
+      bookId: `qawaed-${key}`,
       id,
       title: tLevels(titleKey),
       desc: t(['R', 'P', '1'].includes(key) ? 'sentenceDesc' : key === '2' ? 'tensesDesc' : key === '3' ? 'pronounsDesc' : 'particlesDesc'),
@@ -42,7 +42,7 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
     <main className="min-h-screen bg-gray-50 dark:bg-background text-foreground transition-colors duration-300">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="bg-brand-navy pt-32 pb-1 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-brand-navy pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background: Blueprint Grid */}
         <div className="absolute inset-0 opacity-10" 
@@ -50,11 +50,8 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
         </div>
         
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="w-24 h-24 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-8 backdrop-blur-md shadow-inner-soft">
-             <Icon icon="solar:magic-stick-3-bold-duotone" className="text-5xl text-brand-gold" />
-          </div>
 
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
           
@@ -64,16 +61,8 @@ export default async function QawaedMobastaPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-
-
       {/* ================= TOPICS GRID (The "Smart Cards") ================= */}
 
-      {/* Levels Grid */}
-       <div className="text-center py-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">{t('coreTopics')}</h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('coreDesc')}</p>
-        </div>
-  
       <PdfBookGrid 
         levels={levels} 
       />

@@ -30,7 +30,7 @@ export default async function WafiPlatformPage({ params }: { params: Promise<{ l
                  <span>{t('lmsSystem')}</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">{t('title')}</h1>
-              <p className="text-xl text-white/80 leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">{t('description')}</p>
+              <p className="text-xl text-white/80 leading-relaxed mb-2 max-w-xl mx-auto lg:mx-0">{t('description')}</p>
               
               {/* Features List */}
               <div className="space-y-4 max-w-md mx-auto lg:mx-0">

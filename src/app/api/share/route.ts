@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     // Let's use a dummy protected path for now, which mapped in the PDF route.
     const blobPath = 'private/books/sample-protected.pdf'; 
 
-    const token = generatePdfAccessToken({ email, blobPath });
+    const token = generatePdfAccessToken({ email, blobPath, watermark: true });
 
     // Construct the secure link
     const protocol = request.headers.get('x-forwarded-proto') || 'https';

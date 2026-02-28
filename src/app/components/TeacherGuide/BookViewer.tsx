@@ -71,11 +71,16 @@ export default function BookViewer({
         if (isPdf || isApiPdf) {
           // Use the secure proxy endpoint with watermarking support
           if (isPdf) {
-            fetchUrl = `/api/pdf?url=${encodeURIComponent(url)}`;
+            // Append watermark=true to URL before encoding to hide it
+            const separator = url.includes("?") ? "&" : "?";
+            const urlWithWatermark = watermark ? `${url}${separator}watermark=true` : url;
+            const encodedUrl = encodeAssetUrl(urlWithWatermark);
+            fetchUrl = `/api/pdf?url=${encodedUrl}`;
           }
 
           if (watermark) {
-            fetchUrl += (fetchUrl.includes("?") ? "&" : "?") + "watermark=true";
+            // Use obfuscated parameter for additional layer of detection
+            fetchUrl += (fetchUrl.includes("?") ? "&" : "?") + "w=1";
           }
 
           // Try to get access code from URL or local storage
@@ -228,7 +233,7 @@ export default function BookViewer({
 
         {/* Icon Box or Cover Image */}
         {coverImage ? (
-          <div className="w-full aspect-3/4 mb-8 relative z-10 group-hover:-translate-y-4 transition-transform duration-500 ease-out perspective-1000">
+          <div className="w-full aspect-3/4 mb-4 relative z-10 group-hover:-translate-y-4 transition-transform duration-500 ease-out perspective-1000">
             <div
               onContextMenu={handleContextMenu}
               className="relative w-full h-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_10px_30px_-10px_rgba(255,255,255,0.1)] rounded-2xl overflow-hidden transform group-hover:rotate-x-2 group-hover:scale-105 transition-all duration-500 ring-1 ring-black/5 dark:ring-white/10 group-hover:ring-4 group-hover:ring-brand-gold/20 dark:group-hover:ring-brand-sky/20 bg-gray-50 dark:bg-white/5"

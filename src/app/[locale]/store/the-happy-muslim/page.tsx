@@ -48,6 +48,7 @@ export default async function TheHappyMuslimPage({
     else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
 
     return {
+      bookId: `happymuslim-en-${key}`,
       id,
       title: tLevels(titleKey),
       desc: t(['R', 'P', '1'].includes(key) ? 'book1Desc' : key === '2' ? 'book2Desc' : key === '3' ? 'book3Desc' : 'book4Desc'),
@@ -63,7 +64,7 @@ export default async function TheHappyMuslimPage({
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       
       {/* ================= HERO SECTION (Cloudy & Playful) ================= */}
-      <section className="bg-brand-sky pt-32 pb-1 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-brand-sky pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Playful Floating Elements */}
         <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
@@ -73,31 +74,17 @@ export default async function TheHappyMuslimPage({
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/20 border border-white/30 text-brand-sky-dark text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon icon="solar:star-rainbow-bold-duotone" className="text-brand-gold" />
-            <span>{t('forYounger')}</span>
-          </div>
           
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 drop-shadow-sm leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 drop-shadow-sm leading-tight">
             {t('title')}
           </h1>
           
-          <p className="text-xl text-brand-sky-dark max-w-2xl mx-auto leading-relaxed mb-10 font-medium">
+          <p className="text-xl text-brand-sky-dark max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
             {t('description')}
           </p>
 
         </div>
       </section>
-
-
-
-      {/* ================= BOOKSHELF (The Bookshelves) ================= */}
-      <div className="text-center py-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-               {t('ourBooks')}
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">{t('booksDesc')}</p>
-          </div>
 
       <PdfBookGrid 
         levels={levels} 

@@ -80,7 +80,7 @@ export default async function TeacherGuidePage({
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-[#020617]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-brand-navy pt-32 pb-4 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         {/* Abstract Background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
           <Icon
@@ -96,19 +96,12 @@ export default async function TeacherGuidePage({
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className="inline-flex items-center gap-2 py-2 px-6 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-300 text-sm font-bold mb-8 backdrop-blur-md">
-            <Icon
-              icon="solar:user-hand-up-bold"
-              className="text-brand-gold animate-spin-slow"
-            />
-            <span>{t("educatorZone")}</span>
-          </div>
 
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t("title")}
           </h1>
 
-          <p className="text-xl text-orange-50/80 max-w-2xl mx-auto leading-relaxed mb-10">
+          <p className="text-xl text-orange-50/80 max-w-2xl mx-auto leading-relaxed mb-2">
             {t("description")}
           </p>
         </div>

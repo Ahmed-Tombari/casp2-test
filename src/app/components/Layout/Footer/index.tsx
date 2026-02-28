@@ -153,10 +153,10 @@ const Footer = () => {
                 <div>
                   <p className='text-white/50 text-xs mb-1 uppercase tracking-wider'>{contactT('phoneTitle')}</p>
                   <a
-                    href="tel:+21650970330"
+                    href="tel:+21612345678"
                     className='text-white font-bold tracking-wider hover:text-brand-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy-dark rounded'
                   >
-                    +216 50 970 330
+                    +216 12 345 678
                   </a>
                 </div>
               </li>
@@ -167,10 +167,10 @@ const Footer = () => {
                 <div>
                   <p className='text-white/50 text-xs mb-1 uppercase tracking-wider'>{contactT('emailTitle')}</p>
                   <a
-                    href="mailto:dargouthy@yahoo.fr"
+                    href="mailto:centrecasp.ca@gmail.com"
                     className='text-white font-bold hover:text-brand-gold transition-colors break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy-dark rounded'
                   >
-                    {/* contact@centerarabic.com */}dargouthy@yahoo.fr
+                    {/* contact@centerarabic.com */}centrecasp.ca@gmail.com
                   </a>
                 </div>
               </li>

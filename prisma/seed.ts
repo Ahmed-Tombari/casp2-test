@@ -5,21 +5,21 @@ import "dotenv/config";
 const prisma = new PrismaClient();
 
 async function main() {
-  const email = "tombariahmed9@gmail.com";
-  const password = "Caspeduahmed2026$";
+  const email = "[EMAIL_ADDRESS]";
+  const password = "[PASSWORD]";
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const admin = await prisma.user.upsert({
     where: { email },
     update: {},
     create: {
-      firstName: "Ahmed",
-      lastName: "Tombari",
+      firstName: "",
+      lastName: "",
       email,
       phone: null,
       country: null,
       passwordHash: hashedPassword,
-      role: "ADMIN",
+      role: "USER",
     },
   });
 

@@ -25,13 +25,13 @@
     "accessibleBy": "Accessible par",
     "assasBooks": "Livres Assas",
     "exercicesBooks": "Livres d'exercices",
-    "wafiBooks": "Livres Al Wafi",
-    "gardenBooks": "Livres du jardin d'arabe",
-    "mufidBooks": "Livres Al Mufid",
-    "shamilBooks": "Livres Shamil",
-    "tarikmunirArBooks": "Livres Tareeq Al-Muneer Arabes",
-    "hidayaFrBooks": "Livres Hidayah Français",
-    "happymuslimEnBooks": "Livres Happy Muslim Anglais",
+    "wafiBooks": "Al Wafi",
+    "gardenBooks": "jardin",
+    "mufidBooks": "Al Mufid",
+    "shamilBooks": "Shamil",
+    "tarikmunirArBooks": "Tareeq Al-Muneer",
+    "hidayaFrBooks": "Hidayah Français",
+    "happymuslimEnBooks": "Happy Muslim Anglais",
     "welcome": "Bienvenue dans notre collection de livres privés"
   },
 "nav": {
@@ -584,7 +584,7 @@
     "placeholderPhone": "Entrez votre numéro de téléphone",
     "placeholderMessage": "Comment pouvons-nous vous aider ?",
     "officeTitle": "Notre Bureau",
-    "officeAddress": "Cité Ennasr, Tunis",
+    "officeAddress": "Montreal, Canada",
     "emailTitle": "Support E-mail",
     "phoneTitle": "Ligne Directe"
   },
@@ -657,6 +657,7 @@
   "downloadBtn": "Télécharger le PDF",
   "close": "Fermer",
   "explore": "Explorer la Série",
+  "viewDetails": "Voir les détails",
   "levels": {
     "growthTitle": "Découvrez les niveaux",
     "kg": "Maternelle",
