@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Partner {
   id: string;
@@ -24,27 +24,6 @@ const Partners = () => {
     { id: "darAlKutub", logo: "/images/ourCompany/Dar Al-Kutub.png" },
     { id: "ta3liem", logo: "/images/ourCompany/Ta3liem Distribution.png" },
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
-
-	const cardVariants: Variants = {
-	  hidden: { opacity: 0, y: 30 },
-	  visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-		  duration: 0.5,
-		  ease: [0.16, 1, 0.3, 1], // équivalent easeOut
-		},
-	  },
-	};
-
 
   return (
     <section className="relative py-24 md:py-32 bg-linear-to-b from-white via-brand-sky/10 to-white dark:from-brand-navy-dark dark:via-brand-navy/20 dark:to-brand-navy-dark overflow-hidden">
@@ -76,9 +55,9 @@ const Partners = () => {
 
         {/* Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ staggerChildren: 0.1, delayChildren: 0.1 }}
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
         >
@@ -91,7 +70,7 @@ const Partners = () => {
             const phone2 = tPartners(`${partner.id}.phone2`);
 
             return (
-              <motion.div key={partner.id} variants={cardVariants} className="group relative h-full">
+              <motion.div key={partner.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} viewport={{ once: true }} className="group relative h-full">
                 {/* Card */}
                 <div className="relative h-full flex flex-col p-8 rounded-[2.5rem] border border-brand-sky/20 dark:border-white/10 bg-white/80 dark:bg-brand-navy-dark shadow-soft backdrop-blur-md text-center items-center transition-all duration-500 hover:border-brand-orange hover:shadow-2xl hover:shadow-brand-orange/20 hover:-translate-y-2 hover:scale-[1.02]">
                   {/* Logo + Featured Badge */}

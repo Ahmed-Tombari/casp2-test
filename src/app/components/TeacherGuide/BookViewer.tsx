@@ -14,7 +14,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 // Configure PDF worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-interface BookViewerProps {
+export interface BookViewerProps {
   title: string;
   pdfUrl: string;
   readLabel: string;

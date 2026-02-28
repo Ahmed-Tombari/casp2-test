@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
 const Platforms = () => {
@@ -42,28 +42,6 @@ const Platforms = () => {
       stats: '',
     },
   ];
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
 
   return (
     <section id="platforms" className="relative py-24 bg-white dark:bg-brand-navy-dark overflow-hidden">
@@ -106,9 +84,9 @@ const Platforms = () => {
 
         {/* Platforms Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ staggerChildren: 0.15 }}
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
@@ -118,7 +96,10 @@ const Platforms = () => {
               href={platform.link}
               target="_blank"
               rel="noopener noreferrer"
-              variants={cardVariants}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
               className="group relative flex flex-col bg-white dark:bg-white/5 rounded-[3rem] p-10 shadow-soft border border-brand-navy/5 dark:border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-soft-lg overflow-hidden h-full"
             >
               {/* Hover Fill Effect */}

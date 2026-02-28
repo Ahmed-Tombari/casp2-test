@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const About = () => {
   const t = useTranslations('home')
@@ -12,25 +12,6 @@ const About = () => {
     { key: 'aboutPoint2', icon: 'solar:laptop-minimalistic-bold-duotone' },
     { key: 'aboutPoint3', icon: 'solar:user-speak-bold-duotone' },
   ]
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      }
-    }
-  }
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 0.5 }
-    }
-  }
 
   return (
     <section id='about-section' className='py-24 bg-white dark:bg-transparent overflow-hidden transition-colors duration-300 relative'>
@@ -82,16 +63,19 @@ const About = () => {
               </p>
 
               <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
                 viewport={{ once: true }}
                 className='space-y-6'
               >
                 {points.map((point, index) => (
                   <motion.div 
                     key={index} 
-                    variants={itemVariants}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
                     className='flex gap-5 items-start group p-4 rounded-2xl hover:bg-brand-sky/5 dark:hover:bg-white/5 border border-transparent hover:border-brand-orange/10 dark:hover:border-white/10 transition-all duration-300'
                   >
                     <div className='w-14 h-14 rounded-2xl bg-brand-orange/10 dark:bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-orange group-hover:text-white transition-all duration-500 transform group-hover:rotate-6 shadow-sm'>

@@ -3,45 +3,11 @@
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import PremiumButton from "@/app/components/UI/PremiumButton";
 const Banner = () => {
   const t = useTranslations("home");
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const floatAnimation: Variants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const floatAnimationReverse: Variants = {
-    animate: {
-      y: [10, -10, 10],
-      transition: {
-        duration: 7,
-        repeat: Infinity,
-        ease: "easeInOut",
-        delay: 0.5,
-      },
-    },
-  };
 
   return (
     <section
@@ -71,9 +37,9 @@ const Banner = () => {
       {/* ================= CONTENT ================= */}
       <div className="relative z-10 container mx-auto max-w-4xl">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
           className="flex flex-col items-center text-center"
         >
           {/* ================= TEXT SECTION ================= */}
@@ -166,49 +132,81 @@ const Banner = () => {
 
              {/* Floating Decorations */}
              {/* Globe */}
-             <motion.div
-               variants={floatAnimation}
-               animate="animate"
-               className="absolute top-[30%] end-[1%] sm:end-[2%] w-[400px] h-[100px] sm:w-[120px] sm:h-[120px] z-10 hidden sm:block"
-             >
+              <motion.div
+                animate={{
+                  y: [-10, 10, -10],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute top-[30%] end-[1%] sm:end-[2%] w-[400px] h-[100px] sm:w-[120px] sm:h-[120px] z-10 hidden sm:block"
+              >
                 <Image src="/images/hero/glob.png" alt="" fill className="object-contain" />
-             </motion.div>
+              </motion.div>
 
              {/* Big Graduation Cap */}
-             <motion.div
-               variants={floatAnimationReverse}
-               animate="animate"
-               className="absolute top-[50%] start-[2%] sm:start-[-2%] w-16 h-16 sm:w-[140px] sm:h-[140px] z-10 hidden sm:block"
-             >
+              <motion.div
+                animate={{
+                  y: [10, -10, 10],
+                }}
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+                className="absolute top-[50%] start-[2%] sm:start-[-2%] w-16 h-16 sm:w-[140px] sm:h-[140px] z-10 hidden sm:block"
+              >
                 <Image src="/images/hero/big-hat-left.png" alt="" fill className="object-contain" />
-             </motion.div>
+              </motion.div>
 
              {/* Small Graduation Cap */}
-             <motion.div
-               variants={floatAnimation}
-               animate="animate"
-               className="absolute top-[30%] start-[1%] sm:start-[5%] w-12 h-12 sm:w-[80px] sm:h-[80px] z-10 hidden sm:block"
-             >
+              <motion.div
+                animate={{
+                  y: [-10, 10, -10],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute top-[30%] start-[1%] sm:start-[5%] w-12 h-12 sm:w-[80px] sm:h-[80px] z-10 hidden sm:block"
+              >
                 <Image src="/images/hero/small-hat-left.png" alt="" fill className="object-contain" />
-             </motion.div>
+              </motion.div>
 
              {/* Feather - Left */}
-             <motion.div
-               variants={floatAnimationReverse}
-               animate="animate"
-               className="absolute top-[10%] start-[1%] sm:start-[1%] w-8 h-8 sm:w-[50px] sm:h-[50px] z-10 hidden lg:block opacity-70"
-             >
+              <motion.div
+                animate={{
+                  y: [10, -10, 10],
+                }}
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5,
+                }}
+                className="absolute top-[10%] start-[1%] sm:start-[1%] w-8 h-8 sm:w-[50px] sm:h-[50px] z-10 hidden lg:block opacity-70"
+              >
                 <Image src="/images/hero/feather-left.png" alt="" fill className="object-contain" />
-             </motion.div>
+              </motion.div>
 
              {/* Feather - Right */}
-             <motion.div
-               variants={floatAnimation}
-               animate="animate"
-               className="absolute top-[10%] end-[1%] sm:end-[1%] w-7xl h-7xl sm:w-[60px] sm:h-[60px] z-10 hidden lg:block opacity-80"
-             >
+              <motion.div
+                animate={{
+                  y: [-10, 10, -10],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute top-[10%] end-[1%] sm:end-[1%] w-7xl h-7xl sm:w-[60px] sm:h-[60px] z-10 hidden lg:block opacity-80"
+              >
                 <Image src="/images/hero/feather-right.png" alt="" fill className="object-contain" />
-             </motion.div>
+              </motion.div>
 
           </div>
         </motion.div>

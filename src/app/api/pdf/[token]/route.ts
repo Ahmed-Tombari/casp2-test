@@ -56,7 +56,7 @@ export async function GET(
     // Apply watermark if requested in token
     if (payload.watermark) {
       const watermarked = await watermarkPdf(pdfBuffer);
-      pdfBuffer = watermarked as ArrayBuffer;
+      pdfBuffer = watermarked as unknown as ArrayBuffer;
     }
 
     // Return as a stream
