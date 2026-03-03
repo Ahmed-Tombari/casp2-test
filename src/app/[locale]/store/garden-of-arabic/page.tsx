@@ -44,14 +44,6 @@ export default async function GardenOfArabicPage({
       const id = key;
 
       const section = isExercises ? 'exercices' : 'assas';
-      const colorMap: Record<string, { icon: string, color: string, border: string }> = {
-        'R': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-100' },
-        'P': { icon: 'mdi-sprout', color: 'bg-teal-50 text-teal-500', border: 'border-teal-100' },
-        '1': { icon: 'mdi:tree', color: 'bg-green-50 text-green-600', border: 'border-green-100' },
-        '2': { icon: 'mdi:apple', color: 'bg-lime-50 text-lime-600', border: 'border-lime-100' },
-        '3': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-100' },
-        '4': { icon: 'mdi-sprout', color: 'bg-teal-50 text-teal-500', border: 'border-teal-100' },
-      };
       
      
       return {

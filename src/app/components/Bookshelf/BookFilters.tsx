@@ -1,11 +1,13 @@
 'use client'
-
+ 
+import { Book } from './types'
+ 
 export default function BookFilters({
   books,
   onChange,
 }: {
-  books: any[]
-  onChange: (b: any[]) => void
+  books: Book[]
+  onChange: (b: Book[]) => void
 }) {
   return (
     <select

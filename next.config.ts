@@ -49,7 +49,7 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ["@aws-sdk/client-s3"],
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   images: {
     formats: ['image/avif', 'image/webp'],

@@ -1,21 +1,21 @@
 'use client';
-
+ 
 import React from 'react';
 import { Icon } from '@iconify/react';
-
+ 
 interface Book {
   level: string;
   title: string;
   desc: string;
   color: string;
 }
-
+ 
 interface Feature {
   title: string;
   desc: string;
   icon: string;
 }
-
+ 
 interface SeriesDetailProps {
   title: string;
   description: string;
@@ -25,18 +25,14 @@ interface SeriesDetailProps {
   locale?: string;
   children?: React.ReactNode;
 }
-
+ 
 export default function SeriesDetail({ 
   title, 
   description, 
   features = [], 
-  books = [],
-  locale = 'en',
   children
 }: SeriesDetailProps) {
   
-  const isRTL = locale === 'ar';
-
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
       
@@ -48,7 +44,7 @@ export default function SeriesDetail({
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white rounded-full blur-[120px] mix-blend-overlay translate-x-1/3 -translate-y-1/3"></div>
             <Icon icon="solar:book-bookmark-bold" className="absolute bottom-20 left-20 text-9xl text-brand-sky animate-pulse-slow" />
         </div>
-
+ 
         <div className="container mx-auto max-w-7xl px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
           
           {/* Text Content */}
@@ -65,7 +61,7 @@ export default function SeriesDetail({
              <p className="text-xl text-gray-100 leading-relaxed mb-2 max-w-xl mx-auto lg:mx-0">
                 {description}
              </p>
-
+ 
              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <button className="px-8 py-4 bg-brand-orange text-white rounded-2xl font-bold shadow-3d hover:shadow-3d-pressed hover:translate-y-1 transition-all flex items-center justify-center gap-3">
                    <Icon icon="solar:cart-large-2-bold" className="text-xl" />
@@ -77,7 +73,7 @@ export default function SeriesDetail({
                 </button>
              </div>
           </div>
-
+ 
           {/* 3D Book Mockup Visualization */}
           <div className="relative flex justify-center perspective-1000">
              {/* The Book */}
@@ -97,14 +93,14 @@ export default function SeriesDetail({
                     </div>
                 </div>
              </div>
-
+ 
              {/* Decorative Elements behind book */}
              <div className="absolute -inset-4 bg-brand-gold/20 blur-2xl rounded-full z-10 animate-pulse-slow"></div>
           </div>
-
+ 
         </div>
       </section>
-
+ 
       {/* ================= FEATURES GRID ================= */}
       <section className="py-20 -mt-10 relative z-20 px-4">
          <div className="container mx-auto max-w-6xl">

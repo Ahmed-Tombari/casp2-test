@@ -51,7 +51,9 @@ export default async function AlMufidPage({ params }: { params: Promise<{ locale
         <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-white rounded-full blur-[120px] mix-blend-overlay -translate-x-1/3 -translate-y-1/3"></div>
             <Icon icon="solar:notebook-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
-            <Icon icon="solar:pen-new-square-bold" className="absolute bottom-10 right-10 text-8xl text-white animate-bounce-slow" />
+            <Icon icon="solar:notebook-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
+            <Icon icon="solar:notebook-bold" className="absolute bottom-10 right-10 text-8xl text-white animate-bounce-slow" />
+            <Icon icon="solar:notebook-bold" className="absolute bottom-20 left-10 text-8xl text-white animate-pulse-slow" style={{animationDelay: '2s'}} />
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">

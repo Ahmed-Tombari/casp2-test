@@ -23,8 +23,9 @@ export default function PrivateBookClient() {
   const tGarden = useTranslations("store.gardenOfArabic");
   const tWafi = useTranslations("store.alWafi");
   const tShamil = useTranslations("store.alShamil");
-  const tIslamic = useTranslations("islamicSeries");
+  const tTareeqAlMuneerAr = useTranslations("store.tareeqAlMuneerAr");
   const tHidayahFr = useTranslations("store.hidayahFr");
+  const tHappyMuslim = useTranslations("store.theHappyMuslim");
 
   // Mufid levels: 1 to 6 + P + R
   const mufidKeys = ["1", "2", "3", "4", "5", "6", "P", "R"];
@@ -148,7 +149,7 @@ export default function PrivateBookClient() {
           { id: "shamil", label: tShamil("title"), icon: "solar:library-bold" },
           {
             id: "tarikmunirAr",
-            label: tIslamic("alTareeqAlMuneerArabicTitle"),
+            label: tTareeqAlMuneerAr("title"),
             icon: "solar:pen-bold",
           },
           {
@@ -158,7 +159,7 @@ export default function PrivateBookClient() {
           },
           {
             id: "happymuslimEn",
-            label: tIslamic("theHappyMuslimTitle"),
+            label: tHappyMuslim("title"),
             icon: "solar:smile-circle-bold",
           },
         ].map((tab) => (
@@ -255,7 +256,7 @@ export default function PrivateBookClient() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-                {tIslamic("alTareeqAlMuneerArabicTitle")}
+                {tTareeqAlMuneerAr("title")}
               </h2>
               <div className="h-1 w-24 bg-brand-gold mx-auto rounded-full"></div>
             </div>
@@ -279,7 +280,7 @@ export default function PrivateBookClient() {
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="text-center mb-2 px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-brand-navy dark:text-white mb-4">
-                {tIslamic("theHappyMuslimTitle")}
+                {tHappyMuslim("title")}
               </h2>
               <div className="h-1 w-24 bg-brand-gold mx-auto rounded-full"></div>
             </div>

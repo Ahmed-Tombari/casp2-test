@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import BookCard from './BookCard'
 import BookFilters from './BookFilters'
+import { Book } from './types'
 
-export default function Bookshelf({ books }: { books: any[] }) {
+export default function Bookshelf({ books }: { books: Book[] }) {
   const [filtered, setFiltered] = useState(books)
 
   return (

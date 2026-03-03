@@ -197,7 +197,7 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
     },
     {
       label: t.services,
-      href: '/services',
+      href: '#',
       submenu: [
         { label: t.accessBook, href: '/services/book-access' },
       ],
@@ -235,7 +235,7 @@ export function getNavigationData(locale: Locale): HeaderItem[] {
     },
     {
       label: t.channel,
-      href: '/channel',
+      href: '#',
      submenu: [
         { label: t.youtubeChannel, href: 'https://www.youtube.com/@%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D9%84%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D8%A7%D9%84%D8%AA%D8%B1%D8%A8%D9%88%D9%8A%D8%A9-%D9%83%D9%86' },
         { label: t.facebookChannel, href: 'https://www.facebook.com/caspeducation?rdid=gMP9FoFjFiCWfr4W&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1HDVhzFqx4%2F#' },

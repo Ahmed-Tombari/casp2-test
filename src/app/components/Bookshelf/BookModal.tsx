@@ -1,12 +1,13 @@
 'use client'
 
+import { Book } from './types'
 import BookReviews from './BookReviews'
 
 export default function BookModal({
   book,
   onClose,
 }: {
-  book: any
+  book: Book
   onClose: () => void
 }) {
   return (

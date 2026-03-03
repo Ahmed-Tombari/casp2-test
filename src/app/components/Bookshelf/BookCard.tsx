@@ -4,8 +4,9 @@ import Image from 'next/image'
 import { useState } from 'react'
 import BookModal from './BookModal'
 import { useCart } from '@/app/context/cart.context'
+import { Book } from './types'
 
-export default function BookCard({ book }: { book: any }) {
+export default function BookCard({ book }: { book: Book }) {
   const [open, setOpen] = useState(false)
   const { addItem } = useCart()
 
