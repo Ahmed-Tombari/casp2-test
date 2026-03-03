@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { Icon } from '@iconify/react';
 
 export const revalidate = 86400; // 24 hours
 import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
@@ -21,19 +22,12 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
   // --- The Levels ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4'];
   const levels = levelKeys.map(key => {
-    let id = key;
-    let titleKey = key;
-    if (key === 'R') { id = 'kg'; titleKey = 'kg'; }
-    else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
-
     return {
       bookId: `hidayah-fr-${key}`,
-      id,
-      title: tLevels(titleKey),
-      desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level1Desc' : key === '3' ? 'level1Desc' : 'level1Desc'), // Following existing pattern
-      icon: 'solar:leaf-bold-duotone',
-      color: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400',
-      border: 'border-emerald-200 dark:border-emerald-800',
+      id: key,
+      title: tLevels(key),
+      color: "bg-red-50 text-red-500",
+      border: "border-red-300",
       bookCover: `/pdfbooks/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.png`,
       pdfUrl: `/api/books/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.pdf`
     };
@@ -43,10 +37,12 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="bg-brand-navy pt-24 pb-0 text-center relative overflow-hidden rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-red-400 pt-24 pb-0 text-center relative overflow-hidden rounded-b-[4rem] shadow-soft-lg z-10">
         
-        {/* Background: Abstract Map / Connections */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        {/* Background: Icons & Connections */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <Icon icon="solar:moon-stars-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
+            <Icon icon="solar:stars-minimalistic-bold" className="absolute bottom-20 right-10 text-8xl text-white animate-bounce-slow" />
            <svg className="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
               <path d="M0 100 Q 50 0 100 100" stroke="white" strokeWidth="0.5" fill="none" />
               <path d="M0 80 Q 50 -20 100 80" stroke="white" strokeWidth="0.5" fill="none" opacity="0.5" />
@@ -57,12 +53,11 @@ export default async function HidayahFrenchPage({ params }: { params: Promise<{ 
 
           <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
-          </h1>
-          
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-2 font-light">
+          </h1> 
+
+          <p className="text-xl text-red-100/90 max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
             {t('description')}
           </p>
-
         </div>
       </section>
 

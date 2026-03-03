@@ -32,15 +32,19 @@ export default async function BookDescriptionPage({
   
   const bookData = bookId && storeBooksDetails[bookId] ? storeBooksDetails[bookId] : null;
 
+  const translatedTitle = bookData 
+    ? (locale === 'ar' ? bookData.titleAr : locale === 'fr' ? (bookData.titleFr || bookData.titleEn || bookData.titleAr) : (bookData.titleEn || bookData.titleAr))
+    : (title || "Book Details");
+
   const levelText = bookData 
-    ? (locale === 'ar' ? bookData.levelAr : locale === 'fr' ? (bookData.levelFr || bookData.levelEn || bookData.levelAr) : (bookData.levelEn || bookData.levelAr))
+    ? (locale === 'ar' ? bookData.titleAr : locale === 'fr' ? (bookData.titleFr || bookData.titleEn || bookData.titleAr) : (bookData.titleEn || bookData.titleAr))
     : "Level N/A";
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-[#020617] pt-28 pb-16">
       <div className="container mx-auto max-w-7xl px-4">
         <BookDescriptionClient
-          title={title}
+          title={translatedTitle}
           pdfUrl={pdfUrl}
           cover={cover}
           icon={icon}
@@ -51,7 +55,6 @@ export default async function BookDescriptionPage({
           locale={locale}
           pages={bookData?.pages}
           lessons={bookData?.lessons}
-          priceUSD={bookData?.priceUSD}
           isbn={bookData?.isbn}
           size={bookData?.size}
           levelText={levelText}

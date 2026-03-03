@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { Icon } from '@iconify/react';
@@ -23,13 +24,16 @@ export default function LanguageSwitcher() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
 
   // Validate current locale or fallback
   const currentLang = languages.find(l => l.code === locale) || languages[2]; // Default to AR if not found
 
   const switchLocale = (newLocale: Locale) => {
-    router.replace(pathname, { locale: newLocale });
+    const currentParams = searchParams.toString();
+    const pathWithParams = currentParams ? `${pathname}?${currentParams}` : pathname;
+    router.replace(pathWithParams, { locale: newLocale });
     setIsOpen(false);
   };
 

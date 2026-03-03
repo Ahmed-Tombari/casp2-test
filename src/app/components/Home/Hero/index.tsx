@@ -24,6 +24,7 @@ const Banner = () => {
             alt=""
             fill
             priority
+            quality={60}
             sizes="100vw"
             className="object-contain object-top scale-110"
           />
@@ -108,6 +109,7 @@ const Banner = () => {
                      fill
                      className="object-contain"
                      priority
+                     quality={75}
                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                    />
                 </div>

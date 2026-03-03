@@ -17,6 +17,8 @@ const MobileHeaderLink = ({ item, depth = 0, onClick, onBookAccessClick }: Props
   const path = usePathname()
   const hasSubmenu = !!item.submenu?.length
 
+  const isActive = path === item.href || (item.href !== '/' && path.startsWith(`${item.href}/`))
+
   return (
     <div className="w-full">
       <Link
@@ -35,7 +37,7 @@ const MobileHeaderLink = ({ item, depth = 0, onClick, onBookAccessClick }: Props
           }
         }}
         className={`flex items-center justify-between py-3 px-4 rounded-xl font-black ${
-          path === item.href
+          isActive
             ? 'text-brand-orange bg-brand-orange/10'
             : 'text-brand-navy dark:text-white hover:bg-brand-sky/10'
         }`}

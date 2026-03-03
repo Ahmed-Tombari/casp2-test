@@ -14,7 +14,7 @@ export function ThemeSwitcher() {
   }, []);
 
   if (!mounted) {
-    return <div className="w-9 h-9" />; // Placeholder to avoid layout shift
+    return <div className="w-10 h-10" />;
   }
 
   const isDark = resolvedTheme === "dark";
@@ -22,9 +22,34 @@ export function ThemeSwitcher() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-gold"
       aria-label="Toggle theme"
+      className="
+        relative flex items-center justify-center
+        w-10 h-10 rounded-full
+        bg-white/5 border border-white/10
+        backdrop-blur-md
+        transition-all duration-300 ease-out
+        hover:bg-white/10
+        hover:scale-110
+        hover:shadow-[0_0_18px_rgba(255,215,0,0.35)]
+        active:scale-95
+        focus:outline-none
+        focus:ring-2
+        focus:ring-brand-gold
+        overflow-hidden cursor-pointer
+      "
     >
+      {/* Subtle radial hover glow */}
+      <span
+        className="
+          pointer-events-none absolute inset-0 rounded-full
+          opacity-0 hover:opacity-100
+          transition-opacity duration-300
+          bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.18),transparent_70%)]
+        "
+      />
+
+      {/* Moon */}
       <motion.div
         initial={false}
         animate={{
@@ -32,12 +57,20 @@ export function ThemeSwitcher() {
           opacity: isDark ? 1 : 0,
           rotate: isDark ? 0 : 90,
         }}
-        transition={{ duration: 0.2 }}
+        whileHover={{
+          rotate: 15,
+          scale: 1.15,
+        }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         className="absolute"
       >
-        <Icon icon="solar:moon-stars-bold-duotone" className="text-xl text-brand-gold" />
+        <Icon
+          icon="solar:moon-stars-bold-duotone"
+          className="text-xl text-brand-gold"
+        />
       </motion.div>
 
+      {/* Sun */}
       <motion.div
         initial={false}
         animate={{
@@ -45,10 +78,17 @@ export function ThemeSwitcher() {
           opacity: isDark ? 0 : 1,
           rotate: isDark ? -90 : 0,
         }}
-        transition={{ duration: 0.2 }}
+        whileHover={{
+          rotate: -15,
+          scale: 1.15,
+        }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         className="absolute"
       >
-        <Icon icon="solar:sun-2-bold-duotone" className="text-xl text-amber-500" />
+        <Icon
+          icon="solar:sun-2-bold-duotone"
+          className="text-xl text-amber-500"
+        />
       </motion.div>
     </button>
   );

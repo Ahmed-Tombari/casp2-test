@@ -2,6 +2,17 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  button,
+  [role="button"],
+  a,
+  input[type="submit"],
+  input[type="button"],
+  select {
+    cursor: pointer;
+  }
+}
+
 @theme {
   /* Shadow System - Brand aligned */
   --shadow-soft-sm: 0 2px 12px -2px rgba(43, 90, 150, 0.1);

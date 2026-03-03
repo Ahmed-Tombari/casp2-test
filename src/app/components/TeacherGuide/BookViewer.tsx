@@ -32,7 +32,6 @@ export default function BookViewer({
   title,
   pdfUrl: initialPdfUrl,
   readLabel,
-  downloadLabel,
   closeLabel,
   color,
   borderColor,
@@ -220,11 +219,16 @@ export default function BookViewer({
     setHasError(true);
   }
 
+  // Safelist for Tailwind JIT
+  // hover:shadow-emerald-300 hover:shadow-teal-300 hover:shadow-indigo-300 hover:shadow-orange-300 hover:shadow-brand-gold-dark hover:shadow-amber-300 hover:shadow-red-300 hover:shadow-brand-gold hover:shadow-brand-navy hover:shadow-blue-300 hover:shadow-lime-300
+  // dark:hover:shadow-emerald-800 dark:hover:shadow-teal-800 dark:hover:shadow-indigo-800 dark:hover:shadow-orange-800 dark:hover:shadow-brand-gold-dark dark:hover:shadow-amber-800 dark:hover:shadow-red-800 dark:hover:shadow-brand-gold dark:hover:shadow-brand-navy dark:hover:shadow-blue-800 dark:hover:shadow-lime-800
+  const shadowClasses = borderColor.split(' ').map((c: string) => c.replace('border-', 'hover:shadow-')).join(' ');
+
   return (
     <>
       {/* Card Design */}
       <div
-        className={`group relative bg-white dark:bg-brand-navy-dark p-8 md:p-10 rounded-4xl shadow-soft border-2 ${borderColor} hover:-translate-y-2 hover:shadow-soft-hover transition-all duration-300 flex flex-col items-center text-center h-full`}
+        className={`group relative bg-white dark:bg-brand-navy-dark p-8 md:p-10 rounded-4xl shadow-soft border-2 ${borderColor} hover:-translate-y-2 hover:shadow-2xl ${shadowClasses} transition-all duration-300 flex flex-col items-center text-center h-full`}
       >
         {/* Background Decoration */}
         <div className="absolute top-8 left-8 rtl:right-auto rtl:left-8 ltr:left-auto ltr:right-8 opacity-5 pointer-events-none">
@@ -255,7 +259,7 @@ export default function BookViewer({
                   />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+              <div className="absolute inset-0 bg-linear-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
             </div>
           </div>
         ) : (
@@ -273,14 +277,14 @@ export default function BookViewer({
         {/* Action Button 2 */}
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative px-8 py-4 bg-brand-gold text-brand-navy-dark rounded-2xl font-bold shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+          className="group relative px-8 py-4 bg-brand-gold text-brand-navy-dark rounded-2xl font-bold shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)] hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer"
         >
           <span className="relative z-10 flex items-center gap-2">
             {readLabel}
             <Icon icon="solar:eye-bold" className={isRTL ? "rotate-0" : ""} />
           </span>
           {/* Shine Effect on Button */}
-          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
+          <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/40 to-transparent skew-x-12"></div>
         </button>
       </div>
 
@@ -309,19 +313,7 @@ export default function BookViewer({
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0">
-                  {/* Download Button (Disabled/Protected in this design) */}
-                  {!hasError && (
-                    <button
-                      disabled
-                      className="hidden md:flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-200 dark:bg-white/10 text-gray-400 dark:text-gray-500 cursor-not-allowed text-sm font-bold opacity-60"
-                    >
-                      <Icon
-                        icon="solar:download-square-bold"
-                        className="text-lg"
-                      />
-                      <span>{downloadLabel}</span>
-                    </button>
-                  )}
+
 
                   {/* Close Button */}
                   <button

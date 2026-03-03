@@ -35,19 +35,19 @@ export default async function AlWafiPage({
   
   const generateLevels = (isExercises = false) => {
     return levelKeys.map(key => {
-      let id = key;
-      let titleKey = key;
-      if (key === 'R') { id = 'kg'; titleKey = 'kg'; }
-      else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
+      const id = key;
 
       const section = isExercises ? 'exercices' : 'assas';
+      const idPrefix = isExercises ? 'ex' : 'assas';
 
       return {
-        bookId: `wafi-${key}`,
+        bookId: `wafi-${idPrefix}-${key}`,
         id,
-        title: tLevels(titleKey),
+        title: tLevels(key),
         bookCover: `/pdfbooks/store-book/wafi-book/wafi-${key}/${section}/cover/${key}-1.png`,
-        pdfUrl: `/api/books/store-book/wafi-book/wafi-${key}/${section}/${key}-1.pdf`
+        pdfUrl: `/api/books/store-book/wafi-book/wafi-${key}/${section}/${key}-1.pdf`,
+        color: "bg-brand-gold-dark text-brand-gold-dark",
+        border: "border-brand-gold-dark"
       };
     });
   };
@@ -59,12 +59,12 @@ export default async function AlWafiPage({
     <main className="min-h-screen bg-background text-foreground">
       
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-brand-gold-dark pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Background Patterns */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white rounded-full blur-[120px] mix-blend-overlay translate-x-1/3 -translate-y-1/3"></div>
-            <Icon icon="solar:book-bookmark-bold" className="absolute bottom-20 left-20 text-9xl text-brand-sky animate-pulse-slow" />
+            <Icon icon="solar:book-bookmark-bold" className="absolute bottom-20 left-20 text-9xl text-white animate-pulse-slow" />
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
@@ -73,7 +73,7 @@ export default async function AlWafiPage({
             {t('title')}
           </h1>
           
-          <p className="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-2 font-light">
+          <p className="text-xl text-brand-gold/90 max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
             {t('description')}
           </p>
 

@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
-import { Icon } from '@iconify/react';
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { Icon } from "@iconify/react";
 
 export const revalidate = 86400; // 24 hours
-import PdfBookGrid from '@/app/components/Store/PdfBookGrid';
+import PdfBookGrid from "@/app/components/Store/PdfBookGrid";
 
 export async function generateMetadata({
   params,
@@ -11,17 +11,20 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale: locale, namespace: 'store.hidayah' });
+  const t = await getTranslations({
+    locale: locale,
+    namespace: "store.hidayah",
+  });
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     alternates: {
       canonical: `/${locale}/store/hidayah`,
       languages: {
-        ar: '/ar/store/hidayah',
-        fr: '/fr/store/hidayah',
-        en: '/en/store/hidayah',
+        ar: "/ar/store/hidayah",
+        fr: "/fr/store/hidayah",
+        en: "/en/store/hidayah",
       },
     },
   };
@@ -33,67 +36,85 @@ export default async function HidayahPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale: locale, namespace: 'store.hidayah' });
-  const tLevels = await getTranslations({ locale: locale, namespace: 'store.levels' });
+  const t = await getTranslations({
+    locale: locale,
+    namespace: "store.hidayah",
+  });
+  const tLevels = await getTranslations({
+    locale: locale,
+    namespace: "store.levels",
+  });
 
   // --- Pillars (The Overlapping Feature Grid) ---
 
-
   // --- Journey Levels (The Main Content Cards) ---
-  const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-  const levels = levelKeys.map(key => {
-    let id = key;
-    let titleKey = key;
-    if (key === 'R') { id = 'kg'; titleKey = 'kg'; }
-    else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
+  const levelKeys = [
+    "R",
+    "P",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+  ];
+  const levels = levelKeys.map((key) => {
+    const id = key;
 
     return {
       bookId: `hidayah-ar-${key}`,
       id,
-      title: tLevels(titleKey),
-      desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level2Desc' : key === '3' ? 'level3Desc' : 'level4Desc'),
-      icon: ['R', 'P', '1'].includes(key) ? 'solar:leaf-bold-duotone' : key === '2' ? 'solar:heart-shine-bold-duotone' : key === '3' ? 'mdi:road' : 'solar:users-group-rounded-bold-duotone',
-      color: ['R', 'P', '1'].includes(key) ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' : key === '2' ? 'bg-brand-gold-light/20 text-brand-gold-dark dark:bg-brand-gold/10 dark:text-brand-gold' : key === '3' ? 'bg-brand-sky-light/20 text-brand-sky-dark dark:bg-brand-sky/10 dark:text-brand-sky' : 'bg-brand-navy-light/20 text-brand-navy dark:bg-brand-navy/30 dark:text-white',
-      border: ['R', 'P', '1'].includes(key) ? 'border-emerald-200 dark:border-emerald-800' : key === '2' ? 'border-brand-gold/30' : key === '3' ? 'border-brand-sky/30' : 'border-brand-navy/20',
+      title: tLevels(key),
+      color: "bg-teal-50 text-teal-500",
+      border: "border-teal-300",
       bookCover: "/images/ourbooks/Arabic Garden Series.png",
-      pdfUrl: "#"
+      pdfUrl: "#",
     };
   });
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      
       {/* ================= HERO SECTION ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
-        
+      <section className="relative overflow-hidden bg-teal-400 pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         {/* Decorative Background (Subtle Islamic Pattern hint) */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" 
-             style={{ backgroundImage: 'radial-gradient(circle, #EAB308 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-        </div>
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        ></div>
         <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
-           <Icon icon="solar:moon-stars-bold" className="absolute top-10 right-10 text-9xl text-brand-gold animate-pulse-slow" />
-           <Icon icon="solar:stars-minimalistic-bold-duotone" className="absolute bottom-20 left-10 text-8xl text-brand-sky animate-pulse-slow" style={{animationDelay: '1.5s'}} />
+          <Icon
+            icon="solar:moon-stars-bold"
+            className="absolute top-10 right-10 text-9xl text-white animate-pulse-slow"
+          />
+          <Icon
+            icon="solar:stars-minimalistic-bold"
+            className="absolute bottom-20 left-10 text-8xl text-white animate-pulse-slow"
+            style={{ animationDelay: "1.5s" }}
+          />
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
-            {t('title')}
+            {t("title")}
           </h1>
-          
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed mb-2">
-            {t('description')}
+
+          <p className="text-xl text-teal-100/90 max-w-2xl mx-auto leading-relaxed mb-2">
+            {t("description")}
           </p>
         </div>
       </section>
 
-
-
       {/* ================= THE JOURNEY (Level Cards) ================= */}
-     
-      <PdfBookGrid 
-        levels={levels} 
-      />
 
+      <PdfBookGrid levels={levels} />
     </main>
   );
 }

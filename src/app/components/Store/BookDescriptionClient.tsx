@@ -1,9 +1,6 @@
 "use client";
-
-import { useState } from "react";
 import { Icon } from "@iconify/react";
 import BookViewer from "@/app/components/TeacherGuide/DynamicBookViewer";
-
 
 interface BookDescriptionClientProps {
   title: string;
@@ -18,7 +15,6 @@ interface BookDescriptionClientProps {
   // Dynamic details
   pages?: number;
   lessons?: number;
-  priceUSD?: number;
   isbn?: string;
   size?: string;
   levelText?: string;
@@ -76,16 +72,12 @@ export default function BookDescriptionClient({
   locale,
   pages = 0,
   lessons = 0,
-  priceUSD = 0,
   isbn = "N/A",
   size = "N/A",
   levelText = "N/A"
 }: BookDescriptionClientProps) {
-  const [quantity, setQuantity] = useState(1);
+
   const t = translations[locale] || translations.en;
-  
-  const unitPrice = priceUSD;
-  const totalPrice = (quantity * unitPrice).toFixed(2);
 
   return (
     <div className="flex flex-col lg:flex-row gap-12 items-start" dir={isRTL ? "rtl" : "ltr"}>
@@ -150,7 +142,7 @@ export default function BookDescriptionClient({
                 <div className="w-10 h-10 rounded-full bg-rose-50 dark:bg-rose-900/20 flex items-center justify-center text-rose-500 shrink-0">
                   <Icon icon="solar:tag-price-bold-duotone" className="text-xl" />
                 </div>
-                <span>{t.priceText}: ${priceUSD.toFixed(2)}</span>
+                <span>{t.priceText}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 shrink-0">
@@ -161,50 +153,15 @@ export default function BookDescriptionClient({
             </div>
           </div>
 
-          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-gray-100 dark:border-white/5">
-            <div className="flex items-center gap-4 w-full md:w-auto">
-              <span className="text-brand-navy dark:text-white font-bold text-lg">{t.quantity}:</span>
-              <div className="flex items-center bg-white dark:bg-brand-navy-dark rounded-xl border border-gray-200 dark:border-white/10 overflow-hidden shadow-sm">
-                <button 
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-12 h-12 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
-                >
-                  <Icon icon="solar:minus-circle-bold" className="text-2xl" />
-                </button>
-                <input 
-                  type="number" 
-                  value={quantity}
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-16 h-12 text-center font-bold text-xl bg-transparent border-none focus:ring-0 p-0 text-brand-navy dark:text-white"
-                  min="1"
-                />
-                <button 
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-12 h-12 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
-                >
-                  <Icon icon="solar:add-circle-bold" className="text-2xl" />
-                </button>
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto">
-              <div className="text-center md:text-start">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">{t.total}</div>
-                <div className="text-3xl font-black text-brand-navy dark:text-white flex items-baseline gap-1">
-                  ${totalPrice} <span className="text-lg font-bold text-gray-400">USD</span>
-                </div>
-              </div>
-
-              <button className="w-full md:w-auto px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg shadow-[0_10px_20px_-10px_rgba(249,115,22,0.5)] hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.8)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3"
+            <div className="flex flex-col justify-center md:flex-row items-center gap-6 w-full md:w-auto">
+              <button className="w-full md:w-auto px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-bold text-lg shadow-[0_10px_20px_-10px_rgba(249,115,22,0.5)] hover:shadow-[0_10px_30px_-10px_rgba(249,115,22,0.8)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
                       onClick={() => window.location.href = "https://qalamnet.com/dashboard"}>
                 <Icon icon="solar:cart-large-4-bold" className="text-2xl" />
                 <span>{t.buy}</span>
               </button>
             </div>
           </div>
-
         </div>
       </div>
-    </div>
   );
 }

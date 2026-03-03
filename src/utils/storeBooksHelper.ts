@@ -19,14 +19,14 @@ export function getStoreBookData(bookId: string) {
       : `/store-book/garden-book/garden-${key}/${section}/gardenAsses${key}.pdf`;
 
     const colorMap: Record<string, { icon: string; color: string; border: string }> = {
-      R: { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-100 text-emerald-600', border: 'border-emerald-200' },
-      P: { icon: 'mdi-sprout', color: 'bg-teal-100 text-teal-600', border: 'border-teal-200' },
-      '1': { icon: 'mdi:tree', color: 'bg-green-100 text-green-700', border: 'border-green-200' },
-      '2': { icon: 'mdi:apple', color: 'bg-lime-100 text-lime-600', border: 'border-lime-200' },
-      '3': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-100 text-emerald-600', border: 'border-emerald-200' },
-      '4': { icon: 'mdi-sprout', color: 'bg-teal-100 text-teal-600', border: 'border-teal-200' },
+      R: { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
+      P: { icon: 'mdi-sprout', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
+      '1': { icon: 'mdi:tree', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
+      '2': { icon: 'mdi:apple', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
+      '3': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
+      '4': { icon: 'mdi-sprout', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' },
     };
-    const config = colorMap[key] || { icon: 'mdi:tree', color: 'bg-green-100 text-green-700', border: 'border-green-200' };
+    const config = colorMap[key] || { icon: 'mdi:tree', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-300' };
     icon = config.icon;
     color = config.color;
     borderColor = config.border;
@@ -40,8 +40,8 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = `/api/books/store-book/tarikmunirAr-book/tarikmunirAr-${key}/1-${assetKey}.pdf`;
     
     icon = key === '2' ? 'solar:soundwave-bold-duotone' : key === '3' ? 'solar:widget-add-bold-duotone' : ['4', '5', '6'].includes(key) ? 'solar:book-2-bold-duotone' : 'solar:letter-bold-duotone';
-    color = ['R', 'P', '1'].includes(key) ? 'bg-amber-100 text-amber-600' : key === '2' ? 'bg-teal-100 text-teal-600' : key === '3' ? 'bg-indigo-100 text-indigo-600' : 'bg-rose-100 text-rose-600';
-    borderColor = ['R', 'P', '1'].includes(key) ? 'border-amber-200' : key === '2' ? 'border-teal-200' : key === '3' ? 'border-indigo-200' : 'border-rose-200';
+    color = "bg-amber-50 text-amber-500";
+    borderColor = "border-amber-300";
   }
 
   // Tareeq Al Muneer (English)
@@ -52,8 +52,8 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = `/store-book/tarikmunirEn-book/tarikmunirEn-${key}/1-${assetKey}.pdf`;
     
     icon = ['R', 'P', '1'].includes(key) ? 'solar:letter-bold-duotone' : key === '2' ? 'solar:pen-new-square-bold-duotone' : 'solar:headphones-round-sound-bold-duotone';
-    color = ['R', 'P', '1', '2'].includes(key) ? 'bg-blue-100 text-blue-600' : 'bg-brand-orange-light text-brand-orange-dark';
-    borderColor = ['R', 'P', '1', '2'].includes(key) ? 'border-blue-200' : 'border-brand-orange/30';
+    color = "bg-brand-gold text-brand-gold";
+    borderColor = "border-brand-gold";
   }
 
   // Tareeq Al Muneer (French)
@@ -64,8 +64,8 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = `/store-book/tarikmunirFr-book/tarikmunirFr-${key}/1-${assetKey}.pdf`;
     
     icon = ['R', 'P', '1'].includes(key) ? 'solar:letter-bold-duotone' : key === '2' ? 'solar:pen-new-square-bold-duotone' : 'solar:headphones-round-sound-bold-duotone';
-    color = ['R', 'P', '1', '2'].includes(key) ? 'bg-blue-100 text-blue-600' : 'bg-brand-orange-light text-brand-orange-dark';
-    borderColor = ['R', 'P', '1', '2'].includes(key) ? 'border-blue-200' : 'border-brand-orange/30';
+    color = "bg-blue-50 text-blue-500";
+    borderColor = "border-blue-300";
   }
 
   // The Happy Muslim (English)
@@ -75,35 +75,44 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = `/api/books/store-book/happymuslimEn-book/happymuslimEn-${key}/${key}-1.pdf`;
     
     icon = ['R', 'P', '1'].includes(key) ? 'solar:sun-2-bold-duotone' : key === '2' ? 'solar:hand-shake-bold-duotone' : key === '3' ? 'solar:book-minimalistic-bold-duotone' : 'solar:globus-bold-duotone';
-    color = ['R', 'P', '1'].includes(key) ? 'bg-brand-gold-light/20 text-brand-gold-dark' : key === '2' ? 'bg-teal-100 text-teal-600' : key === '3' ? 'bg-brand-navy-light/20 text-brand-navy' : 'bg-brand-sky-light/20 text-brand-sky-dark';
-    borderColor = ['R', 'P', '1'].includes(key) ? 'border-brand-gold/30' : key === '2' ? 'border-teal-200' : key === '3' ? 'border-brand-navy/20' : 'border-brand-sky/30';
+    color = "bg-blue-50 text-blue-500";
+    borderColor = "border-blue-300";
   }
 
   // Al Mufid
   else if (bookId.startsWith("mufid-")) {
     const key = bookId.replace("mufid-", "");
-    cover = `/pdfbooks/store-book/mufid-book/mufid-${key}/${key}-1.png`;
-    pdfUrl = `/api/books/store-book/mufid-book/mufid-${key}/${key}-1.pdf`;
-    color = "bg-orange-100 text-orange-600";
-    borderColor = "border-orange-200";
+    // Mapping IDs to folders: R->1, P->2, 1->3, 2->4, 3->5, 4->6
+    const folderMap: Record<string, string> = {
+      'R': '1', 'P': '2', '1': '3', '2': '4', '3': '5', '4': '6'
+    };
+    const folderKey = folderMap[key] || key;
+    cover = `/pdfbooks/store-book/mufid-book/mufid-${folderKey}/${folderKey}-1.png`;
+    pdfUrl = `/api/books/store-book/mufid-book/mufid-${folderKey}/${folderKey}-1.pdf`;
+    color = "bg-orange-50 text-orange-500";
+    borderColor = "border-orange-300";
   }
 
   // Al Shamil
   else if (bookId.startsWith("shamil-")) {
     const key = bookId.replace("shamil-", "");
-    cover = `/pdfbooks/store-book/shamil-book/shamil-${key}/${key}-1.png`;
-    pdfUrl = `/api/books/store-book/shamil-book/shamil-${key}/${key}-1.pdf`;
-    color = "bg-blue-100 text-blue-600";
-    borderColor = "border-blue-200";
+    cover = `/pdfbooks/store-book/shamil-book/shamil-${key}/${key}.jpg`;
+    pdfUrl = `/api/books/store-book/shamil-book/shamil-${key}/${key}.pdf`;
+    color = "bg-indigo-50 text-indigo-500";
+    borderColor = "border-indigo-300";
   }
 
   // Al Wafi
   else if (bookId.startsWith("wafi-")) {
-    const key = bookId.replace("wafi-", "");
-    cover = `/pdfbooks/store-book/wafi-book/wafi-${key}/${key}-1.png`;
-    pdfUrl = `/api/books/store-book/wafi-book/wafi-${key}/${key}-1.pdf`;
-    color = "bg-indigo-100 text-indigo-600";
-    borderColor = "border-indigo-200";
+    const parts = bookId.split("-");
+    const sectionPrefix = parts[1]; // assas or ex
+    const key = parts[2] || parts[1]; // handle both wafi-assas-1 and wafi-1
+    const sectionFolder = sectionPrefix === 'ex' ? 'exercices' : 'assas';
+    
+    cover = `/pdfbooks/store-book/wafi-book/wafi-${key}/${sectionFolder}/cover/${key}-1.png`;
+    pdfUrl = `/api/books/store-book/wafi-book/wafi-${key}/${sectionFolder}/${key}-1.pdf`;
+    color = "bg-brand-gold-dark text-brand-gold-dark";
+    borderColor = "border-brand-gold-dark";
   }
 
   // Qawaed Mobasta
@@ -111,8 +120,8 @@ export function getStoreBookData(bookId: string) {
     const key = bookId.replace("qawaed-", "");
     cover = `/pdfbooks/store-book/qawaid-book/cover/${key}.jpg`;
     pdfUrl = `/api/books/store-book/qawaid-book/${key}.pdf`;
-    color = "bg-rose-100 text-rose-600";
-    borderColor = "border-rose-200";
+    color = "bg-lime-50 text-lime-500";
+    borderColor = "border-lime-300";
   }
 
   // Hidayah (Arabic)
@@ -122,8 +131,8 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = "#";
     
     icon = ['R', 'P', '1'].includes(key) ? 'solar:leaf-bold-duotone' : key === '2' ? 'solar:heart-shine-bold-duotone' : key === '3' ? 'mdi:road' : 'solar:users-group-rounded-bold-duotone';
-    color = ['R', 'P', '1'].includes(key) ? 'bg-emerald-100 text-emerald-600' : key === '2' ? 'bg-brand-gold-light/20 text-brand-gold-dark' : key === '3' ? 'bg-brand-sky-light/20 text-brand-sky-dark' : 'bg-brand-navy-light/20 text-brand-navy';
-    borderColor = ['R', 'P', '1'].includes(key) ? 'border-emerald-200' : key === '2' ? 'border-brand-gold/30' : key === '3' ? 'border-brand-sky/30' : 'border-brand-navy/20';
+    color = "bg-teal-50 text-teal-500";
+    borderColor = "border-teal-300";
   }
   
   // Hidayah (English)
@@ -133,19 +142,19 @@ export function getStoreBookData(bookId: string) {
     pdfUrl = "#";
     
     icon = ['R', 'P', '1'].includes(key) ? 'solar:leaf-bold-duotone' : key === '2' ? 'solar:heart-shine-bold-duotone' : key === '3' ? 'mdi:road' : 'solar:users-group-rounded-bold-duotone';
-    color = ['R', 'P', '1'].includes(key) ? 'bg-emerald-100 text-emerald-600' : key === '2' ? 'bg-brand-gold-light/20 text-brand-gold-dark' : key === '3' ? 'bg-brand-sky-light/20 text-brand-sky-dark' : 'bg-brand-navy-light/20 text-brand-navy';
-    borderColor = ['R', 'P', '1'].includes(key) ? 'border-emerald-200' : key === '2' ? 'border-brand-gold/30' : key === '3' ? 'border-brand-sky/30' : 'border-brand-navy/20';
+    color = "bg-brand-navy text-brand-navy";
+    borderColor = "border-brand-navy";
   }
 
   // Hidayah (French)
   else if (bookId.startsWith("hidayah-fr-")) {
     const key = bookId.replace("hidayah-fr-", "");
-    cover = "/images/ourbooks/Arabic Garden Series.png"; // Placeholder
-    pdfUrl = "#";
+    cover = `/pdfbooks/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.png`;
+    pdfUrl = `/api/books/store-book/hidayaFr-book/hidayaFr-${key}/${key}-1.pdf`;
     
-    icon = ['R', 'P', '1'].includes(key) ? 'solar:leaf-bold-duotone' : key === '2' ? 'solar:heart-shine-bold-duotone' : key === '3' ? 'mdi:road' : 'solar:users-group-rounded-bold-duotone';
-    color = ['R', 'P', '1'].includes(key) ? 'bg-emerald-100 text-emerald-600' : key === '2' ? 'bg-brand-gold-light/20 text-brand-gold-dark' : key === '3' ? 'bg-brand-sky-light/20 text-brand-sky-dark' : 'bg-brand-navy-light/20 text-brand-navy';
-    borderColor = ['R', 'P', '1'].includes(key) ? 'border-emerald-200' : key === '2' ? 'border-brand-gold/30' : key === '3' ? 'border-brand-sky/30' : 'border-brand-navy/20';
+    icon = 'solar:leaf-bold-duotone';
+    color = "bg-red-50 text-red-500";
+    borderColor = "border-red-300";
   }
 
   return {

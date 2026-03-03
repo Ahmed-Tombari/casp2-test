@@ -42,19 +42,12 @@ export default async function TheHappyMuslimPage({
   // --- The Little Muslim Bookshelf ---
   const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6'];
   const levels = levelKeys.map(key => {
-    let id = key;
-    let titleKey = key;
-    if (key === 'R') { id = 'kg'; titleKey = 'kg'; }
-    else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
-
     return {
       bookId: `happymuslim-en-${key}`,
-      id,
-      title: tLevels(titleKey),
-      desc: t(['R', 'P', '1'].includes(key) ? 'book1Desc' : key === '2' ? 'book2Desc' : key === '3' ? 'book3Desc' : 'book4Desc'),
-      icon: ['R', 'P', '1'].includes(key) ? 'solar:sun-2-bold-duotone' : key === '2' ? 'solar:hand-shake-bold-duotone' : key === '3' ? 'solar:book-minimalistic-bold-duotone' : 'solar:globus-bold-duotone',
-      color: ['R', 'P', '1'].includes(key) ? 'bg-brand-gold-light/20 text-brand-gold-dark dark:bg-brand-gold/10 dark:text-brand-gold' : key === '2' ? 'bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400' : key === '3' ? 'bg-brand-navy-light/20 text-brand-navy dark:bg-brand-navy/30 dark:text-brand-sky' : 'bg-brand-sky-light/20 text-brand-sky-dark dark:bg-brand-sky/10 dark:text-brand-sky',
-      border: ['R', 'P', '1'].includes(key) ? 'border-brand-gold/30' : key === '2' ? 'border-teal-200 dark:border-teal-800' : key === '3' ? 'border-brand-navy/20' : 'border-brand-sky/30',
+      id: key,
+      title: tLevels(key),
+      color: "bg-blue-50 text-blue-500",
+      border: "border-blue-300",
       bookCover: `/pdfbooks/store-book/happymuslimEn-book/happymuslimEn-${key}/cover/${key}-1.png`,
       pdfUrl: `/api/books/store-book/happymuslimEn-book/happymuslimEn-${key}/${key}-1.pdf`
     };
@@ -64,12 +57,12 @@ export default async function TheHappyMuslimPage({
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       
       {/* ================= HERO SECTION (Cloudy & Playful) ================= */}
-      <section className="bg-brand-sky pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-blue-400 pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Playful Floating Elements */}
         <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
            <Icon icon="solar:cloud-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
-           <Icon icon="solar:balloon-bold" className="absolute bottom-20 right-10 text-8xl text-rose-400 animate-bounce-slow" />
+           <Icon icon="solar:balloon-bold" className="absolute bottom-20 right-10 text-8xl text-white animate-bounce-slow" />
            <Icon icon="solar:cloud-bold" className="absolute top-40 right-40 text-7xl text-white opacity-50" />
         </div>
 
@@ -79,7 +72,7 @@ export default async function TheHappyMuslimPage({
             {t('title')}
           </h1>
           
-          <p className="text-xl text-brand-sky-dark max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
+          <p className="text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
             {t('description')}
           </p>
 

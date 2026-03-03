@@ -23,6 +23,8 @@ const HeaderLink = ({ item, depth = 0, onBookAccessClick }: Props) => {
     }
   }
 
+  const isActive = path === item.href || (item.href !== '/' && path.startsWith(`${item.href}/`))
+
   return (
     <div
       className="relative"
@@ -33,7 +35,7 @@ const HeaderLink = ({ item, depth = 0, onBookAccessClick }: Props) => {
         href={item.href}
         onClick={handleClick}
         className={`text-lg flex items-center gap-0.5 font-semibold rounded-lg px-3 py-2 transition-colors ${
-          path === item.href
+          isActive
             ? 'text-brand-orange bg-brand-orange/10'
             : 'text-brand-navy dark:text-white/90 hover:text-brand-orange hover:bg-brand-sky/10'
         }`}

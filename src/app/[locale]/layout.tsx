@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     default: 'Casp Education',
   },
   description: 'Casp Education is an online learning platform offering high-quality Arabic education and professional courses.',
-  keywords: ['Arabic', 'Education', 'Learning', 'Books', 'E-books', 'Curriculum', 'Casp Education', 'Online Courses'],
+  keywords: ['caspeducation', 'casp education', 'centerarabic', 'casp', 'casp arabic center', 'Arabic', 'Education', 'Learning', 'Books', 'E-books', 'Curriculum', 'Casp Education', 'Online Courses'],
   metadataBase: new URL('https://centerarabic.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Casp Education',
-    description: 'Casp Education is an online learning platform offering high-quality Arabic education and professional courses.',
+    title: 'Casp Education | Comprehensive Arabic Learning Platform',
+    description: 'Casp Education is an online learning platform offering high-quality Arabic education, professional courses, and tailored curriculums. Start your journey with Center Arabic today.',
     url: 'https://centerarabic.com',
     siteName: 'Casp Education',
     images: [
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'EducationalOrganization',
   name: 'Casp Education',
-  alternateName: 'Casp Arabic Center',
+  alternateName: ['Casp Arabic Center', 'caspeducation', 'casp education', 'Center Arabic'],
   description: 'Online learning platform offering high-quality Arabic education and professional courses.',
   url: 'https://centerarabic.com',
   logo: 'https://centerarabic.com/logo.png',
@@ -116,6 +116,8 @@ export default async function PagesLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <link rel="preconnect" href="https://pub-2e481fdf58914ed08e036eeb987a1a89.r2.dev" />
+        <link rel="preconnect" href="https://3nvnebfanoina0ww.public.blob.vercel-storage.com" />
       </head>
       <body
         className={`${cairo.variable} font-sans min-h-screen relative overflow-x-hidden bg-brand-sky/5 text-brand-navy dark:bg-brand-navy-black dark:text-white selection:bg-brand-gold selection:text-brand-navy transition-colors duration-300`}

@@ -22,8 +22,8 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
       desc: t('alShamil.description'),
       href: '/store/al-shamil',
       icon: 'solar:book-2-bold-duotone',
-      color: 'bg-brand-gold',
-      textColor: 'text-brand-gold',
+      color: 'bg-indigo-700',
+      textColor: 'text-indigo-500',
     },
     {
       id: 'al-mufid',
@@ -31,8 +31,8 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
       desc: t('alMufid.description'),
       href: '/store/al-mufid',
       icon: 'solar:notebook-bold-duotone',
-      color: 'bg-brand-orange',
-      textColor: 'text-brand-orange',
+      color: 'bg-orange-600',
+      textColor: 'text-orange-500',
     },
     {
       id: 'al-wafi',
@@ -40,8 +40,8 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
       desc: t('alWafi.description'),
       href: '/store/al-wafi',
       icon: 'solar:library-bold-duotone',
-      color: 'bg-brand-navy',
-      textColor: 'text-brand-navy',
+      color: 'bg-brand-gold-dark',
+      textColor: 'text-brand-gold-500',
     },
     {
       id: 'garden',
@@ -49,64 +49,64 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
       desc: t('gardenOfArabic.description'),
       href: '/store/garden-of-arabic',
       icon: 'solar:leaf-bold-duotone',
-      color: 'bg-emerald-500',
-      textColor: 'text-emerald-600',
+      color: 'bg-emerald-700',
+      textColor: 'text-emerald-500',
     },
     {
       title: t('hidayah.title'),
       desc: t('hidayah.description'),
       href: '/store/hidayah',
       icon: 'solar:book-2-bold-duotone',
-      color: 'bg-brand-gold',
-      textColor: 'text-brand-gold',
+      color: 'bg-teal-400',
+      textColor: 'text-teal-500',
     },
     {
       title: t('hidayahFr.title'),
       desc: t('hidayahFr.description'),
       href: '/store/hidayah-fr',
       icon: 'solar:book-2-bold-duotone',
-      color: 'bg-brand-gold',
-      textColor: 'text-brand-gold',
+      color: 'bg-red-400',
+      textColor: 'text-red-500',
     },
     {
       title: t('hidayahEn.title'),
       desc: t('hidayahEn.description'),
       href: '/store/hidayah-en',
       icon: 'solar:book-2-bold-duotone',
-      color: 'bg-brand-gold',
-      textColor: 'text-brand-gold',
+      color: 'bg-brand-navy',
+      textColor: 'text-brand-navy-500',
     },
     {
       title: t('qawaedMobasta.title'),
       desc: t('qawaedMobasta.description'),
       href: '/store/qawaed-mobasta',
       icon: 'solar:book-2-bold-duotone',
-      color: 'bg-brand-gold',
-      textColor: 'text-brand-gold',
+      color: 'bg-lime-600',
+      textColor: 'text-lime-500',
     },
     {
       title: t('tareeqAlMuneerAr.title'),
       desc: t('tareeqAlMuneerAr.description'),
       href: '/store/tareeq-al-muneer',
       icon: 'solar:cup-star-bold',
-      color: 'bg-brand-navy',
-      textColor: 'text-brand-navy',
+      color: 'bg-amber-600',
+      textColor: 'text-amber-500',
     },
     {
       title: t('tareeqAlMuneerFr.title'),
       desc: t('tareeqAlMuneerFr.description'),
       href: '/store/tareeq-al-muneer-fr',
       icon: 'solar:hand-stars-bold',
-      color: 'bg-brand-orange',
-      textColor: 'text-brand-orange',
+      color: 'bg-blue-600',
+      textColor: 'text-blue-500',
     },
     {
       title: t('tareeqAlMuneerEn.title'),
       desc: t('tareeqAlMuneerEn.description'),
       href: '/store/tareeq-al-muneer-en',
       icon: 'solar:hand-stars-bold',
-      color: 'bg-brand-orange',
-      textColor: 'text-brand-orange',
+      color: 'bg-brand-gold-light',
+      textColor: 'text-brand-gold-dark',
     },
     {
       id: 'happy-muslim',
@@ -114,8 +114,8 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
       desc: t('theHappyMuslim.description'),
       href: '/store/the-happy-muslim',
       icon: 'solar:heart-bold-duotone',
-      color: 'bg-pink-500',
-      textColor: 'text-pink-600',
+      color: 'bg-blue-400',
+      textColor: 'text-blue-500',
     },
   ];
 
@@ -123,27 +123,28 @@ export default async function StorePage({ params }: { params: Promise<{ locale: 
     <main className="min-h-screen bg-gray-50 dark:bg-[#09121E] text-foreground transition-colors duration-300">
       
       {/* Hero Section */}
-      <section className="bg-brand-navy pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="bg-brand-gold pt-24 pb-0 relative overflow-hidden text-center rounded-b-[4rem] shadow-soft-lg z-10">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           {/* Abstract Background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
           <Icon
             icon="solar:shop-bold"
-            className="absolute top-10 left-10 text-9xl text-emerald-400 animate-pulse-slow"
+            className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow"
           />
           <Icon
             icon="solar:shop-bold"
-            className="absolute bottom-20 right-10 text-8xl text-brand-sky animate-pulse-slow"
+            className="absolute bottom-20 right-10 text-8xl text-white animate-pulse-slow"
             style={{ animationDelay: "2s" }}
           />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/20 blur-[100px] rounded-full"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/10 blur-[100px] rounded-full"></div>
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-2 leading-tight">
             {t('title')}
           </h1>
-          <p className="text-xl text-gray-100 max-w-2xl mx-auto leading-relaxed font-light">
+
+          <p className="text-xl text-brand-gold-dark max-w-2xl mx-auto leading-relaxed mb-2 font-medium">
             {t('description')}
           </p>
         </div>

@@ -41,32 +41,26 @@ export default async function GardenOfArabicPage({
   
   const generateLevels = (isExercises = false) => {
     return levelKeys.map(key => {
-      let id = key;
-      let titleKey = key;
-      if (key === 'R') { id = 'kg'; titleKey = 'kg'; }
-      else if (key === 'P') { id = 'prep'; titleKey = 'prep'; }
+      const id = key;
 
       const section = isExercises ? 'exercices' : 'assas';
       const colorMap: Record<string, { icon: string, color: string, border: string }> = {
-        'R': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-100 text-emerald-600', border: 'border-emerald-200' },
-        'P': { icon: 'mdi-sprout', color: 'bg-teal-100 text-teal-600', border: 'border-teal-200' },
-        '1': { icon: 'mdi:tree', color: 'bg-green-100 text-green-700', border: 'border-green-200' },
-        '2': { icon: 'mdi:apple', color: 'bg-lime-100 text-lime-600', border: 'border-lime-200' },
-        '3': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-100 text-emerald-600', border: 'border-emerald-200' },
-        '4': { icon: 'mdi-sprout', color: 'bg-teal-100 text-teal-600', border: 'border-teal-200' },
+        'R': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-100' },
+        'P': { icon: 'mdi-sprout', color: 'bg-teal-50 text-teal-500', border: 'border-teal-100' },
+        '1': { icon: 'mdi:tree', color: 'bg-green-50 text-green-600', border: 'border-green-100' },
+        '2': { icon: 'mdi:apple', color: 'bg-lime-50 text-lime-600', border: 'border-lime-100' },
+        '3': { icon: 'solar:leaf-bold-duotone', color: 'bg-emerald-50 text-emerald-500', border: 'border-emerald-100' },
+        '4': { icon: 'mdi-sprout', color: 'bg-teal-50 text-teal-500', border: 'border-teal-100' },
       };
       
-      const config = colorMap[key] || { icon: 'mdi:tree', color: 'bg-green-100 text-green-700', border: 'border-green-200' };
-
+     
       return {
         id,
         bookId: `garden-${key}-${section}`,
-        title: tLevels(titleKey),
-        sub: t(['R', 'P', '1'].includes(key) ? 'level1Sub' : key === '2' ? 'level2Sub' : key === '3' ? 'level3Sub' : 'stagesDesc'),
-        desc: t(['R', 'P', '1'].includes(key) ? 'level1Desc' : key === '2' ? 'level2Desc' : key === '3' ? 'level3Desc' : 'level4Desc'),
-        icon: config.icon,
-        color: `${config.color} dark:bg-emerald-900/30 dark:text-emerald-400`,
-        border: `${config.border} dark:border-emerald-800`,
+        title: tLevels(key),
+        icon: 'mdi:tree',
+        color: 'bg-emerald-50 text-emerald-500',
+        border: 'border-emerald-300',
         bookCover: `/pdfbooks/store-book/garden-book/garden-${key}/${section}/cover/${key}.jpg`,
         pdfUrl: isExercises 
           ? `/store-book/garden-book/garden-${key}/${section}/${key}.pdf`
@@ -82,13 +76,13 @@ export default async function GardenOfArabicPage({
     <main className="min-h-screen bg-background">
       
       {/* ================= HERO SECTION (Nature Themed) ================= */}
-      <section className="relative overflow-hidden bg-brand-navy pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
+      <section className="relative overflow-hidden bg-emerald-700 pt-24 pb-0 text-center rounded-b-[4rem] shadow-soft-lg z-10">
         
         {/* Abstract Leaves Background */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
-           <Icon icon="solar:leaf-bold" className="absolute top-10 left-10 text-9xl text-emerald-400 animate-pulse-slow" />
-           <Icon icon="solar:leaf-bold" className="absolute bottom-20 right-10 text-8xl text-brand-sky animate-pulse-slow" style={{animationDelay: '2s'}} />
-           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/20 blur-[100px] rounded-full"></div>
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+           <Icon icon="solar:leaf-bold" className="absolute top-10 left-10 text-9xl text-white animate-pulse-slow" />
+           <Icon icon="solar:leaf-bold" className="absolute bottom-20 right-10 text-8xl text-white animate-pulse-slow" style={{animationDelay: '2s'}} />
+           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/20 blur-[100px] rounded-full"></div>
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
@@ -97,7 +91,7 @@ export default async function GardenOfArabicPage({
             {t('title')}
           </h1>
           
-          <p className="text-xl text-emerald-50/80 max-w-2xl mx-auto leading-relaxed mb-2">
+          <p className="text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed mb-2">
             {t('description')}
           </p>
         </div>
