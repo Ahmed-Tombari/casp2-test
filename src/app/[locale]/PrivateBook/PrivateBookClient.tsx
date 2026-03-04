@@ -28,19 +28,19 @@ export default function PrivateBookClient() {
   const tHappyMuslim = useTranslations("store.theHappyMuslim");
 
   // Mufid levels: 1 to 6 + P + R
-  const mufidKeys = ["1", "2", "3", "4", "5", "6", "P", "R"];
+  const mufidKeys = [ "P", "R","1", "2", "3", "4", "5", "6"];
   // Garden levels: 1 to 6 + P + R
-  const gardenKeys = ["1", "2", "3", "4", "5", "6", "P", "R"];
+  const gardenKeys = ["P", "R", "1", "2", "3", "4", "5", "6"];
   // Wafi levels: 1 to 8 + P + R
-  const wafiKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "P", "R"];
-  // Shamil levels: 1 to 4
+  const wafiKeys = ["P", "R", "1", "2", "3", "4", "5", "6", "7", "8"];
+  // Shamil levels: 1 to 4 + P + R
   const shamilKeys = ["1", "2", "3", "4"];
   // Tarik Munir Arabic: 1 to 8 + P + R
-  const tarikmunirArKeys = ["1", "2", "3", "4", "5", "6", "7", "8", "P", "R"];
+  const tarikmunirArKeys = ["P", "R", "1", "2", "3", "4", "5", "6", "7", "8"];
   // Hidayah French: 1 to 4 + P + R
-  const hidayaFrKeys = ["1", "2", "3", "4", "P", "R"];
+  const hidayaFrKeys = ["P", "R", "1", "2", "3", "4"];
   // Happy Muslim English: 1 to 6 + P + R
-  const happymuslimEnKeys = ["1", "2", "3", "4", "5", "6", "P", "R"];
+  const happymuslimEnKeys = ["P", "R", "1", "2", "3", "4", "5", "6"];
 
   const getTitle = (key: string) => {
     if (key === "R") return tLevels("kg");

@@ -21,21 +21,14 @@ export default async function AlMufidPage({ params }: { params: Promise<{ locale
 
 
   // --- Al Mufid Levels ---
-  const levelKeys = ['R', 'P', '1', '2', '3', '4', '5', '6'];
+  const levelKeys = ['1', '2', '3', '4', '5', '6'];
   const levels = levelKeys.map(key => {
-    // Mapping IDs to folders: R->1, P->2, 1->3, 2->4, 3->5, 4->6 (5 and 6 as placeholders)
-    const folderMap: Record<string, string> = {
-      'R': '1', 'P': '2', '1': '3', '2': '4', '3': '5', '4': '6'
-    };
-    const folderKey = folderMap[key] || key;
-    const isPlaceholder = ['5', '6'].includes(key);
-
     return {
       bookId: `mufid-${key}`,
       id: key,
       title: tLevels(key),
-      bookCover: isPlaceholder ? `/pdfbooks/store-book/mufid-book/mufid-6/6-1.png` : `/pdfbooks/store-book/mufid-book/mufid-${folderKey}/${folderKey}-1.png`,
-      pdfUrl: isPlaceholder ? "#" : `/api/books/store-book/mufid-book/mufid-${folderKey}/${folderKey}-1.pdf`,
+      bookCover: `/pdfbooks/store-book/mufid-book/mufid-${key}/${key}-1.png`,
+      pdfUrl: `/api/books/store-book/mufid-book/mufid-${key}/${key}-1.pdf`,
       color: "bg-orange-50 text-orange-500",
       border: "border-orange-300"
     };
